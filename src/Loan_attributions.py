@@ -34,14 +34,14 @@ class Actions:
         """
         Find the class that corresponds to a rule
         """
-        print('The this is 37',rules.index(rule))
+
         return self.logic[rules.index(rule)]
 
     def match_ID_class(self, allocations, match_ID, rules, rule):
         """
         Add ID/class pairs to allocations
         """
-        print('Rules and rule Are : ',rules,'and rule is ', rule)
+        print('')
         return allocations.setdefault(
             match_ID, self.compute_class(rules, rule)
         )
@@ -74,16 +74,6 @@ class Allocations:
         
         return reng_rules
 
-    @staticmethod
-    def convert_rules_if_statements(rule):
-        """
-        Convert into rules to be evaluated
-        """
-        return re.sub(
-            r'\b(Eligible_assets|Excluded_Assets|Used_assets|Private_sale|Age_in_months_of_ABN|Age_in_month_of_GST|LoanType)\b', 
-            r'Loan.\1',
-            rule
-        )
 
     def allocate_Loans_rule_engine(self, actions, rules, Loans):
         """
@@ -95,67 +85,21 @@ class Allocations:
         reng_rules = Allocations.convert_rules_rule_engine(rules)
         # Allocate Loans
         for parent_rule, child_rules in reng_rules.items():
-            
             # Match Loans to parent rule
             matche1 = list(parent_rule.filter(Loans))
  
             for child_rule in child_rules:
 
-                print('The Child Rule: ',child_rule)
                 # Match Loans to child rules
                 for match2 in child_rule.filter(matche1):
-
-                    # Execute actions
+                    print('Match ID : ', match2.ID, '\n Child Rules : ',child_rules, '\n Child Rule :',child_rule, '\n ============================================= \n')
+                    # Execute actions   
                     actions.match_ID_class(
                         self.allocations, match2.ID, child_rules, child_rule
                     )
 
         return self.allocations
 
-
-    def allocate_Loans_if_statements(self, rules, Loans):
-        """
-        Allocate Loans to their respective classes using 
-        conditional branching
-        """
-        for Loan in Loans:
-           
-            # Evaluate parent rules
-            if (eval(Allocations.convert_rules_if_statements(list(rules.keys())[0]))):
-
-                # Evaluate child rules
-                if (eval(Allocations.convert_rules_if_statements(list(rules.values())[0][0]))):
-                    self.allocations[Loan.ID] = Class("A")
-
-                elif (eval(Allocations.convert_rules_if_statements(list(rules.values())[0][1]))):
-                    self.allocations[Loan.ID] = Class("B")
-
-                else:
-                    self.allocations[Loan.ID] = Class("F")
-
-            elif (eval(Allocations.convert_rules_if_statements(list(rules.keys())[1]))):
-
-                if (eval(Allocations.convert_rules_if_statements(list(rules.values())[1][0]))):
-                    self.allocations[Loan.ID] = Class("A")
-
-                elif (eval(Allocations.convert_rules_if_statements(list(rules.values())[1][1]))):
-                    self.allocations[Loan.ID] = Class("B")
-
-                else:
-                    self.allocations[Loan.ID] = Class("F")
-
-            else:
-
-                if (eval(Allocations.convert_rules_if_statements(list(rules.values())[2][0]))):
-                    self.allocations[Loan.ID] = Class("A")
-
-                elif (eval(Allocations.convert_rules_if_statements(list(rules.values())[2][1]))):
-                    self.allocations[Loan.ID] = Class("B")
-
-                else:
-                    self.allocations[Loan.ID] = Class("F")
-                    
-        return self.allocations
 
 class DataHandler:
     
@@ -210,6 +154,8 @@ class DataHandler:
 
             # Write data to output_path
             for row in reader:
-                print("The row is ",row)
-                row["class"] = allocations[int(row["ID"])].name
+                if int(row["ID"]) in list(allocations.keys()):
+                    row["class"] = allocations[int(row["ID"])].name
+                else:
+                    row["class"] = -1
                 writer.writerow(row)
