@@ -14,7 +14,7 @@ class Class:
 
 class Loan:
     
-    def __init__(self, ID, Eligible_assets, Excluded_Assets, Used_assets, Private_sale, Age_in_months_of_ABN, Age_in_month_of_GST, LoanType):
+    def __init__(self, ID, Eligible_assets, Excluded_Assets, Used_assets, Private_sale, Age_in_months_of_ABN, Age_in_month_of_GST, LoanType,Asset_age,Borrowering_for_months):
         self.ID = ID
         self.Eligible_assets = Eligible_assets
         self.Excluded_Assets = Excluded_Assets
@@ -23,7 +23,8 @@ class Loan:
         self.Age_in_months_of_ABN = Age_in_months_of_ABN
         self.Age_in_month_of_GST = Age_in_month_of_GST
         self.LoanType = LoanType
-
+        self.Asset_age = Asset_age
+        self.Borrowering_for_months = Borrowering_for_months
 
 class Actions:
 
@@ -41,7 +42,6 @@ class Actions:
         """
         Add ID/class pairs to allocations
         """
-        print('')
         return allocations.setdefault(
             match_ID, self.compute_class(rules, rule)
         )
@@ -81,18 +81,19 @@ class Allocations:
         rule engine
         """
 
-        # Convert rule to "rule_engine" rule
+        # Convert rule to "rule_engine" rule 
         reng_rules = Allocations.convert_rules_rule_engine(rules)
         # Allocate Loans
         for parent_rule, child_rules in reng_rules.items():
             # Match Loans to parent rule
             matche1 = list(parent_rule.filter(Loans))
- 
             for child_rule in child_rules:
-
+                # print('The Child Rule is :>',child_rule)
+                # print('Print >> ',[(match.Eligible_assets,match.Used_assets) for match in matche1])
+                # print("\n\n ===========  \n")
+                # print('The Filter matche1 is > ',list(child_rule.filter(matche1)))
                 # Match Loans to child rules
                 for match2 in child_rule.filter(matche1):
-                    print('Match ID : ', match2.ID, '\n Child Rules : ',child_rules, '\n Child Rule :',child_rule, '\n ============================================= \n')
                     # Execute actions   
                     actions.match_ID_class(
                         self.allocations, match2.ID, child_rules, child_rule
@@ -128,6 +129,8 @@ class DataHandler:
                     int(loan["Age_in_months_of_ABN"]),
                     int(loan["Age_in_month_of_GST"]),
                     str(loan["LoanType"]),
+                    int(loan["Borrowering_for_months"]),
+                    int(loan["Asset_age"])
                 )
  
                 # Add to Loans list
@@ -148,12 +151,12 @@ class DataHandler:
                 output_file, 
                 fieldnames=reader.fieldnames + ["class"]
                 )
-
+           
             # Populate headers
             writer.writeheader()
-
             # Write data to output_path
             for row in reader:
+
                 if int(row["ID"]) in list(allocations.keys()):
                     row["class"] = allocations[int(row["ID"])].name
                 else:

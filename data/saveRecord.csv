@@ -1,10 +1,10 @@
-ID,Eligible_assets,Excluded_Assets,Used_assets,Private_sale,Age_in_months_of_ABN,Age_in_month_of_GST,LoanType,class
-1,Light trucks, food trucks,False,Flase,5,1,Primary ,-1
-2,equipment (non-mining),Male,true,true,51,55,Primary ,-1
-3,Construction and earth moving,,False, true,33,0,Primary ,-1
-4,caravans,,true,true,31,37,Primary ,-1
-5,Trailers,,true,true,24,36,Primary ,-1
-6,forklifts,,false,true,5,4,Primary,Pepper Tier A
-7,trucks,,false,False,42,222,Primary ,-1
-8,wheeled construction equipment,,true,False,130,3,Primary ,-1
-9,Trailers,,false,true,12,18,Primary,Resimac- light doc
+ID,Eligible_assets,Excluded_Assets,Used_assets,Private_sale,Age_in_months_of_ABN,Age_in_month_of_GST,LoanType,Asset_age,Borrowering_for_months,class
+1,EV Car, food trucks,true,Flase,5,1,Primary,5,55,Flexi up to $20K
+2,equipment (non-mining),Male,true,true,51,55,Primary,0,0,Flexi: $20-$50K
+3,Construction and earth moving,,False, true,33,0,Primary,0,0,Lender Not Found !
+4,caravans,,true,true,31,37,Primary,0,0,Resimac- low doc
+5,Trailers,,false,true,24,36,Primary,0,0,Lender Not Found !
+6,forklifts,,false,true,5,4,Primary,0,0,Lender Not Found !
+7,trucks,,true,False,42,222,Primary,0,0,Pepper Tier B
+8,wheeled construction equipment,,true,False,130,3,Primary,0,0,Pepper Tier C
+9,Trailers,,true,true,12,18,Primary,0,0,Resimac- light doc
