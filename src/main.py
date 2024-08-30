@@ -2,6 +2,46 @@ import sys
 from Loan_attributions import Actions, Class, Allocations, DataHandler
 from Rule_model import Rule,Rule_Connection
 import copy
+from Rules_using_JSON import lender_rules
+import pandas as pd
+from datetime import datetime
+
+Client_data = pd.read_csv("../data/Data from Client.csv")
+
+Client_data.rename(columns= {"asset_type":"Assets"}, inplace=True)  #"repayment_term_month" : "", "applicant_entity_type":"", "asset_supplier_type":"",
+
+
+# Calculating the Age  of Assets
+# Get the current year
+current_year = datetime.now().year
+
+# Calculate the asset age
+Client_data['Asset_age'] = current_year - Client_data['asset_manufacture_year']
+
+
+# Calculating the Number of Months of GST & ABN
+Client_data['gst_registered_date'] = pd.to_datetime(Client_data['gst_registered_date'], format='%d-%m-%Y')
+Client_data['abn_registered_date'] = pd.to_datetime(Client_data['abn_registered_date'], format='%d-%m-%Y')
+
+# Calculate the number of months from gst_registered_date to the current date
+current_date = pd.to_datetime(datetime.now().strftime('%d-%m-%Y'))
+
+# Calculate the difference in months
+Client_data['GST(Months)'] = (current_date.year - Client_data['gst_registered_date'].dt.year) * 12 + (current_date.month - Client_data['gst_registered_date'].dt.month)
+Client_data['ABN(Months)'] = (current_date.year - Client_data['abn_registered_date'].dt.year) * 12 + (current_date.month - Client_data['abn_registered_date'].dt.month)
+
+Client_data['Loan_Amount'] = Client_data['amount_financed'].copy()
+
+#Dropping the unrevelent Columns
+Client_data.drop([],)
+
+
+PartData = Client_data[:10].copy()
+# print(PartData.columns)
+# print(PartData.head())
+# print(PartData.to_dict(orient="records"))
+Data_of_Rule_test = PartData.to_dict(orient="records")
+
 
 # Check for right usage:
 #   - approach = rule-engine
@@ -9,19 +49,54 @@ import copy
 if len(sys.argv) != 2:
     sys.exit("Usage: python main.py approach")
 
-R1 = Rule("111","Eligible_assets","['EV Car', 'Materials handling/forklifts']","in",1,False,"","Flexi up to $20K")
-# print(R1)
-R_I1 = Rule("112","Eligible_assets","EV Car","==",1,False,"","Flexi up to $20K")
-RI1 = Rule("113","Asset_age",3,">",7,True,R_I1,"Flexi up to $20K")
-RN1 = Rule("114", "Borrowering_for_months", 60, "<=", 1, True, RI1, "Flexi up to $20K")
+for Data_rule in Data_of_Rule_test:
+    # print('Date Rule :',Data_rule)
+    for LenderName,LenderRule in lender_rules.items():
+        temppte = copy.deepcopy(LenderRule)
+        while temppte!=None:
+            # print("Flexi up to 20k ", temppte)
+            # print("Eveluation : ",)
+            temppte.Rule.evaluate(Data_rule)
+            temppte.take_decisions(temppte.Rule)
+            if not temppte.take_decisions(temppte.Rule):
+                break
+            temppte = temppte.next_Rule
+        if temppte == None :
+            print(f" ${LenderName} is an Eligible Lender ")
 
-ROP = Rule("111","Used_assets","true","==",1,False,"","Flexi up to $20K")
-ABN = Rule("111","ABN(Months)",24,">",1,False,"","Flexi up to $20K")
-GST = Rule("111","GST(Months)",24,">",1,False,"","Flexi up to $20K")
+
+
+exit()
+
+
+
+R0 = Rule("111","Eligible_assets","in","'Agricultural machinery and equipment', 'Materials handling/forklifts', 'Access equipment (boom/scissor lifts)', 'Light trucks <3.5 tonnes', 'Heavy trucks >3.5 tonnes', 'Trailers and buses/coaches', 'Commercial motor vehicles', '(utes, vans and 4WDs)', 'Construction and earth moving', 'equipment (non-mining)'",1,False,"","Flexi up to $20K",Flow_for_True=True, Flow_for_False=True)
+ABN0 = Rule("111","ABN(Months)", ">", 24,1,False,"","Flexi up to $20K", Flow_for_True=True)
+GST0 = Rule("111","GST(Months)", ">", 24,1,False,"","Flexi up to $20K", Flow_for_True=True)
+Max_Loan_amount0 = Rule("111", "loan Amount", "<", 20000, 1, False, None, "Flexi up to $20K",Flow_for_True=True)
+# ID, Rule_header,Rule_operator, Rule_value, Rule_order, Is_Nested, Nested_Rule, Rule_parent,logical_operator="and", Flow_for_True=False, Flow_for_False=False, Terminate=False):
+
+R2   = Rule("111","Eligible_assets","in","'trailers', 'buses', 'forklifts', 'material handling', 'yelow goods', 'earthmoving equipment', 'wheeled construction equipment', 'agricultural equipment'",1,False,"","Flexi up to $20K",Flow_for_True=True, Flow_for_False=True)
+ABN2 = Rule("111","ABN(Months)", ">", 60,1,False,"","Flexi up to $20K", Flow_for_True=True)
+GST2 = Rule("111","GST(Months)", ">", 36,1,False,"","Flexi up to $20K", Flow_for_True=True)
+Max_Loan_amount2 = Rule("111", "loan Amount", "<", 20000, 1, False, None, "Flexi up to $20K",Flow_for_True=True)
+
+R3 = Rule("111","Eligible_assets","in","'Motor vehicles', 'Passenger vehicles', 'Light trucks', 'Light commercial vehicles (van, utes)', 'Classic cars (loadings apply)', 'Motorbikes', 'Primary assets', 'Heavy trucks >4.5T GVM', 'Trailers', 'Buses and coaches', 'Small yellow goods and excavators', 'Construction and earth moving equipment', 'Farming and agriculture', 'Materials handling and access equipment', 'Prime movers (loadings apply)', 'Caravans'",1,False,"","Flexi up to $20K",Flow_for_True=True, Flow_for_False=True)
+ABN3 = Rule("111","ABN(Months)", ">", 24,1,False,"","Flexi up to $20K", Flow_for_True=True)
+GST3 = Rule("111","GST(Months)", ">", 24,1,False,"","Flexi up to $20K", Flow_for_True=True)
+Max_Loan_amount3 = Rule("111","loan Amount","<",250000,1, False, None, "Flexi up to $20K",Flow_for_True=True)
+
+
+{
+    "Flexi_up_to_20K" : Rule_Connection(27001,R0,Rule_Connection(27002,ABN0,Rule_Connection(27003,GST0, Rule_Connection(27004,Max_Loan_amount0)))),
+    "Pepper_Tier_A" : Rule_Connection(7001,R2,Rule_Connection(7002,ABN2,Rule_Connection(7003,GST2, Rule_Connection(27004,Max_Loan_amount2)))),
+    "Resimac- low doc" : Rule_Connection(7001,R3,Rule_Connection(7002,ABN3,Rule_Connection(7003,GST3, Rule_Connection(27004,Max_Loan_amount3))))
+}    
+
 
 Data_of_Rule_test = {
     "ID" : 1001,
-    "Eligible_assets" : "EV Car",
+    "Eligible_assets" : "Passenger vehicles",
     "Excluded_Assets" : "food trucks",
     "Used_assets" : "true",
     "Private_sale" : "False",
@@ -31,28 +106,16 @@ Data_of_Rule_test = {
     "Asset_age" : 5,
     "Borrowering_for_months" : 55,
     "ABN(Months)":27,
-    "GST(Months)":30
+    "GST(Months)":30,
+    "Loan_Amount":15000
 }
-# print("R1 Rule :",R1)
-# print('R1 Result : ',R1.evaluate(Data_of_Rule_test))
 
-# print("RN1 Rule :",RN1)
-# print('RN1 Result : ',RN1.evaluate(Data_of_Rule_test))
+# print(R1)
+# R_I1 = Rule("112","Eligible_assets","==","EV Car",1,False,"","Flexi up to $20K")
+# RI1 = Rule("113","Asset_age",">",3,7,True,R_I1,"Flexi up to $20K")
+# RN1 = Rule("114", "Borrowering_for_months", "<=", 60, 1, True, RI1, "Flexi up to $20K")
 
-
-Flexi_up_to_20K = Rule_Connection(27001,R1,Rule_Connection(27002,ABN,Rule_Connection(27003,GST)))
-
-
-temppte = copy.deepcopy(Flexi_up_to_20K)
-while temppte!=None:
-    print("Flexi up to 20k ", temppte)
-    print("Eveluation : ",temppte.Rule.evaluate(Data_of_Rule_test))
-    temppte = temppte.next_Rule
-
-
-
-
-exit()
+# ROP = Rule("111","Used_assets","true","==",1,False,"","Flexi up to $20K")
 
 print('Flexi Rule ',Flexi_up_to_20K)
 Primary_Lenders_rule_definations = {
