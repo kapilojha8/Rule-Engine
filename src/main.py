@@ -8,7 +8,7 @@ from datetime import datetime
 
 Client_data = pd.read_csv("../data/Data from Client.csv")
 
-Client_data.rename(columns= {"asset_type":"Assets"}, inplace=True)  #"repayment_term_month" : "", "applicant_entity_type":"", "asset_supplier_type":"",
+Client_data.rename(columns= {"asset_type":"Assets","applicant_entity_type":"Eligible_Applicant"}, inplace=True)  #"repayment_term_month" : "", "applicant_entity_type":"", "asset_supplier_type":"",
 
 
 # Calculating the Age  of Assets
@@ -42,29 +42,34 @@ PartData = Client_data[:10].copy()
 # print(PartData.to_dict(orient="records"))
 Data_of_Rule_test = PartData.to_dict(orient="records")
 
-
 # Check for right usage:
 #   - approach = rule-engine
 #   - approach = if-statements
 if len(sys.argv) != 2:
     sys.exit("Usage: python main.py approach")
-
+Result_Evalulated = []
 for Data_rule in Data_of_Rule_test:
     # print('Date Rule :',Data_rule)
     for LenderName,LenderRule in lender_rules.items():
         temppte = copy.deepcopy(LenderRule)
         while temppte!=None:
-            # print("Flexi up to 20k ", temppte)
+            
+            print("Rule ", temppte.Rule)
             # print("Eveluation : ",)
             temppte.Rule.evaluate(Data_rule)
             temppte.take_decisions(temppte.Rule)
-            if not temppte.take_decisions(temppte.Rule):
+            print("The Evaluation Result is ",temppte.Rule.Evaluated_result)
+            if temppte.Rule.Terminate:
+                # print("here Here!")
+                break
+            if not temppte.take_decisions(temppte.Rule) :
                 break
             temppte = temppte.next_Rule
-        if temppte == None :
-            print(f" ${LenderName} is an Eligible Lender ")
-
-
+        if temppte == None:
+            print(f"{Data_rule['application_number']} {LenderName} is an Eligible Lender ")
+            Data_rule['Evaluated_Lender'] = LenderName
+        else:
+            Data_rule['Evaluated_Lender'] = "No Lender Found!"
 
 exit()
 

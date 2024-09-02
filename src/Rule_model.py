@@ -1,7 +1,7 @@
 
 
 class Rule:
-    def __init__(self, ID, Rule_header,Rule_operator, Rule_value, Rule_order, Is_Nested, Nested_Rule, Rule_parent,logical_operator="and", Flow_for_True=False, Flow_for_False=False, Terminate=False):
+    def __init__(self, ID, Rule_header,Rule_operator, Rule_value, Rule_order, Is_Nested, Nested_Rule, Rule_parent,logical_operator=None,Logical_Rule=None, Flow_for_True=False, Flow_for_False=False, Terminate=False):
         self.ID = ID
         self.Rule_header = Rule_header
         self.Rule_value = Rule_value
@@ -11,20 +11,24 @@ class Rule:
         self.Nested_Rule = Nested_Rule
         self.Rule_parent = Rule_parent
         self.logical_operator = logical_operator  # Can be 'and' or 'or'
+        self.Logical_Rule = Logical_Rule
 
         self.Flow_for_True = Flow_for_True
         self.Flow_for_False = Flow_for_False
-        self.Terminate = True
+        self.Terminate = False
         self.Evaluated_result = False
 
 
     def __str__(self):
+        # print("Rule Header is :", self.Rule_header,"This is logical operator to use !",self.logical_operator)
         if self.Rule_value==None and self.Rule_operator==None:
             return f"{self.Rule_header}"
+        if self.logical_operator and self.Logical_Rule:
+            return f"({self.Rule_header} {self.Rule_operator} {str(self.Rule_value)} {self.logical_operator} {str(self.Logical_Rule)})"
         if not self.Is_Nested:
             return f"{self.Rule_header} {self.Rule_operator} {str(self.Rule_value)}"
-        if self.Is_Nested:
-            return f"({self.Rule_header} {self.Rule_operator} {str(self.Rule_value)} {self.logical_operator} {str(self.Nested_Rule)})"
+        if self.Rule_value!=None and self.Rule_operator!=None and self.Rule_value!=None:
+            return f"{self.Rule_header} {self.Rule_operator} {str(self.Rule_value)}"
         
     def evaluate(self, data):
         if self.Rule_header not in data:
@@ -43,7 +47,11 @@ class Rule:
         elif self.Rule_operator == "<=":
             result = actual_value <= self.Rule_value
         elif self.Rule_operator == "in":
-            result = actual_value in self.Rule_value
+            self.Rule_value = self.Rule_value.split(",")
+            # if(self.Rule_header == "Eligible_Applicant"):
+            #     print("Actual Value is :",actual_value," Rule Value ",self.Rule_value)
+            self.Rule_value = [Rule_value.casefold().strip() for Rule_value in self.Rule_value]
+            result = actual_value.casefold() in self.Rule_value
         else:
             raise ValueError(f"Unsupported operator: {self.Rule_operator}")
         

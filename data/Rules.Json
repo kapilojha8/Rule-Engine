@@ -4,38 +4,101 @@
       "Rule1": {
         "Rule_Head": "Assets",
         "Rule_Operator": "in",
-        "Rule_Value": [
-          "Agricultural machinery and equipment",
-          "Materials handling/forklifts",
-          "Access equipment (boom/scissor lifts)",
-          "Light trucks <3.5 tonnes",
-          "Heavy trucks >3.5 tonnes",
-          "Trailers and buses/coaches",
-          "Commercial motor vehicles (utes, vans and 4WDs)",
-          "Construction and earth moving equipment (non-mining)"
-        ]
+        "Rule_Value": "BEAUTY_EQUIPMENT, Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Terminate": false
       },
       "Rule2": {
         "Rule_Head": "ABN(Months)",
         "Rule_Operator": ">",
-        "Rule_Value": 24
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
       },
       "Rule3": {
         "Rule_Head": "GST(Months)",
-        "Rule_Operator": "in",
-        "Rule_Value": 60
+        "Rule_Operator": ">",
+        "Rule_Value": 60,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
       },
       "Rule4": {
         "Rule_Head": "Loan_Amount",
         "Rule_Operator": "<",
-        "Rule_Value": 20000
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
+      },
+      "Rule5": {
+        "Rule_Head": "Eligible_Applicant",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
+      },
+      "Rule6": {
+        "Rule_Head": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "logical_operator": "and",
+        "Is_Nested": true,
+        "Logical_Rule": {
+          "Rule_Head": "Asset Age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true,
+          "Terminate": false
+        },
+        "Nested_Rule": {
+          "Rule_Head": "repayment_term_month",
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Head": "Asset Age",
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false,
+            "Terminate": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false,
+          "Terminate": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
+      },
+      "Rule8": {
+        "Rule_Head": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "DEALER",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Terminate": false
       }
     },
     "Pepper_Tier_A": {
       "Rule1": {
         "Rule_Head": "Assets",
         "Rule_Operator": "in",
-        "Rule_Value": "'trailers', 'buses', 'forklifts', 'material handling', 'yelow goods', 'earthmoving equipment', 'wheeled construction equipment', 'agricultural equipment'"
+        "Rule_Value": "trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment"
       },
       "Rule2": {
         "Rule_Head": "ABN(Months)",
@@ -57,7 +120,7 @@
       "Rule1": {
         "Rule_Head": "Assets",
         "Rule_Operator": "in",
-        "Rule_Value": "'Motor vehicles', 'Passenger vehicles', 'Light trucks', 'Light commercial vehicles (van, utes)', 'Classic cars (loadings apply)', 'Motorbikes', 'Primary assets', 'Heavy trucks >4.5T GVM', 'Trailers', 'Buses and coaches', 'Small yellow goods and excavators', 'Construction and earth moving equipment', 'Farming and agriculture', 'Materials handling and access equipment', 'Prime movers (loadings apply)', 'Caravans'"
+        "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans"
       },
       "Rule2": {
         "Rule_Head": "ABN(Months)",
