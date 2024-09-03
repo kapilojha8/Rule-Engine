@@ -1,139 +1,151 @@
 {
+  "Remarks": {
+    "1": "Benefit of Doubt",
+    "2": ""
+  },
   "Lenders": {
     "Flexi_up_to_20K": {
-      "Rule1": {
-        "Rule_Head": "Assets",
+      "Assets": {
+        "Reference_field": "Assets",
         "Rule_Operator": "in",
+        "Field_Type": 0,
         "Rule_Value": "BEAUTY_EQUIPMENT, Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
-        "Is_Nested": false,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "Assets",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Passenger cars, SUVs",
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Terminate": false
+        "Remark": "BoD"
       },
-      "Rule2": {
-        "Rule_Head": "ABN(Months)",
+      "ABN(Months)": {
+        "Reference_field": "ABN(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 24,
         "Is_Nested": false,
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
       },
-      "Rule3": {
-        "Rule_Head": "GST(Months)",
+      "GST(Months)": {
+        "Reference_field": "GST(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 60,
         "Is_Nested": false,
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
       },
-      "Rule4": {
-        "Rule_Head": "Loan_Amount",
+      "Loan_Amount": {
+        "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
         "Is_Nested": false,
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
       },
-      "Rule5": {
-        "Rule_Head": "Eligible_Applicant",
+      "Eligible_Applicant": {
+        "Reference_field": "Eligible_Applicant",
         "Rule_Operator": "in",
         "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
         "Is_Nested": false,
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
       },
-      "Rule6": {
-        "Rule_Head": "repayment_term_month",
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
         "Rule_Operator": "<=",
         "Rule_Value": 60,
         "logical_operator": "and",
-        "Is_Nested": true,
         "Logical_Rule": {
-          "Rule_Head": "Asset Age",
+          "Reference_field": "Asset_age",
           "Rule_Operator": ">",
           "Rule_Value": 3,
           "Is_Nested": false,
           "Flow_for_True": false,
-          "Flow_for_False": true,
-          "Terminate": false
+          "Flow_for_False": true
         },
+        "Is_Nested": true,
         "Nested_Rule": {
-          "Rule_Head": "repayment_term_month",
           "Rule_Operator": "<=",
           "Rule_Value": 84,
+          "Reference_field": "repayment_term_month",
           "logical_operator": "and",
           "Is_Nested": false,
           "Logical_Rule": {
-            "Rule_Head": "Asset Age",
             "Rule_Operator": ">",
             "Rule_Value": 333,
+            "Reference_field": "Asset_age",
             "Is_Nested": false,
             "Flow_for_True": true,
-            "Flow_for_False": false,
-            "Terminate": false
+            "Flow_for_False": false
           },
           "Flow_for_True": true,
-          "Flow_for_False": false,
-          "Terminate": false
+          "Flow_for_False": false
         },
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
       },
-      "Rule8": {
-        "Rule_Head": "asset_supplier_type",
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
         "Rule_Operator": "==",
-        "Rule_Value": "DEALER",
+        "Rule_Value": "Private",
         "Is_Nested": false,
         "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Terminate": false
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "USED",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       }
     },
     "Pepper_Tier_A": {
       "Rule1": {
-        "Rule_Head": "Assets",
+        "Reference_field": "Assets",
         "Rule_Operator": "in",
         "Rule_Value": "trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment"
       },
       "Rule2": {
-        "Rule_Head": "ABN(Months)",
+        "Reference_field": "ABN(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 60
       },
       "Rule3": {
-        "Rule_Head": "GST(Months)",
+        "Reference_field": "GST(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 36
       },
       "Rule4": {
-        "Rule_Head": "Loan_Amount",
+        "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000
       }
     },
     "Resimac- low doc": {
       "Rule1": {
-        "Rule_Head": "Assets",
+        "Reference_field": "Assets",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans"
       },
       "Rule2": {
-        "Rule_Head": "ABN(Months)",
+        "Reference_field": "ABN(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 24
       },
       "Rule3": {
-        "Rule_Head": "GST(Months)",
+        "Reference_field": "GST(Months)",
         "Rule_Operator": ">",
         "Rule_Value": 24
       },
       "Rule4": {
-        "Rule_Head": "Loan_Amount",
+        "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 250000
       }

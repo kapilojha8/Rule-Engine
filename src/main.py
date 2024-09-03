@@ -2,7 +2,7 @@ import sys
 from Loan_attributions import Actions, Class, Allocations, DataHandler
 from Rule_model import Rule,Rule_Connection
 import copy
-from Rules_using_JSON import lender_rules
+from Rules_using_JSON import  Rules_using_JSON
 import pandas as pd
 from datetime import datetime
 
@@ -10,6 +10,11 @@ Client_data = pd.read_csv("../data/Data from Client.csv")
 
 Client_data.rename(columns= {"asset_type":"Assets","applicant_entity_type":"Eligible_Applicant"}, inplace=True)  #"repayment_term_month" : "", "applicant_entity_type":"", "asset_supplier_type":"",
 
+def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
+    Rule.evaluate(Data_rule)
+    if Rule.Is_Nested and (not Rule.Evaluated_result):
+        Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
+    return Rule_chain.take_decisions(Rule)
 
 # Calculating the Age  of Assets
 # Get the current year
@@ -48,23 +53,25 @@ Data_of_Rule_test = PartData.to_dict(orient="records")
 if len(sys.argv) != 2:
     sys.exit("Usage: python main.py approach")
 Result_Evalulated = []
+
+Rules_by_Lender  = Rules_using_JSON('../data/Rules.json')
+Rules_by_Lender.Create_rules_using_json()
 for Data_rule in Data_of_Rule_test:
     # print('Date Rule :',Data_rule)
-    for LenderName,LenderRule in lender_rules.items():
+    for LenderName,LenderRule in Rules_by_Lender.lender_rules.items():
         temppte = copy.deepcopy(LenderRule)
         while temppte!=None:
             
             print("Rule ", temppte.Rule)
             # print("Eveluation : ",)
-            temppte.Rule.evaluate(Data_rule)
-            temppte.take_decisions(temppte.Rule)
+            # temppte.Rule.evaluate(Data_rule)
+            # temppte.take_decisions(temppte.Rule)
+            Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
             print("The Evaluation Result is ",temppte.Rule.Evaluated_result)
-            if temppte.Rule.Terminate:
-                # print("here Here!")
-                break
             if not temppte.take_decisions(temppte.Rule) :
                 break
             temppte = temppte.next_Rule
+
         if temppte == None:
             print(f"{Data_rule['application_number']} {LenderName} is an Eligible Lender ")
             Data_rule['Evaluated_Lender'] = LenderName
