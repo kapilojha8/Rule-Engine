@@ -3,6 +3,8 @@ from Rule_model import Rule, Rule_Connection
 
 
 def parse_nested_rule(element):
+    # print("The Element is :",element.find('Reference_field').text)
+    # print("Flow for true ->> ",element.find('Flow_for_True').text)
     """Recursive function to parse nested rules in the XML."""
     # Extracting necessary attributes
     reference_field = element.find('Reference_field').text
@@ -57,14 +59,14 @@ class RulesUsingXML:
 
 # Example Usage:
 
-xml_file = 'rules.xml'  # Path to your XML file
-rules_from_xml = RulesUsingXML(xml_file)
-rules_from_xml.create_rules_using_xml()
+# xml_file = 'rules.xml'  # Path to your XML file
+# rules_from_xml = RulesUsingXML(xml_file)
+# rules_from_xml.create_rules_using_xml()
 
-# Accessing the rules for a particular lender:
-for lender_name, rule_connection in rules_from_xml.lender_rules.items():
-    print(f"Lender: {lender_name}")
-    temp = rule_connection
-    while temp is not None:
-        print(temp.Rule)
-        temp = temp.next_Rule
+# # Accessing the rules for a particular lender:
+# for lender_name, rule_connection in rules_from_xml.lender_rules.items():
+#     print(f"Lender: {lender_name}")
+#     temp = rule_connection
+#     while temp is not None:
+#         print(temp.Rule)
+#         temp = temp.next_Rule

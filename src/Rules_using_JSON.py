@@ -34,9 +34,11 @@ def Logical_OR_NestedRule(rule_var, rule_key="",parent_rule_heading=""):
                 Rule_value     =  rule_var['Rule_Value'],
                 Is_Nested      =  rule_var.get('Is_Nested', False),
                 Nested_Rule    =  Logical_OR_NestedRule(rule_var['Nested_Rule'],"Nested_Rule",parent_rule_heading) if rule_var.get('Nested_Rule') else None,
-                Flow_for_True=rule_var.get('Flow_for_True', True),
+                Flow_for_True  = rule_var.get('Flow_for_True', True),
+                Flow_for_False = rule_var.get('Flow_for_False', False),
                 logical_operator=rule_var.get('logical_operator', None),
-                Logical_Rule   =   Logical_OR_NestedRule(rule_var['Logical_Rule'],"Logical_Rule",parent_rule_heading) if rule_var.get('Logical_Rule') else None
+                Logical_Rule   =   Logical_OR_NestedRule(rule_var['Logical_Rule'],"Logical_Rule",parent_rule_heading) if rule_var.get('Logical_Rule') else None,
+                Remark         =   rule_var.get('Remark', "")
         )
     except KeyError as e:
         raise ValueError(f"Missing required key {e} in rule data: {rule_var}")

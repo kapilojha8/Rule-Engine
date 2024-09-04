@@ -1,5 +1,5 @@
 class Rule:
-    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Is_Nested:bool, Nested_Rule, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False):
+    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Is_Nested:bool, Nested_Rule, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
         """
             Initializes a Rule object with the provided attributes.
 
@@ -29,6 +29,7 @@ class Rule:
         self.Flow_for_True = Flow_for_True
         self.Flow_for_False = Flow_for_False
         self.Evaluated_result = False
+        self.Remark = Remark
 
 
 
@@ -62,7 +63,15 @@ class Rule:
             raise ValueError(f"Header {self.Rule_header} not found in data.")
         
         actual_value = data[self.Rule_header]
-
+        try:
+            if isinstance(self.Rule_value, str) and self.Rule_value.isdigit():
+                self.Rule_value = int(self.Rule_value)
+            if isinstance(actual_value, str) and actual_value.isdigit():
+                actual_value = int(actual_value)
+        except ValueError:
+            raise ValueError(f"Cannot convert {self.Rule_value} or {actual_value} to int.")
+        
+        # print("Rule operator : ",self.Rule_operator,"\n Rule Value : ", type(self.Rule_value),"\n Actual Value : ",type(actual_value))
         if self.Rule_operator == "==":
             result = actual_value == self.Rule_value
         elif self.Rule_operator == ">":
@@ -88,11 +97,11 @@ class Rule:
         
         if self.Is_Nested and self.Nested_Rule:
             if self.logical_operator == "and":
-                result = result and self.Nested_Rule.evaluate(data)
+                result = result and self.Nested_Rule.evaluate(data)['Return_result']
             elif self.logical_operator == "or":
-                result = result or self.Nested_Rule.evaluate(data)
+                result = result or self.Nested_Rule.evaluate(data)['Return_result']
         self.Evaluated_result = result
-        return result
+        return {"Return_result":result,"Remark":self.Remark}
 
 
 

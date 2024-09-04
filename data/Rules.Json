@@ -4,15 +4,15 @@
     "2": ""
   },
   "Lenders": {
-    "Flexi_up_to_20K": {
+    "Primary Flexi_up_to_20K": {
       "Assets": {
-        "Reference_field": "Assets",
+        "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Field_Type": 0,
-        "Rule_Value": "BEAUTY_EQUIPMENT, Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
+        "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
         "Is_Nested": true,
         "Nested_Rule": {
-          "Reference_field": "Assets",
+          "Reference_field": "asset_type",
           "Rule_Operator": "not in",
           "Rule_Value": "Passenger cars, SUVs",
           "Is_Nested": false,
@@ -23,18 +23,18 @@
         "Flow_for_False": true,
         "Remark": "BoD"
       },
-      "ABN(Months)": {
-        "Reference_field": "ABN(Months)",
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "GST(Months)": {
-        "Reference_field": "GST(Months)",
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
-        "Rule_Value": 60,
+        "Rule_Value": 0,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -47,8 +47,8 @@
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Eligible_Applicant": {
-        "Reference_field": "Eligible_Applicant",
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
         "Rule_Operator": "in",
         "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
         "Is_Nested": false,
@@ -106,48 +106,748 @@
         "Flow_for_False": false
       }
     },
-    "Pepper_Tier_A": {
+    "Primary Flexi_from_20_50K": {
       "Rule1": {
-        "Reference_field": "Assets",
+        "Reference_field": "asset_type",
         "Rule_Operator": "in",
-        "Rule_Value": "trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment"
+        "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
       },
-      "Rule2": {
-        "Reference_field": "ABN(Months)",
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
-        "Rule_Value": 60
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       },
-      "Rule3": {
-        "Reference_field": "GST(Months)",
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
-        "Rule_Value": 36
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       },
       "Rule4": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
-        "Rule_Value": 20000
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       }
     },
-    "Resimac- low doc": {
+    "Primary Flexi_50_300K": {
       "Rule1": {
-        "Reference_field": "Assets",
+        "Reference_field": "asset_type",
         "Rule_Operator": "in",
-        "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans"
+        "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
       },
-      "Rule2": {
-        "Reference_field": "ABN(Months)",
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
-        "Rule_Value": 24
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       },
-      "Rule3": {
-        "Reference_field": "GST(Months)",
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
-        "Rule_Value": 24
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       },
       "Rule4": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
-        "Rule_Value": 250000
+        "Rule_Value": 300000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Flexi_upto_20K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 0,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Flexi_from_20_50K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Flexi_50_300K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 300000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Flexi_upto_20K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
+        "Exclude":"Scaffolding, Photocopiers",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 0,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Flexi_from_20_50K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
+        "Exclude":"Scaffolding, Photocopiers",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Flexi_50_300K": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
+        "Exclude":"Scaffolding, Photocopiers",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 300000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+
+    "Primary Pepper_Tier_A": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 60,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 36,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Primary Pepper_Tier_B": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Primary Pepper_Tier_C": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 0,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 300000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Pepper_Tier_A": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Pepper_Tier_B": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Pepper_Tier_A": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Pepper_Tier_B": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 50000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+
+    "Primary Resimac- low doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
+        "Exclude": "Electric or motor vehicle used for hire/rental purposes,food trucks",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 250000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Primary Resimac- light doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
+        "Exclude": "Electric or motor vehicle used for hire/rental purposes,food trucks",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 60,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 36,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 20000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Resimac- low doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 150000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Secondary Resimac- light doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 175000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Resimac- low doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
+        "Exclude" : "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 100000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      }
+    },
+    "Tertiary Resimac- light doc": {
+      "Rule1": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
+        "Exclude" : "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "BoD"
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "GST_in_Months": {
+        "Reference_field": "GST_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 12,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Rule4": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 125000,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
       }
     }
   }
