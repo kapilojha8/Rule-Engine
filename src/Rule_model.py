@@ -1,5 +1,6 @@
+from datetime import datetime
 class Rule:
-    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Is_Nested:bool, Nested_Rule, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
+    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Field_Type, Is_Nested:bool, Nested_Rule, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
         """
             Initializes a Rule object with the provided attributes.
 
@@ -18,6 +19,7 @@ class Rule:
         """
         self.ID = ID
         self.Rule_header = Rule_header
+        self.Rule_value = self.convert_value(Rule_value, Field_Type)
         self.Rule_value = Rule_value
         self.Rule_operator = Rule_operator
         # self.Rule_order = Rule_order
@@ -31,7 +33,23 @@ class Rule:
         self.Evaluated_result = False
         self.Remark = Remark
 
-
+    def convert_value(self, value, Field_Type):
+        """
+            Convert the Rule_Value based on Field_Type.
+            0: bool, 1: date, 2: float, 3: int, 4: str
+        """
+        if Field_Type == 0 or Field_Type == '0':  # bool
+            return bool(value)
+        elif Field_Type == 1 or Field_Type == '1':  # date
+            return datetime.strptime(value, "%d/%m/%Y")  # Assuming the date format is dd/mm/yyyy
+        elif Field_Type == 2 or Field_Type == '2':  # float
+            return float(value)
+        elif Field_Type == 3 or Field_Type == '3':  # int                
+            return int(value)
+        elif Field_Type == 4 or Field_Type == '4':  # str
+            return str(value)
+        else:
+            raise ValueError(f"Unknown Field_Type: {Field_Type}")
 
     def __str__(self):
         """
@@ -63,6 +81,11 @@ class Rule:
             raise ValueError(f"Header {self.Rule_header} not found in data.")
         
         actual_value = data[self.Rule_header]
+        
+        if isinstance(actual_value, datetime) or  isinstance(self.Rule_value, datetime):
+            self.Rule_value = datetime.strptime(self.Rule_value, "%d/%m/%Y").date()  # Convert to date
+            actual_value = actual_value.date()  # Extract the date part
+        
         try:
             if isinstance(self.Rule_value, str) and self.Rule_value.isdigit():
                 self.Rule_value = int(self.Rule_value)
@@ -71,7 +94,8 @@ class Rule:
         except ValueError:
             raise ValueError(f"Cannot convert {self.Rule_value} or {actual_value} to int.")
         
-        # print("Rule operator : ",self.Rule_operator,"\n Rule Value : ", type(self.Rule_value),"\n Actual Value : ",type(actual_value))
+
+        # print("Rule operator : ",self.Rule_operator,"\n Rule Value : ",  type(self.Rule_value),"\n Actual Value : ", (actual_value))
         if self.Rule_operator == "==":
             result = actual_value == self.Rule_value
         elif self.Rule_operator == ">":
@@ -197,3 +221,11 @@ class Rule_Connection: ## Rules Linked List
             return rule.Flow_for_True
         else:
             return rule.Flow_for_False
+# class Field_Types:
+#     def __init__(self, DtypeStr):
+#         self.DataType = DtypeStr
+#         pass
+
+
+# class Remarks:
+#     def __init__(self, remark):

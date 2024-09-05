@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  <root>
+    <Field_Type>
+        <FT0>bool</FT0>,
+        <FT1>date</FT1>,
+        <FT2>float</FT2>,
+        <FT3>int</FT3>,
+        <FT4>str</FT4>,
+    </Field_Type>
      <Remarks>
          <Remark1>Benefit of Doubt</Remark1>
          <Remark2></Remark2>
@@ -9,12 +16,13 @@
              <Assets>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
-                 <Field_Type>0</Field_Type>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks &lt;3.5 tonnes, Heavy trucks &gt;3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)</Rule_Value>
                  <Is_Nested>true</Is_Nested>
                  <Nested_Rule>
                      <Reference_field>asset_type</Reference_field>
                      <Rule_Operator>not in</Rule_Operator>
+                     <Field_Type>FT4</Field_Type>
                      <Rule_Value>Passenger cars, SUVs</Rule_Value>
                      <Is_Nested>false</Is_Nested>
                      <Flow_for_True>false</Flow_for_True>
@@ -26,6 +34,7 @@
              </Assets>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                     &gt;
                  </Rule_Operator>
@@ -36,6 +45,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                     &gt;
                  </Rule_Operator>
@@ -46,6 +56,7 @@
              </GST_in_Months>
              <Loan_Amount>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -54,6 +65,7 @@
              </Loan_Amount>
              <applicant_entity_type>
                  <Reference_field>applicant_entity_type</Reference_field>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Operator>in</Rule_Operator>
                  <Rule_Value>Sole traders, Companies, Trusts, Partnerships</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -62,11 +74,13 @@
              </applicant_entity_type>
              <MAX_TERM>
                  <Reference_field>repayment_term_month</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;=</Rule_Operator>
                  <Rule_Value>60</Rule_Value>
                  <logical_operator>and</logical_operator>
                  <Logical_Rule>
                      <Reference_field>Asset_age</Reference_field>
+                     <Field_Type>FT3</Field_Type>
                      <Rule_Operator>
                         &gt;
                      </Rule_Operator>
@@ -80,6 +94,7 @@
                      <Rule_Operator>&lt;=</Rule_Operator>
                      <Rule_Value>84</Rule_Value>
                      <Reference_field>repayment_term_month</Reference_field>
+                     <Field_Type>FT3</Field_Type>
                      <logical_operator>and</logical_operator>
                      <Is_Nested>false</Is_Nested>
                      <Logical_Rule>
@@ -88,6 +103,7 @@
                          </Rule_Operator>
                          <Rule_Value>333</Rule_Value>
                          <Reference_field>Asset_age</Reference_field>
+                         <Field_Type>FT3</Field_Type>
                          <Is_Nested>false</Is_Nested>
                          <Flow_for_True>true</Flow_for_True>
                          <Flow_for_False>false</Flow_for_False>
@@ -100,6 +116,7 @@
              </MAX_TERM>
              <asset_supplier_type>
                  <Reference_field>asset_supplier_type</Reference_field>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Operator>==</Rule_Operator>
                  <Rule_Value>Private</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -108,6 +125,7 @@
              </asset_supplier_type>
              <usage_type>
                  <Reference_field>usage_type</Reference_field>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Operator>==</Rule_Operator>
                  <Rule_Value>USED</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -119,6 +137,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks &lt;3.5 tonnes, Heavy trucks &lt;3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -127,6 +146,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -137,6 +157,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -147,6 +168,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -158,6 +180,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks &lt;3.5 tonnes, Heavy trucks &gt;3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -166,6 +189,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -176,6 +200,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -186,6 +211,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>300000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -197,6 +223,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -205,6 +232,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -215,6 +243,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -225,6 +254,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -236,6 +266,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -244,6 +275,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -254,6 +286,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -264,6 +297,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -275,6 +309,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -283,6 +318,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -293,6 +329,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -303,6 +340,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>300000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -314,6 +352,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings</Rule_Value>
                  <Exclude>Scaffolding, Photocopiers</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -323,6 +362,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -333,6 +373,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -343,6 +384,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -354,6 +396,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings</Rule_Value>
                  <Exclude>Scaffolding, Photocopiers</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -363,6 +406,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -373,6 +417,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -383,6 +428,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -394,6 +440,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings</Rule_Value>
                  <Exclude>Scaffolding, Photocopiers</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -403,6 +450,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -413,6 +461,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -423,6 +472,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>300000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -434,6 +484,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -442,6 +493,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -452,6 +504,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -462,6 +515,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -473,6 +527,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -481,6 +536,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -491,6 +547,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -501,6 +558,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -512,6 +570,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -520,6 +579,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -530,6 +590,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -540,6 +601,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>300000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -551,6 +613,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Construction equipment (non wheeled &amp; non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -559,6 +622,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -569,6 +633,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -579,6 +644,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -590,6 +656,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Construction equipment (non wheeled &amp; non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -598,6 +665,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -608,6 +676,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -618,6 +687,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -629,6 +699,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar &amp; renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -637,6 +708,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -647,6 +719,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -657,6 +730,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -668,6 +742,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar &amp; renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -676,6 +751,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -686,6 +762,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -696,6 +773,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>50000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -707,6 +785,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans</Rule_Value>
                  <Exclude>Electric or motor vehicle used for hire/rental purposes,food trucks</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -716,6 +795,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -726,6 +806,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -736,6 +817,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>250000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -747,6 +829,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans</Rule_Value>
                  <Exclude>Electric or motor vehicle used for hire/rental purposes,food trucks</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -756,6 +839,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -766,6 +850,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -776,6 +861,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>20000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -787,6 +873,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -795,6 +882,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -805,6 +893,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -815,6 +904,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>150000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -826,6 +916,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units</Rule_Value>
                  <Is_Nested>false</Is_Nested>
                  <Flow_for_True>true</Flow_for_True>
@@ -834,6 +925,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -844,6 +936,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -854,6 +947,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>175000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -865,6 +959,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment</Rule_Value>
                  <Exclude>Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -874,6 +969,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -884,6 +980,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -894,6 +991,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>100000</Rule_Value>
                  <Is_Nested>false</Is_Nested>
@@ -905,6 +1003,7 @@
              <Rule1>
                  <Reference_field>asset_type</Reference_field>
                  <Rule_Operator>in</Rule_Operator>
+                 <Field_Type>FT4</Field_Type>
                  <Rule_Value>IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment</Rule_Value>
                  <Exclude>Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture</Exclude>
                  <Is_Nested>false</Is_Nested>
@@ -914,6 +1013,7 @@
              </Rule1>
              <ABN_in_Months>
                  <Reference_field>ABN_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -924,6 +1024,7 @@
              </ABN_in_Months>
              <GST_in_Months>
                  <Reference_field>GST_in_Months</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>
                      &gt;
                  </Rule_Operator>
@@ -934,6 +1035,7 @@
              </GST_in_Months>
              <Rule4>
                  <Reference_field>Loan_Amount</Reference_field>
+                 <Field_Type>FT3</Field_Type>
                  <Rule_Operator>&lt;</Rule_Operator>
                  <Rule_Value>125000</Rule_Value>
                  <Is_Nested>false</Is_Nested>

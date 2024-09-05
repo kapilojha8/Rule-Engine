@@ -29,14 +29,12 @@ if len(sys.argv) != 2:
 if (sys.argv[1] == "rule-engine-JSON"):
     Rules_by_Lender  = Rules_using_JSON('../data/Rules.json')
     Rules_by_Lender.Create_rules_using_json()
+    Remarks = Rules_by_Lender.Remarks
 elif (sys.argv[1] == "rule-engine-XML"):
     Rules_by_Lender  = RulesUsingXML('../data/Rules_output.xml')
     Rules_by_Lender.create_rules_using_xml()
 else:
     sys.exit("Incorrect arguments. Did you mean: rule-engine or if-statements?")
-
-
-
 
 Result_Evalulated = []
 for Data_rule in Data_of_Rule_test:
@@ -46,18 +44,18 @@ for Data_rule in Data_of_Rule_test:
         remarks = ""
         while temppte!=None:
             
-            print("Rule ", temppte.Rule)
+            # print("Rule ", temppte.Rule)
             # print("Eveluation : ",)
             # temppte.Rule.evaluate(Data_rule)
             # temppte.take_decisions(temppte.Rule)
             Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
-            print("The Evaluation Result is ",temppte.Rule.Evaluated_result)
+            # print("The Evaluation Result is ",temppte.Rule.Evaluated_result)
             # print("The Flow for False is ",temppte.Rule.Flow_for_False)
             # print("The take Decisions were :",temppte.take_decisions(temppte.Rule))
             if not temppte.take_decisions(temppte.Rule) :
                 break
-            if type(temppte.Rule.Remark) == str:
-                remarks +=  temppte.Rule.Remark
+            if type(temppte.Rule.Remark) == int:
+                remarks +=  Remarks[f'{temppte.Rule.Remark}']
             temppte = temppte.next_Rule
 
         if temppte == None:

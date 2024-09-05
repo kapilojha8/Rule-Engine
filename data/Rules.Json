@@ -1,4 +1,11 @@
 {
+  "Field_Type": {
+    "0": "bool",
+    "1": "date",
+    "2": "float",
+    "3": "int",
+    "4": "str"
+  },
   "Remarks": {
     "1": "Benefit of Doubt",
     "2": ""
@@ -8,25 +15,27 @@
       "Assets": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
-        "Field_Type": 0,
+        "Field_Type": 4,
         "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
         "Is_Nested": true,
         "Nested_Rule": {
           "Reference_field": "asset_type",
           "Rule_Operator": "not in",
           "Rule_Value": "Passenger cars, SUVs",
+          "Field_Type": 4,
           "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -35,6 +44,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 0,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -43,6 +53,17 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -51,6 +72,7 @@
         "Reference_field": "applicant_entity_type",
         "Rule_Operator": "in",
         "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -59,11 +81,13 @@
         "Reference_field": "repayment_term_month",
         "Rule_Operator": "<=",
         "Rule_Value": 60,
+        "Field_Type": 3,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Asset_age",
           "Rule_Operator": ">",
           "Rule_Value": 3,
+          "Field_Type": 3,
           "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
@@ -72,12 +96,14 @@
         "Nested_Rule": {
           "Rule_Operator": "<=",
           "Rule_Value": 84,
+          "Field_Type": 3,
           "Reference_field": "repayment_term_month",
           "logical_operator": "and",
           "Is_Nested": false,
           "Logical_Rule": {
             "Rule_Operator": ">",
             "Rule_Value": 333,
+            "Field_Type": 3,
             "Reference_field": "Asset_age",
             "Is_Nested": false,
             "Flow_for_True": true,
@@ -93,6 +119,7 @@
         "Reference_field": "asset_supplier_type",
         "Rule_Operator": "==",
         "Rule_Value": "Private",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -101,25 +128,82 @@
         "Reference_field": "usage_type",
         "Rule_Operator": "==",
         "Rule_Value": "USED",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 20,
+        "Field_Type": 3,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": "<=",
+          "Rule_Value": 30,
+          "Field_Type": 3,
+          "Is_Nested": true,
+          "Nested_Rule": {
+            "Reference_field": "asset_type",
+            "Rule_Operator": "==",
+            "Rule_Value": "trailers",
+            "Field_Type": 4,
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Primary Flexi_from_20_50K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Passenger cars, SUVs",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -128,33 +212,166 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 20,
+        "Field_Type": 3,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": "<=",
+          "Rule_Value": 30,
+          "Field_Type": 3,
+          "Is_Nested": true,
+          "Nested_Rule": {
+            "Reference_field": "asset_type",
+            "Rule_Operator": "==",
+            "Rule_Value": "trailers",
+            "Field_Type": 4,
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Primary Flexi_50_300K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Passenger cars, SUVs",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -163,33 +380,157 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 300000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 300000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 20,
+        "Field_Type": 3,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": "<=",
+          "Rule_Value": 30,
+          "Field_Type": 3,
+          "Is_Nested": true,
+          "Nested_Rule": {
+            "Reference_field": "asset_type",
+            "Rule_Operator": "==",
+            "Rule_Value": "trailers",
+            "Field_Type": 4,
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Secondary Flexi_upto_20K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -198,33 +539,121 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 0,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
     "Secondary Flexi_from_20_50K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -233,33 +662,121 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
     "Secondary Flexi_50_300K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "medical/dental/laboratory equipment, mining equipment, trade tools, attachments for earthmoving, plant services (compressors and generators), printing and packing equipment, forestry machinery and equipment, engineering and toolmaking equipment, mechanical workshop equipment, food manufacturing equipment",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -268,34 +785,131 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 300000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 300000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
     "Tertiary Flexi_upto_20K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
-        "Exclude":"Scaffolding, Photocopiers",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Exclude": "Scaffolding, Photocopiers",
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Scaffolding, Photocopiers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -304,34 +918,131 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 0,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
     "Tertiary Flexi_from_20_50K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
-        "Exclude":"Scaffolding, Photocopiers",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Exclude": "Scaffolding, Photocopiers",
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Scaffolding, Photocopiers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -340,34 +1051,140 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "!=",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
     "Tertiary Flexi_50_300K": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
-        "Exclude":"Scaffolding, Photocopiers",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Exclude": "Scaffolding, Photocopiers",
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Scaffolding, Photocopiers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -376,34 +1193,139 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 300000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": ">",
+          "Rule_Value": 3,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": ">",
+            "Rule_Value": 333,
+            "Field_Type": 3,
+            "Reference_field": "Asset_age",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 150000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "!=",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
-
     "Primary Pepper_Tier_A": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 60,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -412,33 +1334,157 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 36,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": "==",
+            "Rule_Value": 0,
+            "Field_Type": 3,
+            "Reference_field": "balloon_amount",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 150000,
+          "Field_Type": 3,
+          "Reference_field": "Loan_Amount",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "!=",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 15,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Primary Pepper_Tier_B": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -447,33 +1493,157 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": "==",
+            "Rule_Value": 0,
+            "Field_Type": 3,
+            "Reference_field": "balloon_amount",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 150000,
+          "Field_Type": 3,
+          "Reference_field": "Loan_Amount",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "!=",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 15,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Primary Pepper_Tier_C": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-        "Is_Nested": false,
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -482,33 +1652,148 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 0,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 300000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "and",
+          "Is_Nested": false,
+          "Logical_Rule": {
+            "Rule_Operator": "==",
+            "Rule_Value": 0,
+            "Field_Type": 3,
+            "Reference_field": "balloon_amount",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 40000,
+          "Field_Type": 3,
+          "Reference_field": "Loan_Amount",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 300000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "!=",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 15,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true
       }
     },
     "Secondary Pepper_Tier_A": {
-      "Rule1": {
+      "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -517,14 +1802,35 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
       },
-      "Rule4": {
+      "Loan_Amount": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -535,15 +1841,17 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -552,6 +1860,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -560,7 +1869,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -570,15 +1890,17 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -587,6 +1909,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -595,7 +1918,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 20000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -605,15 +1939,17 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -622,6 +1958,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -630,27 +1967,39 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 50000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 20000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
     },
-
     "Primary Resimac- low doc": {
       "Rule1": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
+        "Field_Type": 4,
         "Exclude": "Electric or motor vehicle used for hire/rental purposes,food trucks",
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -659,6 +2008,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -667,7 +2017,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 250000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -677,16 +2038,18 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Motor vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), Motorbikes, Primary assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
+        "Field_Type": 4,
         "Exclude": "Electric or motor vehicle used for hire/rental purposes,food trucks",
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 60,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -695,6 +2058,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 36,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -702,8 +2066,19 @@
       "Rule4": {
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
-        "Rule_Value": 20000,
+        "Rule_Value": 350000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 250000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -713,15 +2088,17 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -730,6 +2107,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -738,6 +2116,17 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 150000,
+        "Field_Type": 3,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -748,15 +2137,17 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
+        "Field_Type": 4,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -765,6 +2156,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -773,7 +2165,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 175000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 150000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -783,16 +2186,18 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
-        "Exclude" : "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+        "Field_Type": 4,
+        "Exclude": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -801,6 +2206,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 24,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -809,7 +2215,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 100000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }
@@ -819,16 +2236,18 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
-        "Exclude" : "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+        "Field_Type": 4,
+        "Exclude": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark": "BoD"
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -837,6 +2256,7 @@
         "Reference_field": "GST_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 12,
+        "Field_Type": 3,
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false
@@ -845,7 +2265,18 @@
         "Reference_field": "Loan_Amount",
         "Rule_Operator": "<",
         "Rule_Value": 125000,
+        "Field_Type": 3,
         "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 100000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": false,
+          "Flow_for_False": true
+        },
         "Flow_for_True": true,
         "Flow_for_False": false
       }

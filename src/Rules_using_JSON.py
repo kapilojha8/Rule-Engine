@@ -32,6 +32,7 @@ def Logical_OR_NestedRule(rule_var, rule_key="",parent_rule_heading=""):
                 Rule_header    =  rule_var['Reference_field'],
                 Rule_operator  =  rule_var['Rule_Operator'],
                 Rule_value     =  rule_var['Rule_Value'],
+                Field_Type     =  rule_var.get('Field_Type'),            
                 Is_Nested      =  rule_var.get('Is_Nested', False),
                 Nested_Rule    =  Logical_OR_NestedRule(rule_var['Nested_Rule'],"Nested_Rule",parent_rule_heading) if rule_var.get('Nested_Rule') else None,
                 Flow_for_True  = rule_var.get('Flow_for_True', True),
@@ -56,6 +57,7 @@ class Rules_using_JSON:
         """
         # Create a dictionary to hold the lenders and their associated rules
         self.lender_rules = {}
+        self.Remarks = {}
         # Load the JSON file
 
 
@@ -89,6 +91,9 @@ class Rules_using_JSON:
             
                 # Store the connected rules for the lender
                 self.lender_rules[lender] = connections
+            for remarkKey, remarkValue in self.rules_json['Remarks'].items():
+                self.Remarks[remarkKey] = remarkValue
+                
             if not self.lender_rules:
                 raise ValueError("No lender rules were created. Check the JSON file for correctness.")
         except KeyError as e:

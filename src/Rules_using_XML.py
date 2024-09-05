@@ -10,6 +10,7 @@ def parse_nested_rule(element):
     reference_field = element.find('Reference_field').text
     rule_operator = element.find('Rule_Operator').text.strip()
     rule_value = element.find('Rule_Value').text
+    field_type = element.find('Field_Type').text[2:]
     flow_for_true = element.find('Flow_for_True').text == "true"
     flow_for_false = element.find('Flow_for_False').text == "true"
     logical_operator = element.find('logical_operator').text if element.find('logical_operator') is not None else None
@@ -26,6 +27,7 @@ def parse_nested_rule(element):
         Rule_header=reference_field,
         Rule_operator=rule_operator,
         Rule_value=rule_value,
+        Field_Type=field_type,
         Is_Nested=nested_rule is not None,
         Nested_Rule=nested_rule,
         Flow_for_True=flow_for_true,
