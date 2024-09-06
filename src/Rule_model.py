@@ -107,24 +107,40 @@ class Rule:
         elif self.Rule_operator == "<=":
             result = actual_value <= self.Rule_value
         elif self.Rule_operator == "in" :
-            self.Rule_value = self.Rule_value.split(",")
-            # if(self.Rule_header == "Assets"):
-            #     print("Actual Value is :",actual_value," Rule Value ",self.Rule_value)
+            if type(self.Rule_value) == str:
+                self.Rule_value = self.Rule_value.split(",")
+            # if(self.Rule_header == "asset_type"):
+                # print("Actual Value is :",actual_value," Rule Value ",self.Rule_value)
             self.Rule_value = [Rule_value.casefold().strip() for Rule_value in self.Rule_value]
             result = actual_value.casefold() in self.Rule_value
         elif  self.Rule_operator == "not in" :
-            self.Rule_value = self.Rule_value.split(",")
+            if type(self.Rule_value) == str:
+               self.Rule_value = self.Rule_value.split(",")
             self.Rule_value = [Rule_value.casefold().strip() for Rule_value in self.Rule_value]
-            result = actual_value.casefold() not in self.Rule_value        
+            result = actual_value.casefold() not in self.Rule_value     
+            # print("The here is :",actual_value.casefold() not in self.Rule_value ) 
         else:
             raise ValueError(f"Unsupported operator: {self.Rule_operator}")
+        # print("This is Logical Operator ",self.logical_operator)
+        if self.logical_operator!=None:
+            if self.logical_operator == "and":
+                result = result and self.Logical_Rule.evaluate(data)['Return_result']
+            elif self.logical_operator == "or":
+                result = result or self.Logical_Rule.evaluate(data)['Return_result']
         
         if self.Is_Nested and self.Nested_Rule:
+            # print("Here when needed !")
+            result = result and self.Nested_Rule.evaluate(data)['Return_result']
             if self.logical_operator == "and":
+                # print("Is it here !")
                 result = result and self.Nested_Rule.evaluate(data)['Return_result']
             elif self.logical_operator == "or":
+                # print("Is it there !")
                 result = result or self.Nested_Rule.evaluate(data)['Return_result']
         self.Evaluated_result = result
+        # print("Here Rule is :",self)
+        # print("The Actual Value is ",actual_value)
+        # print("Here the Result is ",result)
         return {"Return_result":result,"Remark":self.Remark}
 
 

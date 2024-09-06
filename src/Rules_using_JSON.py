@@ -94,6 +94,7 @@ class Rules_using_JSON:
             for remarkKey, remarkValue in self.rules_json['Remarks'].items():
                 self.Remarks[remarkKey] = remarkValue
                 
+                
             if not self.lender_rules:
                 raise ValueError("No lender rules were created. Check the JSON file for correctness.")
         except KeyError as e:

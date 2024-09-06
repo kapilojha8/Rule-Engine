@@ -1,2 +1,2 @@
 application_number,status,settled_at,amount_financed,deposit_amount,balloon_amount,repayment_term_month,applicant_entity_type,asset_supplier_type,asset_category,asset_type,asset_manufacture_year,usage_type,gst_registered_date,abn_registered_date,guarantor_1_residential_status,lender_name
-QF12057,DRAFTED_AMENDED,,108900,0,0,60,TRUSTS,DEALER,TERTIARY_ASSETS,BEAUTY_EQUIPMENT,2023,NEW,01-06-2015,01-04-2015,OWNING,Flexicommercial
+QF12106,DRAFTED_AMENDED,,19000,0,0,60,Trusts,Private,TERTIARY_ASSETS,racing cars,2021,USED,01-06-2015,01-04-2015,RENTING,Flexicommercial
