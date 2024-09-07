@@ -9,11 +9,9 @@ from datetime import datetime
 from preprocessing_of_data import PreprocessingOfData
 
 def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
-    # print("The Rule is ",Rule)
     Rule.evaluate(Data_rule)
-    # print("Evaluated Result", Rule.Evaluated_result)
-    # if Rule.Is_Nested and (not Rule.Evaluated_result):
-    #     Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
+    if Rule.Is_Nested and (not Rule.Evaluated_result):
+        Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
     return Rule_chain.take_decisions(Rule)
 
 
@@ -63,7 +61,7 @@ for Data_rule in Data_of_Rule_test:
             temppte = temppte.next_Rule
 
         if temppte == None:
-            print(f"{Data_rule['application_number']} {LenderName} is an Eligible Lender ")
+            print(f">>>>>>>>>---------{Data_rule['application_number']} {LenderName} is an Eligible Lender ")
             print(f"All Remarks : {remarks} ")
             Data_rule['Evaluated_Lender'] = LenderName
         else:
@@ -117,4 +115,8 @@ QF12107,DRAFTED_AMENDED,,25000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultura
 QF12057,DRAFTED_AMENDED,,108900,0,0,60,TRUSTS,DEALER,TERTIARY_ASSETS,BEAUTY_EQUIPMENT,2023,NEW,01-06-2015,01-04-2015,OWNING,Flexicommercial
 QF12107,DRAFTED_AMENDED,,25000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2017,01-04-2017,RENTING,Flexicommercial
 QF12108,DRAFTED_AMENDED,,60000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2014,01-04-2014,RENTING,Flexicommercial
+
+
+
+
 """

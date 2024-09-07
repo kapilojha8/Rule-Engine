@@ -129,18 +129,9 @@ class Rule:
                 result = result or self.Logical_Rule.evaluate(data)['Return_result']
         
         if self.Is_Nested and self.Nested_Rule:
-            # print("Here when needed !")
-            result = result and self.Nested_Rule.evaluate(data)['Return_result']
-            if self.logical_operator == "and":
-                # print("Is it here !")
-                result = result and self.Nested_Rule.evaluate(data)['Return_result']
-            elif self.logical_operator == "or":
-                # print("Is it there !")
-                result = result or self.Nested_Rule.evaluate(data)['Return_result']
+            NestedResult = self.Nested_Rule.evaluate(data)['Return_result']
+            result = result or NestedResult
         self.Evaluated_result = result
-        # print("Here Rule is :",self)
-        # print("The Actual Value is ",actual_value)
-        # print("Here the Result is ",result)
         return {"Return_result":result,"Remark":self.Remark}
 
 
@@ -233,6 +224,9 @@ class Rule_Connection: ## Rules Linked List
             Returns:
                 bool: The decision to continue (True) or stop (False) based on the rule's evaluation.
         """
+        if type(rule.Nested_Rule)==type(rule):
+            if rule.Nested_Rule.Evaluated_result == False:
+                return rule.Nested_Rule.Flow_for_False
         if rule.Evaluated_result:
             return rule.Flow_for_True
         else:
