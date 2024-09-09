@@ -1,4 +1,9 @@
 from datetime import datetime
+class Flow_exception:
+    def __init__(self,Exception_rule,Condition_to_proceed=False) -> None:
+        self.Exception_rule = Exception_rule
+        self.Condition_to_proceed = Condition_to_proceed
+
 class Rule:
     def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Field_Type, Is_Nested:bool, Nested_Rule, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
         """
@@ -30,6 +35,9 @@ class Rule:
         self.Logical_Rule = Logical_Rule
         self.Flow_for_True = Flow_for_True
         self.Flow_for_False = Flow_for_False
+        Flow_exception_True,Flow_exception_False = True,False
+        self.Flow_Exception_for_True = Flow_exception_True
+        self.Flow_Exception_for_False = Flow_exception_False
         self.Evaluated_result = False
         self.Remark = Remark
 
@@ -98,6 +106,8 @@ class Rule:
         # print("Rule operator : ",self.Rule_operator,"\n Rule Value : ",  type(self.Rule_value),"\n Actual Value : ", (actual_value))
         if self.Rule_operator == "==":
             result = actual_value == self.Rule_value
+        elif self.Rule_operator == "!=":
+            result = actual_value != self.Rule_value
         elif self.Rule_operator == ">":
             result = actual_value > self.Rule_value
         elif self.Rule_operator == "<":

@@ -71,25 +71,6 @@ for Data_rule in Data_of_Rule_test:
 exit()
 
 
-# application_number
-# status
-# settled_at
-# amount_financed
-# deposit_amount
-# balloon_amount
-# repayment_term_month
-# applicant_entity_type
-# asset_supplier_type
-# asset_category
-# asset_type
-# asset_manufacture_year
-# usage_type
-# gst_registered_date
-# abn_registered_date
-# guarantor_1_residential_status
-# lender_name
- 
-
 """
   "Assets": {
           "Reference_field": "asset_type",
