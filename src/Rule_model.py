@@ -132,6 +132,8 @@ class Rule:
             NestedResult = self.Nested_Rule.evaluate(data)['Return_result']
             result = result or NestedResult
         self.Evaluated_result = result
+        # print("The Header is :",self.Rule_header,"The Rule is ",self)
+        # print("The Actual Value : ",actual_value,"The Evaluation Result is :",result)
         return {"Return_result":result,"Remark":self.Remark}
 
 
@@ -239,3 +241,194 @@ class Rule_Connection: ## Rules Linked List
 
 # class Remarks:
 #     def __init__(self, remark):
+
+
+"""
+    "Primary Flexi_50_300K": {
+      "Assets": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Field_Type": 4,
+        "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  Trailers and buses/coaches,  Commercial motor vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Passenger cars, SUVs",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
+      },
+      "ABN_in_Months": {
+        "Reference_field": "ABN_in_Months",
+        "Rule_Operator": ">",
+        "Rule_Value": 24,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Remark": "ABN Months"
+      },
+      "Loan_Amount": {
+        "Reference_field": "Loan_Amount",
+        "Rule_Operator": "<",
+        "Rule_Value": 300000,
+        "Field_Type": 3,
+        "Is_Nested": false,
+        "logical_operator": "and",
+        "Logical_Rule": {
+          "Reference_field": "Loan_Amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 50000,
+          "Field_Type": 3,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Remark": "Loan Amount"
+      },
+      "applicant_entity_type": {
+        "Reference_field": "applicant_entity_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Remark": "Applicant Entity Type"
+      },
+      "MAX_TERM": {
+        "Reference_field": "repayment_term_month",
+        "Rule_Operator": "<=",
+        "Rule_Value": 60,
+        "Field_Type": 3,
+        "logical_operator": "or",
+        "Logical_Rule": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "!=",
+          "Rule_Value": "NEW",
+          "Field_Type": 4,
+          "Is_Nested":false,
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "Asset_age",
+            "Rule_Operator": ">",
+            "Rule_Value": 3,
+            "Field_Type": 3,
+            "Is_Nested": false,
+            "Flow_for_True": false,
+            "Flow_for_False": true
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 84,
+          "Field_Type": 3,
+          "Reference_field": "repayment_term_month",
+          "logical_operator": "or",
+          "Logical_Rule": {
+            "Rule_Operator": "!=",
+            "Rule_Value": "NEW",
+            "Field_Type": 4,
+            "Reference_field": "usage_type",
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false,
+            "logical_operator": "and",
+            "Logical_Rule": {
+              "Rule_Operator": "<",
+              "Rule_Value": 3,
+              "Field_Type": 3,
+              "Reference_field": "Asset_age",
+              "Is_Nested": false,
+              "Flow_for_True": true,
+              "Flow_for_False": false
+            }
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Remark": "Repayment Terms"
+      },
+      "asset_supplier_type": {
+        "Reference_field": "asset_supplier_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "Private",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "Asset Supplier"
+      },
+      "usage_type": {
+        "Reference_field": "usage_type",
+        "Rule_Operator": "==",
+        "Rule_Value": "USED",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "Usage Type"
+      },
+      "Max_loan_non_proprty_owners": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Rule_Operator": "<=",
+          "Rule_Value": 300000,
+          "Field_Type": 3,
+          "Reference_field": "amount_financed",
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": false,
+        "Remark": "Owner Residence status"
+      },
+      "Max_age_of_asset_at_end_of_term": {
+        "Reference_field": "Asset_age",
+        "Rule_Operator": "<=",
+        "Rule_Value": 20,
+        "Field_Type": 3,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "Asset_age",
+          "Rule_Operator": "<=",
+          "Rule_Value": 30,
+          "Field_Type": 3,
+          "Is_Nested": true,
+          "Nested_Rule": {
+            "Reference_field": "asset_type",
+            "Rule_Operator": "==",
+            "Rule_Value": "trailers",
+            "Field_Type": 4,
+            "Is_Nested": false,
+            "Flow_for_True": true,
+            "Flow_for_False": false
+          },
+          "Flow_for_True": true,
+          "Flow_for_False": true
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": "Asset Age"
+      }
+    },
+
+"""

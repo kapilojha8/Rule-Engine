@@ -27,7 +27,7 @@ if len(sys.argv) != 2:
     sys.exit("Usage: python main.py approach")
 
 if (sys.argv[1] == "rule-engine-JSON"):
-    Rules_by_Lender  = Rules_using_JSON('../data/prev_rule.json')
+    Rules_by_Lender  = Rules_using_JSON('../data/Rules.json')
     Rules_by_Lender.Create_rules_using_json()
     Remarks = Rules_by_Lender.Remarks
 elif (sys.argv[1] == "rule-engine-XML"):
@@ -65,8 +65,8 @@ for Data_rule in Data_of_Rule_test:
             print(f"All Remarks : {remarks} ")
             Data_rule['Evaluated_Lender'] = LenderName
         else:
-            print(f"-------------> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
-            print(f"All Remarks : {remarks} ")
+            print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
+            print(f"Failure Remarks : {temppte.Rule.Remark}")
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
 exit()
 
