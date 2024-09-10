@@ -1,4 +1,4 @@
-from Rule_model import Rule, Rule_Connection
+from Rule_model import Rule, Rule_Connection, Flow_exception
 import json
 
 """
@@ -27,6 +27,23 @@ def Logical_OR_NestedRule(rule_var, rule_key="",parent_rule_heading=""):
             Rule: A Rule object created based on the input rule data.
     """
     try:
+        Flow_exception_True_Flow_rule, Flow_exception_True_Condition_to_proceed,Flow_exception_True_Remark, Flow_exception_False_Flow_rule, Flow_exception_False_Condition_to_proceed,Flow_exception_False_Remark = None, None, None, None, None, None
+        if rule_var.get('Flow_Exception_for_True'):
+            if rule_var.get('Flow_Exception_for_True').get('Exception_rule'):
+                Flow_exception_True_Flow_rule = rule_var['Flow_Exception_for_True'].get('Exception_rule')
+            if rule_var.get('Flow_Exception_for_True').get('Condition_to_proceed'): 
+                Flow_exception_True_Condition_to_proceed = rule_var['Flow_Exception_for_True'].get('Condition_to_proceed')
+            if rule_var.get('Flow_Exception_for_True').get('Remark'): 
+                Flow_exception_True_Remark = rule_var['Flow_Exception_for_True'].get('Remark')
+
+        if rule_var.get('Flow_Exception_for_False'):
+            if rule_var.get('Flow_Exception_for_False').get('Exception_rule'):
+                Flow_exception_False_Flow_rule = rule_var['Flow_Exception_for_False'].get('Exception_rule')
+            if rule_var.get('Flow_Exception_for_False').get('Condition_to_proceed'): 
+                Flow_exception_False_Condition_to_proceed = rule_var['Flow_Exception_for_False'].get('Condition_to_proceed')
+            if rule_var.get('Flow_Exception_for_False').get('Remark'): 
+                Flow_exception_False_Remark = rule_var['Flow_Exception_for_False'].get('Remark')
+
         return Rule(
                 ID=rule_key,
                 Rule_header    =  rule_var['Reference_field'],
@@ -37,6 +54,18 @@ def Logical_OR_NestedRule(rule_var, rule_key="",parent_rule_heading=""):
                 Nested_Rule    =  Logical_OR_NestedRule(rule_var['Nested_Rule'],"Nested_Rule",parent_rule_heading) if rule_var.get('Nested_Rule') else None,
                 Flow_for_True  = rule_var.get('Flow_for_True', True),
                 Flow_for_False = rule_var.get('Flow_for_False', False),
+
+                Flow_exception_True = Flow_exception(
+                   Exception_rule =  Logical_OR_NestedRule(Flow_exception_True_Flow_rule) if Flow_exception_True_Flow_rule else None,
+                   Condition_to_proceed =  Flow_exception_True_Condition_to_proceed if Flow_exception_True_Condition_to_proceed else False,
+                   Remark = Flow_exception_True_Remark if Flow_exception_True_Remark else ""
+                  ),
+                Flow_exception_False = Flow_exception(
+                   Exception_rule =  Logical_OR_NestedRule(Flow_exception_False_Flow_rule) if Flow_exception_False_Flow_rule else False,
+                   Condition_to_proceed = Flow_exception_False_Condition_to_proceed if Flow_exception_False_Condition_to_proceed else None,
+                   Remark = Flow_exception_False_Remark if Flow_exception_False_Remark else ""
+                  ),
+                
                 logical_operator=rule_var.get('logical_operator', None),
                 Logical_Rule   =   Logical_OR_NestedRule(rule_var['Logical_Rule'],"Logical_Rule",parent_rule_heading) if rule_var.get('Logical_Rule') else None,
                 Remark         =   rule_var.get('Remark', "")

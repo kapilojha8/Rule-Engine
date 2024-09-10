@@ -9,7 +9,10 @@ from datetime import datetime
 from preprocessing_of_data import PreprocessingOfData
 
 def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
+    # print("The Rule is ",Rule)
     Rule.evaluate(Data_rule)
+    # print("Evaluated Result : ",Rule.evaluate(Data_rule))
+    # print("the Evaluation Result is :",Rule.Evaluated_result)
     if Rule.Is_Nested and (not Rule.Evaluated_result):
         Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
     return Rule_chain.take_decisions(Rule)
@@ -45,16 +48,8 @@ for Data_rule in Data_of_Rule_test:
         temppte = copy.deepcopy(LenderRule)
         remarks = ""
         while temppte!=None:
-            
-            # print("Rule ", temppte.Rule)
-            # print("Eveluation : ",)
-            # temppte.Rule.evaluate(Data_rule)
-            # temppte.take_decisions(temppte.Rule)
-            Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
-            # print("The Evaluation Result is ",temppte.Rule.Evaluated_result)
-            # print("The Flow for False is ",temppte.Rule.Flow_for_False)
-            # print("The take Decisions were :",temppte.take_decisions(temppte.Rule))
-            if not temppte.take_decisions(temppte.Rule) :
+            EATD = Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
+            if not EATD :
                 break
             if type(temppte.Rule.Remark) == int:
                 remarks +=  Remarks[f'{temppte.Rule.Remark}']
