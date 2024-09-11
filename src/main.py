@@ -13,8 +13,8 @@ def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
     Rule.evaluate(Data_rule)
     # print("Evaluated Result : ",Rule.evaluate(Data_rule))
     # print("the Evaluation Result is :",Rule.Evaluated_result)
-    if Rule.Is_Nested and (not Rule.Evaluated_result):
-        Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
+    # if Rule.Is_Nested and (not Rule.Evaluated_result):
+    #     Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
     return Rule_chain.take_decisions(Rule)
 
 
@@ -47,8 +47,12 @@ for Data_rule in Data_of_Rule_test:
             continue
         temppte = copy.deepcopy(LenderRule)
         remarks = ""
+        Running_logs = ""
         while temppte!=None:
-            EATD = Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
+            # EATD = Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
+            Rule_evaluate = temppte.Rule.evaluate(Data_rule)
+            Running_logs = Running_logs + " -- " + Rule_evaluate['Remark']  if Running_logs!="" else Rule_evaluate['Remark']
+            EATD = temppte.take_decisions(temppte.Rule)
             if not EATD :
                 break
             if type(temppte.Rule.Remark) == int:
@@ -56,12 +60,13 @@ for Data_rule in Data_of_Rule_test:
             temppte = temppte.next_Rule
 
         if temppte == None:
-            print(f">>>>>>>>>---------{Data_rule['application_number']} {LenderName} is an Eligible Lender ")
-            print(f"All Remarks : {remarks} ")
+            print(f">>> {Data_rule['application_number']} {LenderName} is an Eligible Lender ")
+            print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = LenderName
         else:
             print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
-            print(f"Failure Remarks : {temppte.Rule.Remark}")
+            print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
+            print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
 exit()
 

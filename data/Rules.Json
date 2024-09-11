@@ -39,7 +39,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -49,7 +49,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -69,7 +69,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -79,7 +79,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"Applicant Entity"
+        "Remark": "Applicant Entity"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -92,7 +92,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -147,7 +147,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -157,7 +157,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -176,7 +176,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"Owner Residence"
+        "Remark": "Owner Residence"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -190,7 +190,7 @@
           "Rule_Value": 30,
           "Field_Type": 3,
           "Is_Nested": false,
-          "logical_operator":"and",
+          "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "asset_type",
             "Rule_Operator": "==",
@@ -205,7 +205,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Asset Age"
+        "Remark": "Asset Age"
       }
     },
     "Primary Flexi_from_20_50K": {
@@ -236,7 +236,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -246,7 +246,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -266,7 +266,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -276,7 +276,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -289,7 +289,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -344,7 +344,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -354,7 +354,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -373,7 +373,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"Owner Residence"
+        "Remark": "Owner Residence"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -387,7 +387,7 @@
           "Rule_Value": 30,
           "Field_Type": 3,
           "Is_Nested": false,
-          "logical_operator":"and",
+          "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "asset_type",
             "Rule_Operator": "==",
@@ -402,7 +402,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Asset Age"
+        "Remark": "Asset Age"
       }
     },
     "Primary Flexi_50_300K": {
@@ -443,7 +443,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-          "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -486,7 +486,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -584,7 +584,7 @@
           "Rule_Value": 30,
           "Field_Type": 3,
           "Is_Nested": false,
-          "logical_operator":"and",
+          "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "asset_type",
             "Rule_Operator": "==",
@@ -599,7 +599,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-          "Remark":"Asset Age"
+        "Remark": "Asset Age"
       }
     },
     "Secondary Flexi_upto_20K": {
@@ -673,7 +673,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -822,7 +822,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -971,7 +971,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -1054,7 +1054,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
         "Field_Type": 4,
-        "Exclude":"Scaffolding, Photocopiers",
+        "Exclude": "Scaffolding, Photocopiers",
         "Is_Nested": true,
         "Nested_Rule": {
           "Reference_field": "asset_type",
@@ -1130,7 +1130,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -1223,7 +1223,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
         "Field_Type": 4,
-        "Exclude":"Scaffolding, Photocopiers",
+        "Exclude": "Scaffolding, Photocopiers",
         "Is_Nested": true,
         "Nested_Rule": {
           "Reference_field": "asset_type",
@@ -1299,7 +1299,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -1392,7 +1392,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
         "Field_Type": 4,
-        "Exclude":"Scaffolding, Photocopiers",
+        "Exclude": "Scaffolding, Photocopiers",
         "Is_Nested": true,
         "Nested_Rule": {
           "Reference_field": "asset_type",
@@ -1468,7 +1468,7 @@
           "Rule_Operator": "!=",
           "Rule_Value": "NEW",
           "Field_Type": 4,
-          "Is_Nested":false,
+          "Is_Nested": false,
           "logical_operator": "and",
           "Logical_Rule": {
             "Reference_field": "Asset_age",
@@ -1557,56 +1557,45 @@
     },
 
 
-
-
-
-
-
     "Primaryy Pepper_Tier_A": {
       "asset_type": {
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Asset is in Allowed Asset List"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Asset is not in Allowed Asset List",
+          "Exception_rule": {
             "Reference_field": "asset_type",
-            "Rule_Operator": "in",
-            "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+            "Rule_Operator": "not in",
+            "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
             "Field_Type": 4,
             "Flow_Exception_for_True": {
-              "Condition_to_proceed":true,
-              "Remark":"Asset is in Allowed List"
+              "Remark": "Asset is not in Excluded Assets list"
             },
-            "Flow_Exception_for_False" :{
-              "Condition_to_proceed" : false,
-              "Remark":"Asset not in Allowed List",
-              "Exception_rule":{
-                "Reference_field": "asset_type",
-                "Rule_Operator": "not in",
-                "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
-                "Field_Type": 4,
-                "Is_Nested": false,
-                "Remark":"Asset in not Allowd asset list",
-                "Flow_Exception_for_True":{
-                  "Remark":"Asset is not in Restrected Asset list"
-                },
-                "Flow_Exception_for_False":{
-                  "Remark":"Asset is in not Allowed asset list"
-                }
-              }
+            "Flow_Exception_for_False": {
+              "Remark": "Asset is in Excluded Assets list"
             }
+          }
+        }
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
         "Rule_Operator": ">",
         "Rule_Value": 60,
         "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark":"ABN(In Months)",
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"ABN Months"
+          "Condition_to_proceed": true,
+          "Remark": "ABN(In Months) is greater than Allowed ABN"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed":false,
-          "Remark":"ABN Months is Less then Expected"
+          "Condition_to_proceed": false,
+          "Remark": "ABN(In Months) is Less then Expected ABN"
         }
       },
       "GST_in_Months": {
@@ -1614,17 +1603,13 @@
         "Rule_Operator": ">",
         "Rule_Value": 36,
         "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark":"GST(In Months)",
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"GST Months"
+          "Condition_to_proceed": true,
+          "Remark": "GST Months is greater than Allowed ABN"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed":false,
-          "Remark":"GST Months is Less then Expected"
+          "Condition_to_proceed": false,
+          "Remark": "GST Months is Less then Expected"
         }
       },
       "Loan_Amount": {
@@ -1642,63 +1627,99 @@
           "Flow_for_True": false,
           "Flow_for_False": true
         },
-        "Is_Nested": false,
-        "Flow_Exception_for_True":{
-          "Condition_to_proceed":true,
-          "Exception_rule":{
-            "Reference_field":"asset_type",
-            "Rule_Operator":"in",
-            "Rule_Value":"Caravans, Camper Vans & Motorhomes",
-            "Field_Type":4,
-            "logical_operator":"and",
-            "Logical_Rule":{
-              "Reference_field": "Loan_Amount",
-              "Rule_Operator": "<=",
-              "Rule_Value": 110000,
-              "Field_Type": 3,
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
-            },
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark":"Loan Amount is Under Allowed Loan Limit",
+          "Exception_rule": {
+            "Reference_field": "asset_type",
+            "Rule_Operator": "not in",
+            "Rule_Value": "Caravans, Camper Vans & Motorhomes, atv, offroad bikes and other goods, Motorbike",
+            "Field_Type": 4,
             "Flow_Exception_for_True":{
-              "Condition_to_proceed":true
+              "Remark":"Asset is not in list of Lower Amount Loan List"
             },
             "Flow_Exception_for_False":{
-              "Condition_to_proceed":false,
-              "Exception_rule":{
-                "Reference_field":"asset_type",
-                "Rule_Operator":"==",
-                "Rule_Value":"Motorbike",
-                "Field_Type":4,
-                "logical_operator":"and",
-                "Logical_Rule":{
-                  "Reference_field": "Loan_Amount",
-                  "Rule_Operator": "<=",
-                  "Rule_Value": 55000,
-                  "Field_Type": 3,
-                  "Is_Nested": false,
-                  "Flow_for_True": true,
-                  "Flow_for_False": false
+              "Remark": "Asset is in Lower Amount Loan Asset List",
+              "Exception_rule": {
+                "Reference_field": "asset_type",
+                "Rule_Operator": "in",
+                "Rule_Value": "Caravans, Camper Vans & Motorhomes",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Exception_rule": {
+                    "Reference_field": "Loan_Amount",
+                    "Rule_Operator": "<=",
+                    "Rule_Value": 110000,
+                    "Field_Type": 3,
+                    "Is_Nested": false,
+                    "Flow_for_True": true,
+                    "Flow_for_False": false,
+                    "Flow_Exception_for_True": {
+                      "Remark": "Asset in Caravans, Camper Vans & Motorhomes also Amount is less than 110,000"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Remark": "Asset in Caravans, Camper Vans & Motorhomes but Amount is greater than 110,000"
+                    }
+                  }
                 },
-                "Flow_Exception_for_True":{
-                  "Condition_to_proceed":true
-                },
-                "Flow_Exception_for_False":{
-                  "Condition_to_proceed":true,
-                  "Exception_rule":{
-                    "Reference_field":"asset_type",
-                    "Rule_Operator":"==",
-                    "Rule_Value":"ATV offroad bikes and other goods",
-                    "Field_Type":4,
-                    "logical_operator":"and",
-                    "Logical_Rule":{
-                      "Reference_field": "Loan_Amount",
-                      "Rule_Operator": "<=",
-                      "Rule_Value": 50000,
-                      "Field_Type": 3,
-                      "Is_Nested": false,
-                      "Flow_for_True": true,
-                      "Flow_for_False": false
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Asset is not in Caravans, Camper Vans & Motorhomes also or Amount is greater than 110,000",
+                  "Exception_rule": {
+                    "Reference_field": "asset_type",
+                    "Rule_Operator": "==",
+                    "Rule_Value": "Motorbike",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Exception_rule": {
+                        "Reference_field": "Loan_Amount",
+                        "Rule_Operator": "<=",
+                        "Rule_Value": 55000,
+                        "Field_Type": 3,
+                        "Is_Nested": false,
+                        "Flow_for_True": true,
+                        "Flow_for_False": false,
+                        "Flow_Exception_for_True": {
+                          "Remark": "Asset is in Motorbike and Loan Amount is less then 55,000"
+                        },
+                        "Flow_Exception_for_False": {
+                          "Remark": "Asset is in Motorbike but Loan Amount is greater than 55,000"
+                        }
+                      },
+                      "Remark": "Asset is Motorbike and Loan Amount is less than 55,000"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Asset is not Motorbike or Loan Amount is not less than 55,000",
+                      "Exception_rule": {
+                        "Reference_field": "asset_type",
+                        "Rule_Operator": "in",
+                        "Rule_Value": "ATV offroad bikes and other goods",
+                        "Field_Type": 4,
+                        "Flow_Exception_for_True": {
+                          "Remark": "Asset is ATV offroad Bikes",
+                          "Exception_rule": {
+                            "Reference_field": "Loan_Amount",
+                            "Rule_Operator": "<=",
+                            "Rule_Value": 50000,
+                            "Field_Type": 3,
+                            "Is_Nested": false,
+                            "Flow_for_True": true,
+                            "Flow_for_False": false,
+                            "Flow_Exception_for_True": {
+                              "Remark": "Assset is in ATV Offroad Bikes and Amount it less than 50,000"
+                            },
+                            "Flow_Exception_for_False": {
+                              "Remark": "Asset is in ATV Offroad Bikes but Amount is greater than 50,000"
+                            }
+                          }
+                        },
+                        "Flow_Exception_for_False": {
+                          "Remark": "Asset is not in ATV offroad Bikes"
+                        }
+                      }
                     }
                   }
                 }
@@ -1706,30 +1727,23 @@
             }
           }
         },
-        "Flow_Exception_for_False":{
-          "Condition_to_proceed":true
-        },
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Loan Amount Exceded Allowed Loan Limit"
+        }
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
         "Rule_Operator": "in",
         "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
         "Field_Type": 4,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark":"Applicant Entity Type",
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"Applicant Entity Type"
+          "Condition_to_proceed": true,
+          "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed":false,
-          "Remark":"Applicant Entity Type is not in Allowed Applicant List"
+          "Condition_to_proceed": false,
+          "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
         }
       },
       "MAX_TERM": {
@@ -1748,13 +1762,13 @@
           "Flow_for_False": true
         },
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"Repayment Term"
+          "Condition_to_proceed": true,
+          "Remark": "Repayment Term"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed":false,
-          "Remark":"Repayment Term Condition is not satisfied",
-          "Exception_rule":{
+          "Condition_to_proceed": false,
+          "Remark": "Repayment Term Condition is not satisfied",
+          "Exception_rule": {
             "Rule_Operator": "<=",
             "Rule_Value": 84,
             "Field_Type": 3,
@@ -1773,10 +1787,10 @@
             "Flow_for_True": true,
             "Flow_for_False": false,
             "Flow_Exception_for_True": {
-              "Remark":"repayment_term_month 84 Condition with Ballon Amount 0 is satisfied"
+              "Remark": "repayment_term_month 84 Condition with Ballon Amount 0 is satisfied"
             },
             "Flow_Exception_for_False": {
-              "Remark":"repayment term month 84 Condition with Ballon Amount 0 is not satisfied"
+              "Remark": "repayment term month 84 Condition with Ballon Amount 0 is not satisfied"
             }
           }
         },
@@ -1784,7 +1798,6 @@
         "Flow_for_True": true,
         "Flow_for_False": false,
         "Remark": "Repayment Term"
-        
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -1792,9 +1805,9 @@
         "Rule_Value": "Private",
         "Field_Type": 4,
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,  
-          "Remark":"asset_supplier_type",
-          "Exception_rule":{
+          "Condition_to_proceed": true,
+          "Remark": "Asset Supplier is Private which is Okay",
+          "Exception_rule": {
             "Rule_Operator": "<=",
             "Rule_Value": 150000,
             "Field_Type": 3,
@@ -1803,22 +1816,17 @@
             "Flow_for_True": true,
             "Flow_for_False": false,
             "Flow_Exception_for_True": {
-                "Remark":"asset_supplier_type with Loan Amount is allowed"
+              "Remark": "Loan Amount of greater than 150,000 is not allowed with Asset supplier Private"
             },
             "Flow_Exception_for_False": {
-                "Remark":"asset_supplier_type with Loan Amount is not allowed"
+              "Remark": "Loan Amount of less than 150,000 is all right with Asset supplier Private"
             }
           }
         },
         "Flow_Exception_for_False": {
-            "Remark":"Asset Supplier"
-        },
-
-
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+          "Condition_to_proceed":true,
+          "Remark": "Asset Supplier is not private Dealer"
+        }
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -1826,46 +1834,38 @@
         "Rule_Value": "OWNING",
         "Field_Type": 4,
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"ABN Months",
-          "Exception_rule":{
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is not Owned",
+          "Exception_rule": {
             "Rule_Operator": "<=",
             "Rule_Value": 250000,
             "Field_Type": 3,
             "Reference_field": "amount_financed",
-            "Is_Nested": false,
-            "Flow_for_True": true,
-            "Flow_for_False": false,
             "Flow_Exception_for_True": {
-              "Remark":"gurantor residence status and amount financed following condition"
+              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
             },
             "Flow_Exception_for_False": {
-                "Remark":"gurantor residence status and amount financed not following condition"
+              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
             }
           }
-        },
-        "Flow_Exception_for_False": {
-          "Condition_to_proceed":true,
-            "Remark":"ABN Months is Less then Expected"
-        },
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Not Property Owner Allowed Loan Amount Exceded"
+        }
       },
       "usage_type": {
         "Reference_field": "usage_type",
         "Rule_Operator": "!=",
         "Rule_Value": "USED",
         "Field_Type": 4,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": true,
-        "Remark": "Usage Type",
         "Flow_Exception_for_True": {
-          "Remark":"usage_type"
+          "Condition_to_proceed":true,
+          "Remark": "usage_type"
         },
         "Flow_Exception_for_False": {
-            "Remark":"usage_type of used is not allowed"
+          "Condition_to_proceed":true,
+          "Remark": "usage_type of used is not allowed"
         }
       },
       "Max_age_of_asset_at_end_of_term": {
@@ -1873,39 +1873,35 @@
         "Rule_Operator": "<=",
         "Rule_Value": 15,
         "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Max Age of Asset Limit exceeded",
         "Flow_Exception_for_True": {
-          "Condition_to_proceed":true,
-          "Remark":"Max Age of Asset"
+          "Condition_to_proceed": true,
+          "Remark": "Asset Age is under Allowed Age of Asset"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed":false,
-            "Remark":"Max Age of Asset Limit exceeded"
+          "Condition_to_proceed": false,
+          "Remark": "Max Age of Asset Limit exceeded"
         }
       }
     },
     "Primary Pepper_Tier_B": {
       "asset_type": {
-            "Reference_field": "asset_type",
-            "Rule_Operator": "in",
-            "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-            "Field_Type": 4,
-            "Is_Nested": true,
-            "Nested_Rule": {
-              "Reference_field": "asset_type",
-              "Rule_Operator": "not in",
-              "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
-              "Field_Type": 4,
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
-            },
-            "Flow_for_True": true,
-            "Flow_for_False": true,
-            "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -1915,7 +1911,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -1925,7 +1921,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -1945,8 +1941,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -1956,7 +1951,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2043,7 +2038,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -2058,23 +2053,23 @@
     },
     "Primary Pepper_Tier_C": {
       "asset_type": {
-            "Reference_field": "asset_type",
-            "Rule_Operator": "in",
-            "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-            "Field_Type": 4,
-            "Is_Nested": true,
-            "Nested_Rule": {
-              "Reference_field": "asset_type",
-              "Rule_Operator": "not in",
-              "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
-              "Field_Type": 4,
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
-            },
-            "Flow_for_True": true,
-            "Flow_for_False": true,
-            "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -2084,7 +2079,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2094,7 +2089,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2114,8 +2109,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2125,7 +2119,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2212,7 +2206,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -2227,14 +2221,14 @@
     },
     "Secondary Pepper_Tier_A": {
       "asset_type": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "in",
-          "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": true,
-          "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -2244,7 +2238,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2254,7 +2248,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2274,8 +2268,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2285,7 +2278,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2358,14 +2351,14 @@
     },
     "Secondary Pepper_Tier_B": {
       "asset_type": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "in",
-          "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": true,
-          "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -2375,7 +2368,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2385,7 +2378,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2405,8 +2398,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2416,7 +2408,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2489,14 +2481,14 @@
     },
     "Tertiary Pepper_Tier_A": {
       "asset_type": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "in",
-          "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": true,
-          "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -2506,7 +2498,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2516,7 +2508,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2536,8 +2528,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2547,7 +2538,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2606,7 +2597,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -2621,14 +2612,14 @@
     },
     "Tertiary Pepper_Tier_B": {
       "asset_type": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "in",
-          "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": true,
-          "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+        "Field_Type": 4,
+        "Is_Nested": false,
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -2638,7 +2629,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2648,7 +2639,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2668,8 +2659,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
-
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2679,7 +2669,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2738,7 +2728,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -2751,15 +2741,6 @@
         "Remark": "Asset Age"
       }
     },
-
-
-
-
-
-
-
-
-
     "Primary Resimac- low doc": {
       "asset_type": {
         "Reference_field": "asset_type",
@@ -2788,7 +2769,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -2798,7 +2779,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -2818,7 +2799,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -2828,7 +2809,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -2867,7 +2848,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Terms"
+        "Remark": "Repayment Terms"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -2877,7 +2858,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -2896,7 +2877,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Owner Residence status"
+        "Remark": "Owner Residence status"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -2964,7 +2945,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Max Age of Asset Limit exceeded"
+        "Remark": "Max Age of Asset Limit exceeded"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -2974,7 +2955,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     },
     "Primary Resimac- light doc": {
@@ -3005,7 +2986,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -3015,7 +2996,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -3035,7 +3016,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -3045,7 +3026,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -3084,7 +3065,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Terms"
+        "Remark": "Repayment Terms"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -3094,7 +3075,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -3113,7 +3094,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Not Property Owner Allowed Loan Amount Exceded"
+        "Remark": "Not Property Owner Allowed Loan Amount Exceded"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -3161,7 +3142,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Max Age of Asset Limit exceeded"
+        "Remark": "Max Age of Asset Limit exceeded"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -3171,7 +3152,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     },
     "Secondary Resimac- low doc": {
@@ -3193,7 +3174,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -3203,7 +3184,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -3223,7 +3204,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -3233,7 +3214,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -3243,7 +3224,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Term"
+        "Remark": "Repayment Term"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -3253,7 +3234,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -3272,7 +3253,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Not Property Owner Allowed Loan Amount Exceded"
+        "Remark": "Not Property Owner Allowed Loan Amount Exceded"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -3281,7 +3262,7 @@
         "Field_Type": 3,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Max Age of Asset Limit exceeded"
+        "Remark": "Max Age of Asset Limit exceeded"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -3291,7 +3272,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     },
     "Secondary Resimac- light doc": {
@@ -3313,7 +3294,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -3323,7 +3304,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -3343,7 +3324,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -3353,7 +3334,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -3363,7 +3344,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Term"
+        "Remark": "Repayment Term"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -3373,7 +3354,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -3392,7 +3373,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Not Property Owner Allowed Loan Amount Exceded"
+        "Remark": "Not Property Owner Allowed Loan Amount Exceded"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -3401,7 +3382,7 @@
         "Field_Type": 3,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Age"
+        "Remark": "Asset Age"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -3411,28 +3392,28 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     },
     "Tertiary Resimac- low doc": {
       "asset_type": {
-            "Reference_field": "asset_type",
-            "Rule_Operator": "in",
-            "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
-            "Field_Type": 4,
-            "Is_Nested": true,
-            "Nested_Rule": {
-              "Reference_field": "asset_type",
-              "Rule_Operator": "not in",
-              "Rule_Value": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
-              "Field_Type": 4,
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
-            },
-            "Flow_for_True": true,
-            "Flow_for_False": true,
-            "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -3442,7 +3423,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -3452,7 +3433,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -3472,7 +3453,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -3482,7 +3463,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -3492,7 +3473,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Term"
+        "Remark": "Repayment Term"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -3502,7 +3483,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -3521,7 +3502,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Not Property Owner Allowed Loan Amount Exceded"
+        "Remark": "Not Property Owner Allowed Loan Amount Exceded"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -3530,7 +3511,7 @@
         "Field_Type": 3,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Age"
+        "Remark": "Asset Age"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -3540,28 +3521,28 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     },
     "Tertiary Resimac- light doc": {
       "asset_type": {
-            "Reference_field": "asset_type",
-            "Rule_Operator": "in",
-            "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
-            "Field_Type": 4,
-            "Is_Nested": true,
-            "Nested_Rule": {
-              "Reference_field": "asset_type",
-              "Rule_Operator": "not in",
-              "Rule_Value": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
-              "Field_Type": 4,
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
-            },
-            "Flow_for_True": true,
-            "Flow_for_False": true,
-            "Remark": 1
+        "Reference_field": "asset_type",
+        "Rule_Operator": "in",
+        "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
+        "Field_Type": 4,
+        "Is_Nested": true,
+        "Nested_Rule": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "not in",
+          "Rule_Value": "Fixtures and fittings, cool roms and spray booths, intangible assets, refrigeration, gym equipment, hospitality equipment, software, scafolding, racking and temporary fencing, artwork, vending and gaming machines, livestock, ride share, taxis and repairable writeoffs, demountables and shipping containers, racking, office furniture",
+          "Field_Type": 4,
+          "Is_Nested": false,
+          "Flow_for_True": true,
+          "Flow_for_False": false
+        },
+        "Flow_for_True": true,
+        "Flow_for_False": true,
+        "Remark": 1
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
@@ -3571,7 +3552,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"ABN(In Months)"
+        "Remark": "ABN(In Months)"
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
@@ -3581,7 +3562,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"GST(In Months)"
+        "Remark": "GST(In Months)"
       },
       "Loan_Amount": {
         "Reference_field": "Loan_Amount",
@@ -3601,7 +3582,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Loan Amount"
+        "Remark": "Loan Amount"
       },
       "applicant_entity_type": {
         "Reference_field": "applicant_entity_type",
@@ -3611,7 +3592,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Applicant Entity Type"
+        "Remark": "Applicant Entity Type"
       },
       "MAX_TERM": {
         "Reference_field": "repayment_term_month",
@@ -3621,7 +3602,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Repayment Term"
+        "Remark": "Repayment Term"
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -3631,7 +3612,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Asset Supplier"
+        "Remark": "Asset Supplier"
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -3650,7 +3631,7 @@
         },
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Non Property Owner Allowed Loan Amount Exceded"
+        "Remark": "Non Property Owner Allowed Loan Amount Exceded"
       },
       "Max_age_of_asset_at_end_of_term": {
         "Reference_field": "Asset_age",
@@ -3659,7 +3640,7 @@
         "Field_Type": 3,
         "Flow_for_True": true,
         "Flow_for_False": true,
-        "Remark":"Asset Age"
+        "Remark": "Asset Age"
       },
       "usage_type": {
         "Reference_field": "usage_type",
@@ -3669,7 +3650,7 @@
         "Is_Nested": false,
         "Flow_for_True": true,
         "Flow_for_False": false,
-        "Remark":"Usage Type"
+        "Remark": "Usage Type"
       }
     }
   }

@@ -5,6 +5,9 @@ class Flow_exception:
         self.Condition_to_proceed = Condition_to_proceed
         self.Remark = Remark
 
+    def __str__(self) -> str:
+        return f"Exception Rule : {self.Exception_rule} || Condition to proceed : {self.Condition_to_proceed} || Remark : {self.Remark}"
+
 class Rule:
     def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Field_Type, Is_Nested:bool, Nested_Rule,Flow_exception_True,Flow_exception_False, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
         """
@@ -75,6 +78,166 @@ class Rule:
         if self.Rule_value!=None and self.Rule_operator!=None and self.Rule_value!=None:
             return f"{self.Rule_header} {self.Rule_operator} {str(self.Rule_value)}"
         
+    def eevaluate(self, data):
+        #     """
+        #         Evaluates the rule against provided data.
+
+        #         Args:
+        #             data (dict): The data dictionary containing values to be evaluated against the rule.
+
+        #         Returns:
+        #             bool: The result of the rule evaluation (True or False).
+        #     """
+        #     if self.Rule_header not in data:
+        #         raise ValueError(f"Header {self.Rule_header} not found in data.")
+            
+        #     actual_value = data[self.Rule_header]
+            
+        #     if isinstance(actual_value, datetime) or  isinstance(self.Rule_value, datetime):
+        #         self.Rule_value = datetime.strptime(self.Rule_value, "%d/%m/%Y").date()  # Convert to date
+        #         actual_value = actual_value.date()  # Extract the date part
+            
+        #     try:
+        #         if isinstance(self.Rule_value, str) and self.Rule_value.isdigit():
+        #             self.Rule_value = int(self.Rule_value)
+        #         if isinstance(actual_value, str) and actual_value.isdigit():
+        #             actual_value = int(actual_value)
+        #     except ValueError:
+        #         raise ValueError(f"Cannot convert {self.Rule_value} or {actual_value} to int.")
+            
+
+        #     # print("Rule operator : ",self.Rule_operator,"\n Rule Value : ",  type(self.Rule_value),"\n Actual Value : ", (actual_value))
+        #     if self.Rule_operator == "==":
+        #         result = actual_value == self.Rule_value
+        #     elif self.Rule_operator == "!=":
+        #         result = actual_value != self.Rule_value
+        #     elif self.Rule_operator == ">":
+        #         result = actual_value > self.Rule_value
+        #     elif self.Rule_operator == "<":
+        #         result = actual_value < self.Rule_value
+        #     elif self.Rule_operator == ">=":
+        #         result = actual_value >= self.Rule_value
+        #     elif self.Rule_operator == "<=":
+        #         result = actual_value <= self.Rule_value
+        #     elif self.Rule_operator == "in" :
+        #         if type(self.Rule_value) == str:
+        #             self.Rule_value = self.Rule_value.split(",")
+        #         # if(self.Rule_header == "asset_type"):
+        #             # print("Actual Value is :",actual_value," Rule Value ",self.Rule_value)
+        #         self.Rule_value = [Rule_value.casefold().strip() for Rule_value in self.Rule_value]
+        #         result = actual_value.casefold() in self.Rule_value
+        #     elif  self.Rule_operator == "not in" :
+        #         if type(self.Rule_value) == str:
+        #            self.Rule_value = self.Rule_value.split(",")
+        #         self.Rule_value = [Rule_value.casefold().strip() for Rule_value in self.Rule_value]
+        #         result = actual_value.casefold() not in self.Rule_value     
+        #         # print("The here is :",actual_value.casefold() not in self.Rule_value ) 
+        #     else:
+        #         raise ValueError(f"Unsupported operator: {self.Rule_operator}")
+        #     # print("This is Logical Operator ",self.logical_operator)
+        #     if self.logical_operator!=None:
+        #         if self.logical_operator == "and":
+        #             result = result and self.Logical_Rule.evaluate(data)['Return_result']
+        #         elif self.logical_operator == "or":
+        #             result = result or self.Logical_Rule.evaluate(data)['Return_result']
+            
+        #     if self.Is_Nested and self.Nested_Rule:
+        #         NestedResult = self.Nested_Rule.evaluate(data)['Return_result']
+        #         result = result or NestedResult
+        #     self.Evaluated_result = result
+        #     # print("The Header is :",self.Rule_header,"The Rule is ",self)
+        #     # print("The Actual Value : ",actual_value,"The Evaluation Result is :",result)
+        #     return {"Return_result":result,"Remark":self.Remark}
+        return 1
+
+    def OLDevaluate(self, data):
+        """
+            Evaluates the rule against provided data.
+
+            Args:
+                data (dict): The data dictionary containing values to be evaluated against the rule.
+
+            Returns:
+                bool: The result of the rule evaluation (True or False).
+        """
+
+        nested_remark = ""
+        if self.Rule_header not in data:
+            raise ValueError(f"Header {self.Rule_header} not found in data.")
+        
+        actual_value = data[self.Rule_header]
+        
+        # Handle date comparison
+        if isinstance(actual_value, datetime) or isinstance(self.Rule_value, datetime):
+            self.Rule_value = datetime.strptime(self.Rule_value, "%d/%m/%Y").date() if isinstance(self.Rule_value, str) else self.Rule_value
+            actual_value = actual_value.date() if isinstance(actual_value, datetime) else actual_value
+        
+        try:
+            if isinstance(self.Rule_value, str) and self.Rule_value.isdigit():
+                self.Rule_value = int(self.Rule_value)
+            if isinstance(actual_value, str) and actual_value.isdigit():
+                actual_value = int(actual_value)
+        except ValueError:
+            raise ValueError(f"Cannot convert {self.Rule_value} or {actual_value} to int.")
+        
+        # Add additional operator support here
+        if self.Rule_operator == "==":
+            result = actual_value == self.Rule_value
+        elif self.Rule_operator == "!=":
+            result = actual_value != self.Rule_value
+        elif self.Rule_operator == ">":
+            result = actual_value > self.Rule_value
+        elif self.Rule_operator == "<":
+            result = actual_value < self.Rule_value
+        elif self.Rule_operator == ">=":
+            result = actual_value >= self.Rule_value
+        elif self.Rule_operator == "<=":
+            result = actual_value <= self.Rule_value
+        elif self.Rule_operator == "in":
+            if isinstance(self.Rule_value, str):
+                self.Rule_value = [x.strip().lower() for x in self.Rule_value.split(",")]
+            result = actual_value.strip().lower() in self.Rule_value
+        elif self.Rule_operator == "not in":
+            if isinstance(self.Rule_value, str):
+                self.Rule_value = [x.strip().lower() for x in self.Rule_value.split(",")]
+            result = actual_value.strip().lower() not in self.Rule_value
+        else:
+            raise ValueError(f"Unsupported operator: {self.Rule_operator}")
+        
+        if self.logical_operator:
+            if self.logical_operator == "and":
+                result = result and self.Logical_Rule.evaluate(data)['Return_result']
+            elif self.logical_operator == "or":
+                result = result or self.Logical_Rule.evaluate(data)['Return_result']
+        
+        # print("Rule is ",self)
+        # print("Here Evaluation Results in ",result)
+        if self.Is_Nested and self.Nested_Rule:
+            result = result and self.Nested_Rule.evaluate(data)['Return_result']
+
+        if result:
+            if self.Flow_Exception_for_True and self.Flow_Exception_for_True.Exception_rule:
+                LLO = self.Flow_Exception_for_True.Exception_rule.evaluate(data)
+                nested_remark += LLO['Remark']
+                result = LLO['Return_result']
+                print("This is Evaluation of this Rule ",LLO)
+                print("This is Flow Exception for true :",self.Flow_Exception_for_True.Exception_rule)
+            # if self.Flow_Exception_for_True.Exception_rule:
+                print("This is Flow Exception Rule is :",self.Flow_Exception_for_True.Condition_to_proceed)
+        else:
+            if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Exception_rule:
+                LLO = self.Flow_Exception_for_False.Exception_rule.evaluate(data)
+                nested_remark += LLO['Remark']
+                result = LLO['Return_result']
+                print("This is Evaluation of this Rule ",LLO)
+                print("This is Flow Exception for true :",self.Flow_Exception_for_False.Exception_rule)
+            # if self.Flow_Exception_for_False.Exception_rule:
+                print("This is Flow Exception Rule is :",self.Flow_Exception_for_False.Condition_to_proceed)
+        
+        self.Evaluated_result = result
+        return {"Return_result": result, "Remark": nested_remark + self.Remark }
+
+
     def evaluate(self, data):
         """
             Evaluates the rule against provided data.
@@ -140,31 +303,28 @@ class Rule:
                 nested_remark += self.Flow_Exception_for_True.Remark
             if self.Flow_Exception_for_True and self.Flow_Exception_for_True.Exception_rule:
                 LLO = self.Flow_Exception_for_True.Exception_rule.evaluate(data)
-                nested_remark += LLO['Remark']
+                nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
                 result = LLO['Return_result']
-                if not LLO['Return_result']:
-                    print("------> remark : ",LLO['Remark'])
-                print("This is Evaluation of this Rule ",LLO)
-                print("This is Remark of this Rule ",self.Flow_Exception_for_True.Remark)
-                print("Exception rule  for true :",self.Flow_Exception_for_True.Exception_rule)
+                # print("Flow Exception for true \n ",self.Flow_Exception_for_True)
+                # print("This is Evaluation of this Rule ",LLO)
+                # print("This is Remark of this Rule ",self.Flow_Exception_for_True.Remark)
+                # print("Exception rule  for true :",self.Flow_Exception_for_True.Exception_rule)
             # if self.Flow_Exception_for_True.Exception_rule:
-                print("This is Flow Exception Rule is :",self.Flow_Exception_for_True.Condition_to_proceed)
+                # print("This is Flow Exception Rule is :",self.Flow_Exception_for_True.Condition_to_proceed)
         else:
             if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Remark:
                 nested_remark += self.Flow_Exception_for_False.Remark
             if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Exception_rule:
                 LLO = self.Flow_Exception_for_False.Exception_rule.evaluate(data)
-                nested_remark += LLO['Remark']
+                nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
                 result = LLO['Return_result']
-                if not LLO['Return_result']:
-                    print("------> remark : ",LLO['Remark'])
-                print("This is Evaluation of this Rule ",LLO)
-                print("Exception rule for false :",self.Flow_Exception_for_False.Exception_rule)
-            # if self.Flow_Exception_for_False.Exception_rule:
-                print("This is Flow Exception Rule is :",self.Flow_Exception_for_False.Condition_to_proceed)
+                # print("Flow Exception for false \n ",self.Flow_Exception_for_False)
+                # print("This is Evaluation of this Rule ",LLO)
+            #     print("Exception rule for false :",self.Flow_Exception_for_False.Exception_rule)
+            # # if self.Flow_Exception_for_False.Exception_rule:
+            #     print("This is Flow Exception Rule is :",self.Flow_Exception_for_False.Condition_to_proceed)
         
         self.Evaluated_result = result
-        # nested_remark += self.Remark
         return {"Return_result": result, "Remark": nested_remark }
 
 
@@ -220,6 +380,7 @@ class Rule_Connection: ## Rules Linked List
         self.RC_ID = ID
         self.Rule = Rule
         self.next_Rule = next_Rule
+        self.Running_logs = ""
 
     def __repr__(self):
         """
@@ -238,13 +399,13 @@ class Rule_Connection: ## Rules Linked List
             Returns:
                 bool: The decision to continue (True) or stop (False) based on the rule's evaluation.
         """
-        if type(rule.Nested_Rule)==type(rule):
-            if rule.Nested_Rule.Evaluated_result == False:
-                return rule.Nested_Rule.Flow_for_False
+        # if type(rule.Nested_Rule)==type(rule):
+        #     if rule.Nested_Rule.Evaluated_result == False:
+        #         return rule.Nested_Rule.Flow_for_False
         if rule.Evaluated_result:
-            return rule.Flow_for_True
+            return rule.Flow_Exception_for_True.Condition_to_proceed
         else:
-            return rule.Flow_for_False
+            return rule.Flow_Exception_for_False.Condition_to_proceed
     
 
     def TLOtake_decisions(self):
