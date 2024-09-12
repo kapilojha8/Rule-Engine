@@ -4,20 +4,28 @@ import os
 import json
 
 class PreprocessingOfData:
-    def __init__(self, csv_file_path="../data/Data_from_Client.csv") -> None:
+    def __init__(self,ClientData={}, csv_file_path="../data/Data_from_Client.csv", ClientDataDict = True) -> None:
         """
         Initializes the PreprocessingOfData class by loading data and setting up necessary fields.
         
         Parameters:
         csv_file_path (str): The file path of the CSV file containing client data. Defaults to "../data/Data_from_Client.csv".
         """
-        self.csv_file_path = csv_file_path
-        self.Client_data = self.load_data()
+        if ClientDataDict and isinstance(ClientDataDict, dict):
+            print("Dict_data")
+        else:
+            self.csv_file_path = csv_file_path
+            self.Client_data = self.load_data()
+
         # Initialize Data_of_Rule_test to None
         self.Data_of_Rule_test = None
         # Create ABN and GST dates, calculate Asset age
         if self.Client_data is not None:
-            self.create_abn_gst_dates()
+            if ClientDataDict:
+                self.create_abn_gst_dates()
+            else:
+                if len(self.Client_data.columns) and  all(item in self.Client_data.columns for item in ['Asset_age','GST_in_Months','ABN_in_Months']):
+                    ValueError("The Columns were not in Dataframe")
             self.create_asset_classification()
             self.create_Deposit_Amount_Percentage()
 

@@ -1,2 +1,3 @@
-application_number,status,settled_at,amount_financed,deposit_amount,balloon_amount,repayment_term_month,applicant_entity_type,asset_supplier_type,asset_category,asset_type,asset_manufacture_year,usage_type,gst_registered_date,abn_registered_date,guarantor_1_residential_status,lender_name
-QF12057,DRAFTED_AMENDED,,119089,0,0,60,Trusts,DEALER,PRIMARYY_ASSETS,ART,2023,USED,01-06-2015,01-04-2015,OWNING,Flexicommercial
+application_number,status,settled_at,amount_financed,deposit_amount,balloon_amount,repayment_term_month,applicant_entity_type,asset_supplier_type,asset_category,asset_type,asset_manufacture_year,usage_type,gst_registered_date,abn_registered_date,guarantor_1_residential_status,lender_name,Asset_age,GST_in_Months,ABN_in_Months
+QF12057,DRAFTED_AMENDED,,119089,0,0,60,Trusts,DEALER,PRIMARYY_ASSETS,ART,2023,USED,01-06-2015,01-04-2015,OWNING,Flexicommercial,1,12,13
+QF12059,DRAFTED_AMENDED,,150000,0,0,60,Trusts,DEALER,PRIMARYY_ASSETS,Material Handling,2013,NEW,01-06-2011,01-04-2011,OWNING,Flexicommercial,1,12,18

@@ -8,20 +8,10 @@ import pandas as pd
 from datetime import datetime
 from preprocessing_of_data import PreprocessingOfData
 
-def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
-    # print("The Rule is ",Rule)
-    Rule.evaluate(Data_rule)
-    # print("Evaluated Result : ",Rule.evaluate(Data_rule))
-    # print("the Evaluation Result is :",Rule.Evaluated_result)
-    # if Rule.Is_Nested and (not Rule.Evaluated_result):
-    #     Rule.Evaluated_result = Evaluate_and_take_decision(Rule_chain, Rule.Nested_Rule, Data_rule)
-    return Rule_chain.take_decisions(Rule)
 
-
-Preprocessed_data = PreprocessingOfData("../data/Data from Client.csv")
+Preprocessed_data = PreprocessingOfData(csv_file_path="../data/Data from Client.csv", ClientDataDict=False)
 Preprocessed_data.converting_df_to_dict()
 Data_of_Rule_test = Preprocessed_data.Data_of_Rule_test
- 
 # Check for right usage:
 #   - approach = rule-engine
 #   - approach = if-statements
@@ -41,7 +31,9 @@ else:
 
 Result_Evalulated = []
 for Data_rule in Data_of_Rule_test:
+    TempDict = {}
     for LenderName,LenderRule in Rules_by_Lender.lender_rules.items():
+        TempDict[LenderName] = {}
         # print("The Lender Name is :",LenderName)
         if LenderName.upper().find(Data_rule['asset_category'].split("_")[0]) == -1:
             continue
@@ -49,14 +41,17 @@ for Data_rule in Data_of_Rule_test:
         remarks = ""
         Running_logs = ""
         while temppte!=None:
-            # EATD = Evaluate_and_take_decision(temppte, temppte.Rule, Data_rule)
             Rule_evaluate = temppte.Rule.evaluate(Data_rule)
             Running_logs = Running_logs + " -- " + Rule_evaluate['Remark']  if Running_logs!="" else Rule_evaluate['Remark']
+            # TempDict[LenderName] = {temppte.RC_ID:}
+            TempDict[LenderName]["RC_TD"] = temppte.RC_ID
             EATD = temppte.take_decisions(temppte.Rule)
             if not EATD :
                 break
             if type(temppte.Rule.Remark) == int:
                 remarks +=  Remarks[f'{temppte.Rule.Remark}']
+            TempDict[LenderName]["RC_Result"] = Rule_evaluate['Return_result']
+            TempDict[LenderName]["Remark"] = Rule_evaluate['Remark']
             temppte = temppte.next_Rule
 
         if temppte == None:
@@ -68,3 +63,6 @@ for Data_rule in Data_of_Rule_test:
             print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
             print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
+
+
+print("This si tempt dict", TempDict)
