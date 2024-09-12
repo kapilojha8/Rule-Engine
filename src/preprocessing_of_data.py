@@ -40,7 +40,6 @@ class PreprocessingOfData:
     def create_Deposit_Amount_Percentage(self):
 
         self.Client_data["Deposit_Amount_percentage"] = (self.Client_data['deposit_amount'].fillna(0) / self.Client_data['amount_financed']) * 100  
-        print(self.Client_data["Deposit_Amount_percentage"])
 
 
 

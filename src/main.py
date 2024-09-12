@@ -6,7 +6,7 @@ from Rules_using_JSON import  Rules_using_JSON
 from Rules_using_XML import RulesUsingXML
 import pandas as pd
 from datetime import datetime
-from src.preprocessing_of_data import PreprocessingOfData
+from preprocessing_of_data import PreprocessingOfData
 
 def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
     # print("The Rule is ",Rule)
@@ -68,36 +68,3 @@ for Data_rule in Data_of_Rule_test:
             print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
             print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
-exit()
-
-
-"""
-  "Assets": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "in",
-          "Field_Type": 4,
-          "Is_Nested": true,
-          "Nested_Rule": {
-            "Reference_field": "asset_type",
-            "Rule_Operator": "not in",
-            "Field_Type": 4,
-            "Is_Nested": false,
-            "Flow_for_True": false,
-            "Flow_for_False": true
-          },
-          "Flow_for_True": false,
-          "Flow_for_False": true,
-          "Remark": 1
-        },
-
-QF12108,DRAFTED_AMENDED,,60000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2014,01-04-2014,RENTING,Flexicommercial
-QF12103,DRAFTED_AMENDED,,25000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Aeroplane equipment,2021,USED,01-06-2015,01-04-2015,RENTING,Flexicommercial
-QF12107,DRAFTED_AMENDED,,25000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2017,01-04-2017,RENTING,Flexicommercial
-QF12057,DRAFTED_AMENDED,,108900,0,0,60,TRUSTS,DEALER,TERTIARY_ASSETS,BEAUTY_EQUIPMENT,2023,NEW,01-06-2015,01-04-2015,OWNING,Flexicommercial
-QF12107,DRAFTED_AMENDED,,25000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2017,01-04-2017,RENTING,Flexicommercial
-QF12108,DRAFTED_AMENDED,,60000,0,0,60,Trusts,Private,TERTIARY_ASSETS,Agricultural machinery and equipment,2021,USED,01-06-2014,01-04-2014,RENTING,Flexicommercial
-
-
-
-
-"""
