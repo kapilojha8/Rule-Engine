@@ -1555,6 +1555,9 @@
         "Remark": "Owner Residence status"
       }
     },
+
+
+
     "Primaryy Pepper_Tier_A": {
       "asset_type": {
         "Reference_field": "asset_type",
@@ -1833,10 +1836,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is under limit to lend"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -1867,6 +1870,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2149,10 +2222,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -2184,6 +2257,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2370,10 +2513,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -2404,6 +2547,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2557,10 +2770,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -2577,6 +2790,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2730,10 +3013,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -2750,6 +3033,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -2888,10 +3241,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -2922,6 +3275,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -3064,10 +3487,10 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
-              "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+              "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
-              "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+              "Remark": "Gurantor residence status is not Owned but Loan amount for financing is too much to lend"
             }
           }
         }
@@ -3099,8 +3522,80 @@
           "Condition_to_proceed": false,
           "Remark": "Max Age of Asset Limit exceeded"
         }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     },
+
+    
     "Primary Resimac- low doc": {
       "asset_type": {
         "Reference_field": "asset_type",
@@ -3176,7 +3671,7 @@
           "Condition_to_proceed": false,
           "Remark": "Asset is in Lower Amount Loan Asset List",
           "Exception_rule": {
-            "Reference_field": "asset_type",
+            "Reference_field": "Asset_classification",
             "Rule_Operator": "not in",
             "Rule_Value": "Motor vehicles",
             "Field_Type": 4,
@@ -3188,7 +3683,7 @@
               "Condition_to_proceed": false,
               "Remark": "Asset is in Lower Amount Loan Asset List",
               "Exception_rule": {
-                "Reference_field": "asset_type",
+                "Reference_field": "Asset_classification",
                 "Rule_Operator": "in",
                 "Rule_Value": "Motor vehicles",
                 "Field_Type": 4,
@@ -3206,6 +3701,9 @@
                       "Remark": "Asset in Motor vehicles but Amount is greater than 150,000"
                     }
                   }
+                },
+                "Flow_Exception_for_False": {
+                  "Remark": "Asset classification is not of the type Motor Vehicles"
                 }
               }
             }
@@ -3313,81 +3811,80 @@
         "Rule_Operator": "<=",
         "Rule_Value": 20,
         "Field_Type": 3,
-        "Flow_Exception_for_True":{
-          "Condition_to_proceed":true,
-          "Remark":"Asset Age is under Allowed Age of Asset",
-          "Exception_rule":{
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Asset Age is under Allowed Age of Asset",
+          "Exception_rule": {
             "Reference_field": "asset_type",
             "Rule_Operator": "not in ",
             "Rule_Value": "Trucks, EV, Trailers",
             "Field_Type": 4,
-            "Flow_Exception_for_True":{
-              "Remark":"Asset is under Allowed Age of Asset also It is not in Exception Asset List"
+            "Flow_Exception_for_True": {
+              "Remark": "Asset is under Allowed Age of Asset also It is not in Exception Asset List"
             },
-            "Flow_Exception_for_False":{
-              "Remark":"Asset is in Excluded Assets list",
-              "Exception_rule":{
+            "Flow_Exception_for_False": {
+              "Remark": "Asset is in Excluded Assets list",
+              "Exception_rule": {
                 "Reference_field": "asset_type",
                 "Rule_Operator": "==",
                 "Rule_Value": "EVs",
-                "Field_Type":4,
-                "Flow_Exception_for_True":{
-                  "Remark":"Asset is EV",
-                  "Exception_rule":{
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Remark": "Asset is EV",
+                  "Exception_rule": {
                     "Reference_field": "Asset_age",
                     "Rule_Operator": "<=",
                     "Rule_Value": "12",
                     "Field_Type": 3,
-                    "Flow_Exception_for_True":{
-                      "Remark":"Asset is EV and Asset Age is less then Allowed Age 12"
+                    "Flow_Exception_for_True": {
+                      "Remark": "Asset is EV and Asset Age is less then Allowed Age 12"
                     },
-                    "Flow_Exception_for_False":{
-                      "Remark":"Asset is EV and Asset Age is greater then Allowed Age 12"
+                    "Flow_Exception_for_False": {
+                      "Remark": "Asset is EV and Asset Age is greater then Allowed Age 12"
                     }
                   }
                 },
-                "Flow_Exception_for_False":{
-                  "Remark":"Asset is not EV Now Checking for Further Assets of Exception List",
-                  "Exception_rule":{
+                "Flow_Exception_for_False": {
+                  "Remark": "Asset is not EV Now Checking for Further Assets of Exception List",
+                  "Exception_rule": {
                     "Reference_field": "asset_type",
                     "Rule_Operator": "==",
                     "Rule_Value": "Trailers",
                     "Field_Type": 4,
-                    "Flow_Exception_for_True":{
-                      "Remark":"Asset is Trailers",
-                      "Exception_rule":{
+                    "Flow_Exception_for_True": {
+                      "Remark": "Asset is Trailers",
+                      "Exception_rule": {
                         "Reference_field": "asset_type",
                         "Rule_Operator": "==",
                         "Rule_Value": 30,
                         "Field_Type": 3,
-                        "Flow_Exception_for_True":{
-                          "Remark":"Asset is Trailer and Asset Age is less then Allowed Age 30"
+                        "Flow_Exception_for_True": {
+                          "Remark": "Asset is Trailer and Asset Age is less then Allowed Age 30"
                         },
-                        "Flow_Exception_for_False":{
-                          "Remark":"Asset is Trailer and Asset Age is greater then Allowed Age 30",
-                          "Exception_rule":{
+                        "Flow_Exception_for_False": {
+                          "Remark": "Asset is Trailer and Asset Age is greater then Allowed Age 30",
+                          "Exception_rule": {
                             "Reference_field": "asset_type",
                             "Rule_Operator": "==",
                             "Rule_Value": "Trucks",
                             "Field_Type": 4,
-                            "Flow_Exception_for_True":{
-                              "Remark":"Asset is Trucks",
-                              "Exception_rule":{
+                            "Flow_Exception_for_True": {
+                              "Remark": "Asset is Trucks",
+                              "Exception_rule": {
                                 "Reference_field": "Asset_age",
                                 "Rule_Operator": "<=",
                                 "Rule_Value": "12",
                                 "Field_Type": 3,
-                                "Flow_Exception_for_True":{
-                                  "Remark":"Asset is Truck and Asset Age is less then Allowed Age 25"
+                                "Flow_Exception_for_True": {
+                                  "Remark": "Asset is Truck and Asset Age is less then Allowed Age 25"
                                 },
-                                "Flow_Exception_for_False":{
-                                  "Remark":"Asset is Truck and Asset Age is greater then Allowed Age 25"
+                                "Flow_Exception_for_False": {
+                                  "Remark": "Asset is Truck and Asset Age is greater then Allowed Age 25"
                                 }
                               }
                             }
                           }
                         }
-
                       }
                     }
                   }
@@ -3471,6 +3968,76 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": true,
           "Remark": "usage_type of used is not allowed"
+        }
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.1",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -3669,6 +4236,76 @@
         "Flow_for_True": true,
         "Flow_for_False": true,
         "Remark": "Usage Type"
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.1",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "Secondary Resimac- low doc": {
@@ -3789,6 +4426,76 @@
         "Flow_for_True": true,
         "Flow_for_False": true,
         "Remark": "Usage Type"
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "Secondary Resimac- light doc": {
@@ -3909,6 +4616,76 @@
         "Flow_for_True": true,
         "Flow_for_False": true,
         "Remark": "Usage Type"
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "Tertiary Resimac- low doc": {
@@ -4038,6 +4815,76 @@
         "Flow_for_True": true,
         "Flow_for_False": false,
         "Remark": "Usage Type"
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "Tertiary Resimac- light doc": {
@@ -4167,6 +5014,76 @@
         "Flow_for_True": true,
         "Flow_for_False": false,
         "Remark": "Usage Type"
+      },
+      "Deposit_for_non_proprty_owner-Primay_assets": {
+        "Reference_field": "guarantor_1_residential_status",
+        "Rule_Operator": "==",
+        "Rule_Value": "OWNING",
+        "Field_Type": 4,
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Gurantor residence status is Owned so no Deposit is Applicable"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Gurantor residence status is not Owned so Deposit Fee is Applicable",
+          "Exception_rule": {
+            "Reference_field": "Asset_classification",
+            "Rule_Operator": "==",
+            "Rule_Value": "Primary assets",
+            "Field_Type": 4,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Gurantor residence status is not Owned and Asset Type is Primary Asset",
+              "Exception_rule": {
+                "Reference_field": "Deposit_Amount_percentage",
+                "Rule_Operator": ">=",
+                "Rule_Value": "0.2",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is above Allowed Limit"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned & Asset type is Primary Asset Also Deposit Amount percentage is below Allowed Limit"
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Gurantor residence status is not Owned also the Asset is not Primary Asset now further checking for Motor Vehicle",
+              "Exception_rule": {
+                "Reference_field": "Asset_classification",
+                "Rule_Operator": "==",
+                "Rule_Value": "Motor vehicles",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                  "Exception_rule": {
+                    "Reference_field": "Deposit_Amount_percentage",
+                    "Rule_Operator": ">=",
+                    "Rule_Value": "0.2",
+                    "Field_Type": 4,
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is above Allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Gurantor residence status is not Owned & Asset type is Motor Asset Also Deposit Amount percentage is below Allowed Limit"
+                    }
+                  }
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Gurantor residence status is not Owned also the Asset is not motor Vehicle"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

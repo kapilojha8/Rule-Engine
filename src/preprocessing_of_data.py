@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 import os
+import json
 
 class PreprocessingOfData:
     def __init__(self, csv_file_path="../data/Data_from_Client.csv") -> None:
@@ -17,6 +18,31 @@ class PreprocessingOfData:
         # Create ABN and GST dates, calculate Asset age
         if self.Client_data is not None:
             self.create_abn_gst_dates()
+            self.create_asset_classification()
+            self.create_Deposit_Amount_Percentage()
+
+    def create_asset_classification(self):
+        with open('../data/Preprocessing_Data.json', 'r') as file:
+                self.asset_classes = json.load(file)
+
+        def classify_asset(asset):
+            asset_upper = asset.upper()
+            if asset_upper in self.asset_classes["Motor_Vehicles"]:
+                return "Motor_Vehicles"
+            elif asset_upper in self.asset_classes["Primary_Assets"]:
+                return "Primary_Assets"
+            else:
+                return "Unknown"
+
+        self.Client_data['Asset_classification'] =self.Client_data['asset_type'].apply(classify_asset)
+        
+    
+    def create_Deposit_Amount_Percentage(self):
+
+        self.Client_data["Deposit_Amount_percentage"] = (self.Client_data['deposit_amount'].fillna(0) / self.Client_data['amount_financed']) * 100  
+        print(self.Client_data["Deposit_Amount_percentage"])
+
+
 
     def load_data(self):
         """

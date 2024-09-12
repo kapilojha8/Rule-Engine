@@ -6,7 +6,7 @@ from Rules_using_JSON import  Rules_using_JSON
 from Rules_using_XML import RulesUsingXML
 import pandas as pd
 from datetime import datetime
-from preprocessing_of_data import PreprocessingOfData
+from src.preprocessing_of_data import PreprocessingOfData
 
 def Evaluate_and_take_decision(Rule_chain, Rule, Data_rule):
     # print("The Rule is ",Rule)

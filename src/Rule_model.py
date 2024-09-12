@@ -270,7 +270,10 @@ class Rule:
         
         # Add additional operator support here
         if self.Rule_operator == "==":
-            result = actual_value == self.Rule_value
+            if isinstance(actual_value, str) and isinstance(self.Rule_value, str):
+                result = actual_value.strip().lower() == self.Rule_value.strip().lower()
+            else:
+                result = actual_value.strip().lower() == self.Rule_value.strip().lower()
         elif self.Rule_operator == "!=":
             result = actual_value != self.Rule_value
         elif self.Rule_operator == ">":
