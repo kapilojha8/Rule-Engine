@@ -599,7 +599,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 300000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -1434,7 +1433,7 @@
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 24,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1448,7 +1447,7 @@
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 0,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1465,7 +1464,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 20000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -1595,10 +1593,14 @@
         "Rule_Operator": "!=",
         "Rule_Value": "USED",
         "Field_Type": 4,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Usage Type"
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "usage_type of used is allowed"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "usage_type of used is allowed"
+        }
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -1618,9 +1620,11 @@
             "Field_Type": 3,
             "Reference_field": "amount_financed",
             "Flow_Exception_for_True": {
+              "Condition_to_proceed":true,
               "Remark": "Gurantor residence status is not Owned and Loan amount for financing is under limit for Lender"
             },
             "Flow_Exception_for_False": {
+              "Condition_to_proceed":false,
               "Remark": "Gurantor residence status is not Owned and Loan amount for financing is greater than allowed limit of Lender"
             }
           }
@@ -1656,7 +1660,7 @@
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 24,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1670,7 +1674,7 @@
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 24,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1687,7 +1691,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 50000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -1723,58 +1726,84 @@
         "Rule_Operator": "<=",
         "Rule_Value": 60,
         "Field_Type": 3,
-        "logical_operator": "or",
-        "Logical_Rule": {
-          "Reference_field": "usage_type",
-          "Rule_Operator": "!=",
-          "Rule_Value": "NEW",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "logical_operator": "and",
-          "Logical_Rule": {
-            "Reference_field": "Asset_age",
-            "Rule_Operator": ">",
-            "Rule_Value": 3,
-            "Field_Type": 3,
-            "Is_Nested": false,
-            "Flow_for_True": false,
-            "Flow_for_False": true
-          },
-          "Flow_for_True": true,
-          "Flow_for_False": false
-        },
-        "Is_Nested": true,
-        "Nested_Rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 84,
-          "Field_Type": 3,
-          "Reference_field": "repayment_term_month",
-          "logical_operator": "or",
-          "Logical_Rule": {
-            "Rule_Operator": "!=",
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Repayment Term Condition is satisfied with 60 Repayments",
+          "Exception_rule": {
+            "Reference_field": "usage_type",
+            "Rule_Operator": "==",
             "Rule_Value": "NEW",
             "Field_Type": 4,
-            "Reference_field": "usage_type",
-            "Is_Nested": false,
-            "Flow_for_True": true,
-            "Flow_for_False": false,
-            "logical_operator": "and",
-            "Logical_Rule": {
-              "Rule_Operator": "<",
-              "Rule_Value": 3,
-              "Field_Type": 3,
-              "Reference_field": "Asset_age",
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Repayment Term Condition is 60 Repayments And Asset is New"
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Repayment Term Condition is 60 Repayments And Asset is Old",
+              "Exception_rule": {
+                "Reference_field": "Asset_age",
+                "Rule_Operator": ">",
+                "Rule_Value": 3,
+                "Field_Type": 3,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Repayment Term Condition is 60 Repayments And Asset is Old Also Asset age is greater than Allowed Age"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Repayment Term Condition is 60 Repayments and Asset is Old Also Asset age is less than Allowed Age"
+                }
+              }
             }
-          },
-          "Flow_for_True": true,
-          "Flow_for_False": false
+          }
         },
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Repayment Terms"
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Repayment Term Condition 60 got Failed checking for 84 Repayment Month",
+          "Exception_rule": {
+            "Reference_field": "repayment_term_month",
+            "Rule_Operator": "<=",
+            "Rule_Value": 84,
+            "Field_Type": 3,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Repayment Term Condition is not satisfied with 60 Repayments but repayment term is 84 now checking for Asset Age",
+              "Exception_rule": {
+                "Reference_field": "usage_type",
+                "Rule_Operator": "==",
+                "Rule_Value": "NEW",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Remark Term Condition is 84 and Asset is New"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Remark Term Condition is 84 and Asset is Old",
+                  "Exception_rule": {
+                    "Rule_Operator": "<",
+                    "Rule_Value": 3,
+                    "Field_Type": 3,
+                    "Reference_field": "Asset_age",
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Repayment Term month is Qualified with 84 and Asset is Old also Asset Age is under allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Repayment Term month is Qualified with 84 and Asset is Old but Asset Age is greater than allowed Limit"
+                    }
+                  }
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Repayment Term Condition is not satisfied with 60 Repayments also repayment term is not 84"
+            }
+          }
+        }
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -1795,10 +1824,14 @@
         "Rule_Operator": "!=",
         "Rule_Value": "USED",
         "Field_Type": 4,
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Usage Type"
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "usage_type of used is allowed"
+        },
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "usage_type of used is allowed"
+        }
       },
       "Max_loan_non_proprty_owners": {
         "Reference_field": "guarantor_1_residential_status",
@@ -1846,9 +1879,11 @@
             "Rule_Value": "Scaffolding, Photocopiers",
             "Field_Type": 4,
             "Flow_Exception_for_True": {
+              "Condition_to_proceed":true,
               "Remark": "Asset is not in Excluded Assets list"
             },
             "Flow_Exception_for_False": {
+              "Condition_to_proceed":false,
               "Remark": "Asset is in Excluded Assets list"
             }
           }
@@ -1856,7 +1891,7 @@
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 24,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1870,7 +1905,7 @@
       },
       "GST_in_Months": {
         "Reference_field": "GST_in_Months",
-        "Rule_Operator": ">",
+        "Rule_Operator": ">=",
         "Rule_Value": 24,
         "Field_Type": 3,
         "Flow_Exception_for_True": {
@@ -1887,7 +1922,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 300000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -1923,58 +1957,84 @@
         "Rule_Operator": "<=",
         "Rule_Value": 60,
         "Field_Type": 3,
-        "logical_operator": "or",
-        "Logical_Rule": {
-          "Reference_field": "usage_type",
-          "Rule_Operator": "!=",
-          "Rule_Value": "NEW",
-          "Field_Type": 4,
-          "Is_Nested": false,
-          "logical_operator": "and",
-          "Logical_Rule": {
-            "Reference_field": "Asset_age",
-            "Rule_Operator": ">",
-            "Rule_Value": 3,
-            "Field_Type": 3,
-            "Is_Nested": false,
-            "Flow_for_True": false,
-            "Flow_for_False": true
-          },
-          "Flow_for_True": true,
-          "Flow_for_False": false
-        },
-        "Is_Nested": true,
-        "Nested_Rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 84,
-          "Field_Type": 3,
-          "Reference_field": "repayment_term_month",
-          "logical_operator": "or",
-          "Logical_Rule": {
-            "Rule_Operator": "!=",
+        "Flow_Exception_for_True": {
+          "Condition_to_proceed": true,
+          "Remark": "Repayment Term Condition is satisfied with 60 Repayments",
+          "Exception_rule": {
+            "Reference_field": "usage_type",
+            "Rule_Operator": "==",
             "Rule_Value": "NEW",
             "Field_Type": 4,
-            "Reference_field": "usage_type",
-            "Is_Nested": false,
-            "Flow_for_True": true,
-            "Flow_for_False": false,
-            "logical_operator": "and",
-            "Logical_Rule": {
-              "Rule_Operator": "<",
-              "Rule_Value": 3,
-              "Field_Type": 3,
-              "Reference_field": "Asset_age",
-              "Is_Nested": false,
-              "Flow_for_True": true,
-              "Flow_for_False": false
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Repayment Term Condition is 60 Repayments And Asset is New"
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Repayment Term Condition is 60 Repayments And Asset is Old",
+              "Exception_rule": {
+                "Reference_field": "Asset_age",
+                "Rule_Operator": ">",
+                "Rule_Value": 3,
+                "Field_Type": 3,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Repayment Term Condition is 60 Repayments And Asset is Old Also Asset age is greater than Allowed Age"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Repayment Term Condition is 60 Repayments and Asset is Old Also Asset age is less than Allowed Age"
+                }
+              }
             }
-          },
-          "Flow_for_True": true,
-          "Flow_for_False": false
+          }
         },
-        "Flow_for_True": true,
-        "Flow_for_False": false,
-        "Remark": "Repayment Terms"
+        "Flow_Exception_for_False": {
+          "Condition_to_proceed": false,
+          "Remark": "Repayment Term Condition 60 got Failed checking for 84 Repayment Month",
+          "Exception_rule": {
+            "Reference_field": "repayment_term_month",
+            "Rule_Operator": "<=",
+            "Rule_Value": 84,
+            "Field_Type": 3,
+            "Flow_Exception_for_True": {
+              "Condition_to_proceed": true,
+              "Remark": "Repayment Term Condition is not satisfied with 60 Repayments but repayment term is 84 now checking for Asset Age",
+              "Exception_rule": {
+                "Reference_field": "usage_type",
+                "Rule_Operator": "==",
+                "Rule_Value": "NEW",
+                "Field_Type": 4,
+                "Flow_Exception_for_True": {
+                  "Condition_to_proceed": true,
+                  "Remark": "Remark Term Condition is 84 and Asset is New"
+                },
+                "Flow_Exception_for_False": {
+                  "Condition_to_proceed": false,
+                  "Remark": "Remark Term Condition is 84 and Asset is Old",
+                  "Exception_rule": {
+                    "Rule_Operator": "<",
+                    "Rule_Value": 3,
+                    "Field_Type": 3,
+                    "Reference_field": "Asset_age",
+                    "Flow_Exception_for_True": {
+                      "Condition_to_proceed": true,
+                      "Remark": "Repayment Term month is Qualified with 84 and Asset is Old also Asset Age is under allowed Limit"
+                    },
+                    "Flow_Exception_for_False": {
+                      "Condition_to_proceed": false,
+                      "Remark": "Repayment Term month is Qualified with 84 and Asset is Old but Asset Age is greater than allowed Limit"
+                    }
+                  }
+                }
+              }
+            },
+            "Flow_Exception_for_False": {
+              "Condition_to_proceed": false,
+              "Remark": "Repayment Term Condition is not satisfied with 60 Repayments also repayment term is not 84"
+            }
+          }
+        }
       },
       "asset_supplier_type": {
         "Reference_field": "asset_supplier_type",
@@ -2000,7 +2060,7 @@
           "Remark": "usage_type"
         },
         "Flow_Exception_for_False": {
-          "Condition_to_proceed": true,
+          "Condition_to_proceed": false,
           "Remark": "usage_type of used is not allowed"
         }
       },
@@ -2031,7 +2091,7 @@
         }
       }
     },
-    "Primaryy Pepper_Tier_A": {
+    "Primary Pepper_Tier_A": {
       "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
@@ -2150,7 +2210,6 @@
                         "Rule_Operator": "<=",
                         "Rule_Value": 55000,
                         "Field_Type": 3,
-                        "Is_Nested": false,
                         "Flow_for_True": true,
                         "Flow_for_False": false,
                         "Flow_Exception_for_True": {
@@ -2176,7 +2235,6 @@
                             "Rule_Operator": "<=",
                             "Rule_Value": 50000,
                             "Field_Type": 3,
-                            "Is_Nested": false,
                             "Flow_for_True": true,
                             "Flow_for_False": false,
                             "Flow_Exception_for_True": {
@@ -2228,7 +2286,6 @@
           "Rule_Operator": ">",
           "Rule_Value": 0,
           "Field_Type": 3,
-          "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
         },
@@ -2275,7 +2332,6 @@
             "Rule_Value": 150000,
             "Field_Type": 3,
             "Reference_field": "Loan_Amount",
-            "Is_Nested": false,
             "Flow_for_True": true,
             "Flow_for_False": false,
             "Flow_Exception_for_True": {
@@ -2416,7 +2472,7 @@
         }
       }
     },
-    "Primaryy Pepper_Tier_B": {
+    "Primary Pepper_Tier_B": {
       "asset_type": {
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
@@ -2476,7 +2532,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 150000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -2536,7 +2591,6 @@
                         "Rule_Operator": "<=",
                         "Rule_Value": 55000,
                         "Field_Type": 3,
-                        "Is_Nested": false,
                         "Flow_for_True": true,
                         "Flow_for_False": false,
                         "Flow_Exception_for_True": {
@@ -2562,7 +2616,6 @@
                             "Rule_Operator": "<=",
                             "Rule_Value": 50000,
                             "Field_Type": 3,
-                            "Is_Nested": false,
                             "Flow_for_True": true,
                             "Flow_for_False": false,
                             "Flow_Exception_for_True": {
@@ -2614,7 +2667,6 @@
           "Rule_Operator": ">",
           "Rule_Value": 0,
           "Field_Type": 3,
-          "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
         },
@@ -2661,7 +2713,6 @@
             "Rule_Value": 150000,
             "Field_Type": 3,
             "Reference_field": "Loan_Amount",
-            "Is_Nested": false,
             "Flow_for_True": true,
             "Flow_for_False": false,
             "Flow_Exception_for_True": {
@@ -2708,7 +2759,6 @@
         "Rule_Operator": "!=",
         "Rule_Value": "USED",
         "Field_Type": 4,
-        "Is_Nested": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "usage_type"
@@ -2863,7 +2913,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 40000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -2905,7 +2954,6 @@
           "Rule_Operator": ">",
           "Rule_Value": 0,
           "Field_Type": 3,
-          "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
         },
@@ -2952,7 +3000,6 @@
             "Rule_Value": 40000,
             "Field_Type": 3,
             "Reference_field": "Loan_Amount",
-            "Is_Nested": false,
             "Flow_for_True": true,
             "Flow_for_False": false,
             "Flow_Exception_for_True": {
@@ -3141,7 +3188,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 150000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -3182,10 +3228,7 @@
           "Reference_field": "balloon_amount",
           "Rule_Operator": ">",
           "Rule_Value": 0,
-          "Field_Type": 3,
-          "Is_Nested": false,
-          "Flow_for_True": false,
-          "Flow_for_False": true
+          "Field_Type": 3
         },
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
@@ -3209,9 +3252,6 @@
             "Rule_Value": 100000,
             "Field_Type": 3,
             "Reference_field": "Loan_Amount",
-            "Is_Nested": false,
-            "Flow_for_True": true,
-            "Flow_for_False": false,
             "Flow_Exception_for_True": {
               "Remark": "Loan Amount of greater than 100,000 is not allowed with Asset supplier Private"
             },
@@ -3384,7 +3424,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 150000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -3426,7 +3465,6 @@
           "Rule_Operator": ">",
           "Rule_Value": 0,
           "Field_Type": 3,
-          "Is_Nested": false,
           "Flow_for_True": false,
           "Flow_for_False": true
         },
@@ -3452,9 +3490,6 @@
             "Rule_Value": 100000,
             "Field_Type": 3,
             "Reference_field": "Loan_Amount",
-            "Is_Nested": false,
-            "Flow_for_True": true,
-            "Flow_for_False": false,
             "Flow_Exception_for_True": {
               "Remark": "Loan Amount of greater than 100,000 is not allowed with Asset supplier Private"
             },
@@ -3627,7 +3662,6 @@
         "Rule_Operator": "<=",
         "Rule_Value": 75000,
         "Field_Type": 3,
-        "Is_Nested": false,
         "logical_operator": "and",
         "Logical_Rule": {
           "Reference_field": "Loan_Amount",
@@ -3668,10 +3702,7 @@
           "Reference_field": "balloon_amount",
           "Rule_Operator": "==",
           "Rule_Value": 0,
-          "Field_Type": 3,
-          "Is_Nested": false,
-          "Flow_for_True": false,
-          "Flow_for_False": true
+          "Field_Type": 3
         },
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
@@ -3834,11 +3865,7 @@
         "Flow_Exception_for_False": {
           "Condition_to_proceed": true,
           "Remark": "Asset is not in Allowed Asset List"
-        },
-        "Is_Nested": false,
-        "Flow_for_True": true,
-        "Flow_for_False": true,
-        "Remark": 1
+        }
       },
       "ABN_in_Months": {
         "Reference_field": "ABN_in_Months",
