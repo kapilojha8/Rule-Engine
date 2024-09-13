@@ -44,25 +44,29 @@ for Data_rule in Data_of_Rule_test:
             Rule_evaluate = temppte.Rule.evaluate(Data_rule)
             Running_logs = Running_logs + " -- " + Rule_evaluate['Remark']  if Running_logs!="" else Rule_evaluate['Remark']
             # TempDict[LenderName] = {temppte.RC_ID:}
-            TempDict[LenderName]["RC_TD"] = temppte.RC_ID
+            TempDict[LenderName][temppte.RC_ID] = {"RC_ID": temppte.RC_ID}
             EATD = temppte.take_decisions(temppte.Rule)
+            TempDict[LenderName][temppte.RC_ID]["RC_Result"] = Rule_evaluate['Return_result']   # Rule Condition Result
+            TempDict[LenderName][temppte.RC_ID]["Remark"] = Rule_evaluate['Remark']
             if not EATD :
                 break
             if type(temppte.Rule.Remark) == int:
                 remarks +=  Remarks[f'{temppte.Rule.Remark}']
-            TempDict[LenderName]["RC_Result"] = Rule_evaluate['Return_result']
-            TempDict[LenderName]["Remark"] = Rule_evaluate['Remark']
             temppte = temppte.next_Rule
 
         if temppte == None:
+            TempDict[LenderName]['Eligibility'] = True 
             print(f">>> {Data_rule['application_number']} {LenderName} is an Eligible Lender ")
             print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = LenderName
         else:
+            TempDict[LenderName]['Eligibility'] = False
             print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
             print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
             print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
 
 
-print("This si tempt dict", TempDict)
+# print("This si tempt dict", TempDict)
+for key,val in TempDict.items():
+    print(f"{key} : {val}" )
