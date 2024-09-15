@@ -30,12 +30,19 @@ else:
     sys.exit("Incorrect arguments. Did you mean: rule-engine or if-statements?")
 
 Result_Evalulated = []
+LenderInforPassed = {}
+LenderInforPassedList = []
+karna = 0
+MotorAssetLenders = ['CARS', 'SOLE TRADER' ] #, 'TERTIARY', 'PRIMARY', 'SECONDARY'
 for Data_rule in Data_of_Rule_test:
     TempDict = {}
+    count = 1
+    LenderInforPassedTemp = {}
+    LenderInforPassedTemp['application_number'] = Data_rule['application_number']
+
     for LenderName,LenderRule in Rules_by_Lender.lender_rules.items():
         TempDict[LenderName] = {}
-        # print("The Lender Name is :",LenderName)
-        if LenderName.upper().find(Data_rule['asset_category'].split("_")[0]) == -1:
+        if (LenderName.upper().find(Data_rule['asset_category'].split("_")[0]) == -1) ^  (Data_rule['asset_category'].split("_")[0] in MotorAssetLenders):
             continue
         temppte = copy.deepcopy(LenderRule)
         remarks = ""
@@ -56,17 +63,26 @@ for Data_rule in Data_of_Rule_test:
 
         if temppte == None:
             TempDict[LenderName]['Eligibility'] = True 
-            print(f">>> {Data_rule['application_number']} {LenderName} is an Eligible Lender ")
-            print("This is tempte running Logs ",Running_logs)
+            LenderInforPassedTemp[f"Lender{count}"] = LenderName
+            # print(f">>> {Data_rule['application_number']} {LenderName} is an Eligible Lender ")
+            # print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = LenderName
+            count += 1
         else:
             TempDict[LenderName]['Eligibility'] = False
-            print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
-            print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
-            print("This is tempte running Logs ",Running_logs)
+            LenderInforPassedTemp[f"Lender{count}"] =  LenderName +" : "+ Rule_evaluate['Remark'].split('||')[-1]
+            # print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
+            # print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
+            # print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
+            count += 1
+    if LenderInforPassedTemp.get("Lender1"):
+        karna+=1
+    LenderInforPassedList.append(LenderInforPassedTemp)
 
+dfe = pd.DataFrame(LenderInforPassedList)
+dfe.to_csv("../data/dataExtracted/ExpotedLendersInfor.csv",index=False)
 
-# print("This si tempt dict", TempDict)
-for key,val in TempDict.items():
-    print(f"{key} : {val}" )
+OgData = pd.read_csv("../data/cpData.csv")
+ThisDt = OgData.merge(dfe,on="application_number")
+ThisDt.to_csv("../data/dataExtracted/Report on Rule Engine.csv",index=False)

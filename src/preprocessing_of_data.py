@@ -42,12 +42,12 @@ class PreprocessingOfData:
             else:
                 return "Unknown"
 
-        self.Client_data['Asset_classification'] =self.Client_data['asset_type'].apply(classify_asset)
+        self.Client_data['Asset_classification'] = self.Client_data['asset_type'].apply(classify_asset)
         
     
     def create_Deposit_Amount_Percentage(self):
 
-        self.Client_data["Deposit_Amount_percentage"] = (self.Client_data['deposit_amount'].fillna(0) / self.Client_data['amount_financed']) * 100  
+        self.Client_data["Deposit_Amount_percentage"] = (self.Client_data['deposit_amount'].fillna(0) / self.Client_data['amount_financed'])  
 
 
 
