@@ -28,7 +28,7 @@ class Rule:
         self.ID = ID
         self.Rule_header = Rule_header
         self.Rule_value = self.convert_value(Rule_value, Field_Type)
-        self.Rule_value = Rule_value
+        # self.Rule_value = Rule_value
         self.Rule_operator = Rule_operator
         # self.Rule_order = Rule_order
         # self.Rule_parent = Rule_parent
