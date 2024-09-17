@@ -1,6 +1,4 @@
 import sys
-from Loan_attributions import Actions, Class, Allocations, DataHandler
-from Rule_model import Rule,Rule_Connection
 import copy
 from Rules_using_JSON import  Rules_using_JSON
 from Rules_using_XML import RulesUsingXML
@@ -34,6 +32,7 @@ LenderInforPassed = {}
 LenderInforPassedList = []
 karna = 0
 MotorAssetLenders = ['CARS', 'SOLE TRADER' ] #, 'TERTIARY', 'PRIMARY', 'SECONDARY'
+
 for Data_rule in Data_of_Rule_test:
     TempDict = {}
     count = 1
@@ -64,16 +63,11 @@ for Data_rule in Data_of_Rule_test:
         if temppte == None:
             TempDict[LenderName]['Eligibility'] = True 
             LenderInforPassedTemp[f"Lender{count}"] = LenderName
-            # print(f">>> {Data_rule['application_number']} {LenderName} is an Eligible Lender ")
-            # print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = LenderName
             count += 1
         else:
             TempDict[LenderName]['Eligibility'] = False
             LenderInforPassedTemp[f"Lender{count}"] =  LenderName +" : "+ Rule_evaluate['Remark'].split('||')[-1]
-            # print(f"--> {Data_rule['application_number']} {LenderName} is not Eligible Lender ")
-            # print(f"Failure Remarks : {Rule_evaluate['Remark'].split('||')[-1]}")
-            # print("This is tempte running Logs ",Running_logs)
             Data_rule['Evaluated_Lender'] = "No Lender Found!"
             count += 1
     if LenderInforPassedTemp.get("Lender1"):
@@ -83,6 +77,6 @@ for Data_rule in Data_of_Rule_test:
 dfe = pd.DataFrame(LenderInforPassedList)
 dfe.to_csv("../data/dataExtracted/ExpotedLendersInfor.csv",index=False)
 
-OgData = pd.read_csv("../data/cpData.csv")
+OgData = pd.read_csv("../data/Data from Client.csv")
 ThisDt = OgData.merge(dfe,on="application_number")
 ThisDt.to_csv("../data/dataExtracted/Report on Rule Engine.csv",index=False)
