@@ -73,7 +73,7 @@ class PreprocessingOfData:
         except Exception as e:
             raise Exception(f"An error occurred while loading the data: {str(e)}")
 
-    def create_abn_gst_dates(self, current_year=datetime.now().year, current_date=pd.to_datetime(datetime.now().strftime('%d-%m-%Y'))):
+    def create_abn_gst_dates(self, current_year=datetime.now().year, current_date=pd.to_datetime(datetime.now().strftime('%d-%m-%Y'), dayfirst=True)):
         """
         Calculates asset age and the number of months for GST and ABN registration.
 
@@ -87,12 +87,25 @@ class PreprocessingOfData:
             current_date = pd.to_datetime(datetime.now().strftime('%d-%m-%Y'))
 
         try:
+            # Ensure the 'asset_manufacture_year' column is numeric
+            self.Client_data['asset_manufacture_year'] = pd.to_numeric(self.Client_data['asset_manufacture_year'], errors='coerce')
+            self.Client_data['repayment_term_month'] = pd.to_numeric(self.Client_data['repayment_term_month'], errors='coerce')
+            # Check for any NaN values after conversion
+            if self.Client_data['asset_manufacture_year'].isnull().any():
+                raise ValueError("Invalid or missing values in 'asset_manufacture_year' column.")
+ 
             # Calculate the asset age based on the current year and asset manufacture year
             self.Client_data['Asset_age'] = current_year - self.Client_data['asset_manufacture_year']
+            self.Client_data["Asset_age_at_end_of_term"] = self.Client_data["Asset_age"] + self.Client_data['repayment_term_month']/12
+            
 
             # Convert GST and ABN registration dates from string to datetime format
-            self.Client_data['gst_registered_date'] = pd.to_datetime(self.Client_data['gst_registered_date'], format='%d-%m-%Y')
-            self.Client_data['abn_registered_date'] = pd.to_datetime(self.Client_data['abn_registered_date'], format='%d-%m-%Y')
+            self.Client_data['gst_registered_date'] = pd.to_datetime(self.Client_data['gst_registered_date'], format='%Y-%m-%d', errors='coerce')
+            self.Client_data['abn_registered_date'] = pd.to_datetime(self.Client_data['abn_registered_date'], format='%Y-%m-%d', errors='coerce')
+
+            # Check for invalid dates
+            if self.Client_data[['gst_registered_date', 'abn_registered_date']].isnull().any().any():
+                raise ValueError("Invalid or missing dates in 'gst_registered_date' or 'abn_registered_date' columns.")
 
             # Calculate the number of months since GST registration
             self.Client_data['GST_in_Months'] = (current_date.year - self.Client_data['gst_registered_date'].dt.year) * 12 + (current_date.month - self.Client_data['gst_registered_date'].dt.month)
@@ -102,6 +115,7 @@ class PreprocessingOfData:
 
             # Create a new column 'Loan_Amount' as a copy of the 'amount_financed' column
             self.Client_data['Loan_Amount'] = self.Client_data['amount_financed'].copy()
+            
         except KeyError as e:
             raise KeyError(f"Missing column in data: {str(e)}")
         except Exception as e:
