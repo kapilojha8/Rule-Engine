@@ -1215,7 +1215,7 @@
     "ABN_in_Months": {
       "Reference_field": "ABN_in_Months",
       "Rule_Operator": ">",
-      "Rule_Value": 24,
+      "Rule_Value": 60,
       "Field_Type": 3,
       "Flow_Exception_for_True": {
         "Condition_to_proceed": true,
@@ -1229,7 +1229,7 @@
     "GST_in_Months": {
       "Reference_field": "GST_in_Months",
       "Rule_Operator": ">",
-      "Rule_Value": 12,
+      "Rule_Value": 36,
       "Field_Type": 3,
       "Flow_Exception_for_True": {
         "Condition_to_proceed": true,
