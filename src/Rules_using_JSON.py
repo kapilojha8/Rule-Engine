@@ -54,7 +54,7 @@ def Logical_OR_NestedRule(rule_var, rule_key="",parent_rule_heading=""):
                 Nested_Rule    =  Logical_OR_NestedRule(rule_var['Nested_Rule'],"Nested_Rule",parent_rule_heading) if rule_var.get('Nested_Rule') else None,
                 Flow_for_True  = rule_var.get('Flow_for_True', True),
                 Flow_for_False = rule_var.get('Flow_for_False', False),
-
+                Is_Evaluating  = rule_var.get('Is_Evaluating', True),
                 Flow_exception_True = Flow_exception(
                    Exception_rule =  Logical_OR_NestedRule(Flow_exception_True_Flow_rule) if Flow_exception_True_Flow_rule else None,
                    Condition_to_proceed =  Flow_exception_True_Condition_to_proceed if Flow_exception_True_Condition_to_proceed else False,

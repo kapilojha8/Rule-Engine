@@ -24,8 +24,10 @@ class PreprocessingOfData:
             if ClientDataDict:
                 self.create_abn_gst_dates()
             else:
+                print("Tha pe ")
                 if len(self.Client_data.columns) and  all(item in self.Client_data.columns for item in ['Asset_age','GST_in_Months','ABN_in_Months']):
                     ValueError("The Columns were not in Dataframe")
+                self.create_Asset_age_at_end_of_term()
             self.create_asset_classification()
             self.create_Deposit_Amount_Percentage()
 
@@ -72,6 +74,10 @@ class PreprocessingOfData:
             raise ValueError("Error parsing the CSV file. Please check the file format.")
         except Exception as e:
             raise Exception(f"An error occurred while loading the data: {str(e)}")
+
+    def create_Asset_age_at_end_of_term(self):
+        self.Client_data["Asset_age_at_end_of_term"] = self.Client_data["Asset_age"] + self.Client_data['repayment_term_month']/12
+
 
     def create_abn_gst_dates(self, current_year=datetime.now().year, current_date=pd.to_datetime(datetime.now().strftime('%d-%m-%Y'), dayfirst=True)):
         """

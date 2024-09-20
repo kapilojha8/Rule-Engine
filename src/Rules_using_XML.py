@@ -44,11 +44,26 @@ class RulesUsingXML:
         # Load the XML file
         tree = ET.parse(xml_file_name)
         self.root = tree.getroot()
+        print(self.root)
 
     def create_rules_using_xml(self):
         # Iterate over the lenders in the XML file
+        Dict = {}
         for lender in self.root.find('Lenders'):
+            Dict[lender.tag] = {}
             lender_name = lender.tag
+            lender_attrib = lender.attrib
+            print("-->",lender_name)
+            for rule_element in (list(lender)):
+                print((rule_element))
+                # for ref,refval in Dict[lender.tag][rule_element.tag]:
+                #     print(ref,refval)
+                Dict[lender.tag][rule_element.tag] = {}
+                # Dict[lender.tag][rule_element.tag]['Reference_field'] = rule_element.find('Rule').get('Reference_field')
+                # Dict[lender.tag][rule_element.tag]['Rule_Operator'] = rule_element.find('Rule').get('Rule_Operator')
+                # Dict[lender.tag][rule_element.tag]['Field_Type'] = rule_element.find('Rule').get('Field_Type')
+            continue
+        
             connections = None
 
             # Create Rule objects and connect them
@@ -58,7 +73,7 @@ class RulesUsingXML:
 
             # Store the connected rules for the lender
             self.lender_rules[lender_name] = connections
-
+        print(Dict)
 # Example Usage:
 
 # xml_file = 'rules.xml'  # Path to your XML file

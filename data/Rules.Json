@@ -16,6 +16,7 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  TRAILERS, BUSES AND COACHES,  Commercial Motor_Vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
@@ -148,6 +149,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -188,6 +190,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualifies for the relevant asset categories."
@@ -308,6 +311,7 @@
         "Reference_field": "asset_type",
         "Rule_Operator": "in",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Rule_Value": "Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks <3.5 tonnes, Heavy trucks >3.5 tonnes,  TRAILERS, BUSES AND COACHES,  Commercial Motor_Vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)",
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
@@ -440,6 +444,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -480,6 +485,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualifies for the relevant asset categories."
@@ -732,6 +738,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -1012,6 +1019,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -1243,6 +1251,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -1474,6 +1483,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -1717,6 +1727,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -1845,6 +1856,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -1976,6 +1988,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -2102,6 +2115,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Fitness equipment, POS systems, AV and video conferencing, ALL IT assets, renewable energy, pallet racking, security system (hardware only), fit outs, temporary fencing, software, air conditioning units, cool rooms, spray booths, catering and hospitality equipment, portable buildings",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -2235,6 +2249,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -2361,6 +2376,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -2582,6 +2598,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately.",
@@ -2634,6 +2651,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualify for the relevant asset categories"
@@ -2734,6 +2752,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -2955,6 +2974,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately.",
@@ -3007,6 +3027,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualify for the relevant asset categories"
@@ -3107,6 +3128,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -3238,6 +3260,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately.",
@@ -3290,6 +3313,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualifies for the relevant asset categories."
@@ -3390,6 +3414,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to Primary_Assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -3495,6 +3520,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately.",
@@ -3633,6 +3659,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to Primary_Assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -3738,6 +3765,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately.",
@@ -3876,6 +3904,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -4121,6 +4150,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -4366,6 +4396,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Motor_Vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), MOTORBIKES, Primary_Assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -4530,6 +4561,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -4570,6 +4602,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualifies for the relevant asset categories."
@@ -4750,6 +4783,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Motor_Vehicles, Passenger vehicles, Light trucks, Light commercial vehicles (van, utes), Classic cars (loadings apply), MOTORBIKES, Primary_Assets, Heavy trucks >4.5T GVM, Trailers, Buses and coaches, Small yellow goods and excavators, Construction and earth moving equipment, Farming and agriculture, Materials handling and access equipment, Prime movers (loadings apply), Caravans",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -4914,6 +4948,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -4954,6 +4989,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The used asset qualifies for the relevant asset categories."
@@ -4977,7 +5013,7 @@
           "Remark": "The asset age does not meet the required age criteria Consequently, checking the 'Exception asset list'.",
           "Exception_rule": {
             "Reference_field": "asset_type",
-            "Rule_Operator": "in ",
+            "Rule_Operator": "in",
             "Rule_Value": "Trucks, Trailers",
             "Field_Type": 4,
             "Flow_Exception_for_True": {
@@ -5108,6 +5144,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -5199,6 +5236,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -5239,6 +5277,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The Asset is Used Asset which is Allowed"
@@ -5339,6 +5378,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "Generators and compressors, engineering and toolmaking, medical equipment, woodworking and metalworking equipment, CNC, edge benders, landscaping and groundkeeping, attachments for earthmoving machinery, detachable GPS units",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -5430,6 +5470,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "Private",
         "Field_Type": 4,
+        "Is_Evaluating": false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The borrower can buy the assets privately."
@@ -5470,6 +5511,7 @@
         "Rule_Operator": "==",
         "Rule_Value": "USED",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "usage_type of Asset is used which is allowed"
@@ -5570,6 +5612,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."
@@ -5813,6 +5856,7 @@
         "Rule_Operator": "in",
         "Rule_Value": "IT hardware, Audio visual, conveyors, wine and beer industry processing, skip bins, medical lasers, ttesting and calibration equipment",
         "Field_Type": 4,
+        "Is_Evaluating":false,
         "Flow_Exception_for_True": {
           "Condition_to_proceed": true,
           "Remark": "The asset is listed as an eligible asset."

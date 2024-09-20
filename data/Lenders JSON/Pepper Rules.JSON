@@ -1,480 +1,373 @@
 {
   "Primary Pepper_Tier_A": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Asset is not in Allowed Asset List",
-        "Exception_rule": {
+        "Asset Type": {
           "Reference_field": "asset_type",
-          "Rule_Operator": "not in",
-          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+          "Rule_Operator": "in",
+          "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
           "Field_Type": 4,
-          "Flow_Exception_for_True": {
-            "Remark": "Asset is not in Excluded Assets list"
-          },
-          "Flow_Exception_for_False": {
-            "Remark": "Asset is in Excluded Assets list"
-          }
-        }
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 36,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 250000,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 10000,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amount is Under Allowed Loan Limit",
-        "Exception_rule": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "not in",
-          "Rule_Value": "Caravans, Camper Vans & Motorhomes, atv, offroad bikes and other goods, Motorbike",
-          "Field_Type": 4,
+          "Is_Evaluating":false,
           "Flow_Exception_for_True": {
             "Condition_to_proceed": true,
-            "Remark": "Asset is not in list of Lower Amount Loan List"
+            "Remark": "The asset is listed as an eligible asset."
           },
           "Flow_Exception_for_False": {
             "Condition_to_proceed": false,
-            "Remark": "Asset is in Lower Amount Loan Asset List",
+            "Remark": "There are no applicable asset categories for this asset. Consequently, checking the 'Excluded asset list'.",
             "Exception_rule": {
               "Reference_field": "asset_type",
-              "Rule_Operator": "in",
-              "Rule_Value": "Caravans, Camper Vans & Motorhomes",
+              "Rule_Operator": "not in",
+              "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
               "Field_Type": 4,
               "Flow_Exception_for_True": {
-                "Condition_to_proceed": true,
-                "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
-                "Exception_rule": {
-                  "Reference_field": "Loan_Amount",
-                  "Rule_Operator": "<=",
-                  "Rule_Value": 110000,
-                  "Field_Type": 3,
-                  "Flow_Exception_for_True": {
-                    "Remark": "Asset in Caravans, Camper Vans & Motorhomes also Amount is less than 110,000"
-                  },
-                  "Flow_Exception_for_False": {
-                    "Remark": "Asset in Caravans, Camper Vans & Motorhomes but Amount is greater than 110,000"
-                  }
-                }
+                "Remark": "The asset is not listed as excluded on any applicable list. As a result, it will be given the benefit of the doubt for additional evaluation."
               },
               "Flow_Exception_for_False": {
-                "Condition_to_proceed": false,
-                "Remark": "Asset not in Caravans, Camper Vans & Motorhomes",
-                "Exception_rule": {
-                  "Reference_field": "asset_type",
-                  "Rule_Operator": "==",
-                  "Rule_Value": "Motorbike",
-                  "Field_Type": 4,
-                  "Flow_Exception_for_True": {
-                    "Condition_to_proceed": true,
-                    "Remark": "Asset is Motorbike",
-                    "Exception_rule": {
-                      "Reference_field": "Loan_Amount",
-                      "Rule_Operator": "<=",
-                      "Rule_Value": 55000,
-                      "Field_Type": 3,
-                      "Is_Nested": false,
-                      "Flow_for_True": true,
-                      "Flow_for_False": false,
-                      "Flow_Exception_for_True": {
-                        "Remark": "Asset is Motorbike and Loan Amount is less then 55,000"
-                      },
-                      "Flow_Exception_for_False": {
-                        "Remark": "Asset is Motorbike but Loan Amount is greater than 55,000"
-                      }
-                    }
-                  },
-                  "Flow_Exception_for_False": {
-                    "Condition_to_proceed": true,
-                    "Remark": "Asset is not Motorbike",
-                    "Exception_rule": {
-                      "Reference_field": "asset_type",
-                      "Rule_Operator": "in",
-                      "Rule_Value": "ATV offroad bikes and other goods",
-                      "Field_Type": 4,
-                      "Flow_Exception_for_True": {
-                        "Remark": "Asset is ATV offroad Bikes",
-                        "Exception_rule": {
-                          "Reference_field": "Loan_Amount",
-                          "Rule_Operator": "<=",
-                          "Rule_Value": 50000,
-                          "Field_Type": 3,
-                          "Is_Nested": false,
-                          "Flow_for_True": true,
-                          "Flow_for_False": false,
-                          "Flow_Exception_for_True": {
-                            "Remark": "Assset is in ATV Offroad Bikes and Amount it less than 50,000"
-                          },
-                          "Flow_Exception_for_False": {
-                            "Remark": "Asset is in ATV Offroad Bikes but Amount is greater than 50,000"
-                          }
-                        }
-                      },
-                      "Flow_Exception_for_False": {
-                        "Remark": "Asset is not in ATV offroad Bikes"
-                      }
-                    }
-                  }
-                }
+                "Remark": "The asset qualifies in excluded asset categories and will not be considered for further assessment."
               }
             }
           }
-        }
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 84,
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 60,
           "Field_Type": 3,
-          "Reference_field": "repayment_term_month",
-          "logical_operator": "and",
-          "Logical_Rule": {
-            "Rule_Operator": "==",
-            "Rule_Value": 0,
-            "Field_Type": 3,
-            "Reference_field": "balloon_amount"
-          },
           "Flow_Exception_for_True": {
             "Condition_to_proceed": true,
-            "Remark": "repayment_term_month 84 Condition with Ballon Amount 0 is satisfied"
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
           },
           "Flow_Exception_for_False": {
             "Condition_to_proceed": false,
-            "Remark": "repayment term month 84 Condition with Ballon Amount 0 is not satisfied"
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
           }
-        }
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "==",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is Private which is Okay",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 150000,
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 36,
           "Field_Type": 3,
-          "Reference_field": "Loan_Amount",
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": false,
           "Flow_Exception_for_True": {
-            "Remark": "Loan Amount of greater than 150,000 is not allowed with Asset supplier Private"
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
           },
           "Flow_Exception_for_False": {
-            "Remark": "Loan Amount of less than 150,000 is all right with Asset supplier Private"
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
           }
-        }
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "==",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
+        },
+        "Loan Amount": {
+          "Reference_field": "amount_financed",
           "Rule_Operator": "<=",
           "Rule_Value": 250000,
           "Field_Type": 3,
-          "Reference_field": "amount_financed",
-          "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
           },
-          "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
-          }
-        }
-      }
-    },
-    "usage_type": {
-      "Reference_field": "usage_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "USED",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type of used is not allowed"
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 15,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Primary Pepper_Tier_B": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Asset is not in Allowed Asset List",
-        "Exception_rule": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "not in",
-          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
-          "Field_Type": 4,
-          "Flow_Exception_for_True": {
-            "Remark": "Asset is not in Excluded Assets list"
-          },
-          "Flow_Exception_for_False": {
-            "Remark": "Asset is in Excluded Assets list"
-          }
-        }
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 24,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 12,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 150000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 10000,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amount is Under Allowed Loan Limit",
-        "Exception_rule": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "not in",
-          "Rule_Value": "Caravans, Camper Vans & Motorhomes, atv, offroad bikes and other goods, Motorbike",
-          "Field_Type": 4,
           "Flow_Exception_for_True": {
             "Condition_to_proceed": true,
-            "Remark": "Asset is not in list of Lower Amount Loan List"
-          },
-          "Flow_Exception_for_False": {
-            "Condition_to_proceed": false,
-            "Remark": "Asset is in Lower Amount Loan Asset List",
+            "Remark": "The loan limit meets the criteria for the relevant asset categories Now, checking the 'exception asset list'.",
             "Exception_rule": {
               "Reference_field": "asset_type",
-              "Rule_Operator": "in",
-              "Rule_Value": "Caravans, Camper Vans & Motorhomes",
+              "Rule_Operator": "not in",
+              "Rule_Value": "Caravans, Camper Vans, Motorhomes, atv, offroad bikes and other goods, MOTORBIKES",
               "Field_Type": 4,
               "Flow_Exception_for_True": {
                 "Condition_to_proceed": true,
-                "Remark": "Asset is in Caravans, Camper Vans & Motorhomes",
+                "Remark": "The asset does not belong to exception asset list. "
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset belongs to exception list of assets (Motor Vehicles).",
                 "Exception_rule": {
-                  "Reference_field": "Loan_Amount",
-                  "Rule_Operator": "<=",
-                  "Rule_Value": 110000,
-                  "Field_Type": 3,
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "Caravans, Camper Vans, Motorhomes",
+                  "Field_Type": 4,
                   "Flow_Exception_for_True": {
-                    "Remark": "Asset in Caravans, Camper Vans & Motorhomes also Amount is less than 110,000"
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the  list of assets (Caravans, Camper Vans, Motorhomes)",
+                    "Exception_rule": {
+                      "Reference_field": "amount_financed",
+                      "Rule_Operator": "<=",
+                      "Rule_Value": 110000,
+                      "Field_Type": 3,
+                      "Flow_Exception_for_True": {
+                        "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                      },
+                      "Flow_Exception_for_False": {
+                        "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                      }
+                    }
                   },
                   "Flow_Exception_for_False": {
-                    "Remark": "Asset in Caravans, Camper Vans & Motorhomes but Amount is greater than 110,000"
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not belong to exception list of asset (Caravans, Camper Vans, Motorhomes).",
+                    "Exception_rule": {
+                      "Reference_field": "asset_type",
+                      "Rule_Operator": "==",
+                      "Rule_Value": "MOTORBIKES",
+                      "Field_Type": 4,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The asset qualifies in the exception list of assets (MOTORBIKES).",
+                        "Exception_rule": {
+                          "Reference_field": "amount_financed",
+                          "Rule_Operator": "<=",
+                          "Rule_Value": 55000,
+                          "Field_Type": 3,
+                          "Flow_Exception_for_True": {
+                            "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                          },
+                          "Flow_Exception_for_False": {
+                            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                          }
+                        }
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The asset does not belong to exception list of asset (MOTORBIKES).",
+                        "Exception_rule": {
+                          "Reference_field": "asset_type",
+                          "Rule_Operator": "in",
+                          "Rule_Value": "ATV, offroad bikes and other goods",
+                          "Field_Type": 4,
+                          "Flow_Exception_for_True": {
+                            "Remark": "The asset qualifies in the exception list of assets (ATV, Offroad bikes and other goods).",
+                            "Exception_rule": {
+                              "Reference_field": "amount_financed",
+                              "Rule_Operator": "<=",
+                              "Rule_Value": 50000,
+                              "Field_Type": 3,
+                              "Flow_Exception_for_True": {
+                                "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                              },
+                              "Flow_Exception_for_False": {
+                                "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                              }
+                            }
+                          },
+                          "Flow_Exception_for_False": {
+                            "Remark": "The asset does not qualifies in the exception list of assets (ATV, Offroad bikes & other goods)."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+          }
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 84,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 150000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The borrower can buy the assets privately for up to the loan amount drafted in application."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The borrower can not buy the assets privately for over the loan amount."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset categories.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 250000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Used Asset": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "USED",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The used asset qualify for the relevant asset categories"
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The un-used asset qualify for the relevant asset categories"
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 15,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
                   }
                 }
               },
               "Flow_Exception_for_False": {
                 "Condition_to_proceed": false,
-                "Remark": "Asset not in Caravans, Camper Vans & Motorhomes",
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
                 "Exception_rule": {
                   "Reference_field": "asset_type",
-                  "Rule_Operator": "==",
-                  "Rule_Value": "Motorbike",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
                   "Field_Type": 4,
                   "Flow_Exception_for_True": {
                     "Condition_to_proceed": true,
-                    "Remark": "Asset is Motorbike",
+                    "Remark": "The asset qualifies in the applicable motor asset list.",
                     "Exception_rule": {
-                      "Reference_field": "Loan_Amount",
-                      "Rule_Operator": "<=",
-                      "Rule_Value": 55000,
-                      "Field_Type": 3,
-                      "Is_Nested": false,
-                      "Flow_for_True": true,
-                      "Flow_for_False": false,
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0,
+                      "Field_Type": 2,
                       "Flow_Exception_for_True": {
-                        "Remark": "Asset is Motorbike and Loan Amount is less then 55,000"
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
                       },
                       "Flow_Exception_for_False": {
-                        "Remark": "Asset is Motorbike but Loan Amount is greater than 55,000"
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
                       }
                     }
                   },
                   "Flow_Exception_for_False": {
-                    "Condition_to_proceed": true,
-                    "Remark": "Asset is not Motorbike",
-                    "Exception_rule": {
-                      "Reference_field": "asset_type",
-                      "Rule_Operator": "in",
-                      "Rule_Value": "ATV offroad bikes and other goods",
-                      "Field_Type": 4,
-                      "Flow_Exception_for_True": {
-                        "Remark": "Asset is ATV offroad Bikes",
-                        "Exception_rule": {
-                          "Reference_field": "Loan_Amount",
-                          "Rule_Operator": "<=",
-                          "Rule_Value": 50000,
-                          "Field_Type": 3,
-                          "Is_Nested": false,
-                          "Flow_for_True": true,
-                          "Flow_for_False": false,
-                          "Flow_Exception_for_True": {
-                            "Remark": "Assset is in ATV Offroad Bikes and Amount it less than 50,000"
-                          },
-                          "Flow_Exception_for_False": {
-                            "Remark": "Asset is in ATV Offroad Bikes but Amount is greater than 50,000"
-                          }
-                        }
-                      },
-                      "Flow_Exception_for_False": {
-                        "Remark": "Asset is not in ATV offroad Bikes"
-                      }
-                    }
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
                   }
                 }
               }
@@ -482,1067 +375,1648 @@
           }
         }
       },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 84,
-          "Field_Type": 3,
-          "Reference_field": "repayment_term_month",
-          "logical_operator": "and",
-          "Logical_Rule": {
-            "Rule_Operator": "==",
-            "Rule_Value": 0,
-            "Field_Type": 3,
-            "Reference_field": "balloon_amount"
-          },
+      "Primary Pepper_Tier_B": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
           "Flow_Exception_for_True": {
             "Condition_to_proceed": true,
-            "Remark": "repayment_term_month 84 Condition with Ballon Amount 0 is satisfied"
+            "Remark": "The asset is listed as an eligible asset."
           },
           "Flow_Exception_for_False": {
             "Condition_to_proceed": false,
-            "Remark": "repayment term month 84 Condition with Ballon Amount 0 is not satisfied"
+            "Remark": "There are no applicable asset categories for this asset. Consequently, checking the 'Excluded asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Remark": "The asset is not listed as excluded on any applicable list. As a result, it will be given the benefit of the doubt for additional evaluation."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The asset qualifies in excluded asset categories and will not be considered for further assessment."
+              }
+            }
           }
-        }
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "==",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is Private which is Okay",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 150000,
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
           "Field_Type": 3,
-          "Reference_field": "Loan_Amount",
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": false,
           "Flow_Exception_for_True": {
-            "Remark": "Loan Amount of greater than 150,000 is not allowed with Asset supplier Private"
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
           },
           "Flow_Exception_for_False": {
-            "Remark": "Loan Amount of less than 150,000 is all right with Asset supplier Private"
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
           }
-        }
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "==",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 150000,
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 12,
           "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
           "Reference_field": "amount_financed",
+          "Rule_Operator": "<=",
+          "Rule_Value": 150000,
+          "Field_Type": 3,
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories Now, checking the 'exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "Caravans, Camper Vans, Motorhomes, atv, offroad bikes and other goods, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset does not belong to exception asset list. "
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset belongs to exception list of assets (Motor Vehicles).",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "Caravans, Camper Vans, Motorhomes",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset belongs to exception list of assets (Caravans, Camper Vans, Motorhomes).",
+                    "Exception_rule": {
+                      "Reference_field": "amount_financed",
+                      "Rule_Operator": "<=",
+                      "Rule_Value": 110000,
+                      "Field_Type": 3,
+                      "Flow_Exception_for_True": {
+                        "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                      },
+                      "Flow_Exception_for_False": {
+                        "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not belong to exception list of asset (Caravans, Camper Vans, Motorhomes).",
+                    "Exception_rule": {
+                      "Reference_field": "asset_type",
+                      "Rule_Operator": "==",
+                      "Rule_Value": "MOTORBIKES",
+                      "Field_Type": 4,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The asset qualifies in the exception list of assets (MOTORBIKES).",
+                        "Exception_rule": {
+                          "Reference_field": "amount_financed",
+                          "Rule_Operator": "<=",
+                          "Rule_Value": 55000,
+                          "Field_Type": 3,
+                          "Flow_Exception_for_True": {
+                            "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                          },
+                          "Flow_Exception_for_False": {
+                            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                          }
+                        }
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The asset does not belong to exception list of asset (MOTORBIKES).",
+                        "Exception_rule": {
+                          "Reference_field": "asset_type",
+                          "Rule_Operator": "in",
+                          "Rule_Value": "ATV, offroad bikes and other goods",
+                          "Field_Type": 4,
+                          "Flow_Exception_for_True": {
+                            "Remark": "The asset qualifies in the exception list of assets (ATV, Offroad bikes & other goods).",
+                            "Exception_rule": {
+                              "Reference_field": "amount_financed",
+                              "Rule_Operator": "<=",
+                              "Rule_Value": 50000,
+                              "Field_Type": 3,
+                              "Flow_Exception_for_True": {
+                                "Remark": "The loan limit meets the criteria for the relevant asset categories"
+                              },
+                              "Flow_Exception_for_False": {
+                                "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+                              }
+                            }
+                          },
+                          "Flow_Exception_for_False": {
+                            "Remark": "The asset does not qualifies in the exception list of assets (ATV, Offroad bikes & other goods)."
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
           }
-        }
-      }
-    },
-    "usage_type": {
-      "Reference_field": "usage_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "USED",
-      "Field_Type": 4,
-      "Is_Nested": false,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type of used is not allowed"
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 15,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Primary Pepper_Tier_C": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Motor vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Asset is not in Allowed Asset List",
-        "Exception_rule": {
-          "Reference_field": "asset_type",
-          "Rule_Operator": "not in",
-          "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
           "Field_Type": 4,
           "Flow_Exception_for_True": {
-            "Remark": "Asset is not in Excluded Assets list"
-          },
-          "Flow_Exception_for_False": {
-            "Remark": "Asset is in Excluded Assets list"
-          }
-        }
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 24,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 0,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 40000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amout is in allowed limit"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 84,
-          "Field_Type": 3,
-          "Reference_field": "repayment_term_month",
-          "logical_operator": "and",
-          "Logical_Rule": {
-            "Rule_Operator": "==",
-            "Rule_Value": 0,
-            "Field_Type": 3,
-            "Reference_field": "balloon_amount"
-          },
-          "Flow_Exception_for_True": {
             "Condition_to_proceed": true,
-            "Remark": "repayment_term_month 84 Condition with Ballon Amount 0 is satisfied"
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
           },
           "Flow_Exception_for_False": {
             "Condition_to_proceed": false,
-            "Remark": "repayment term month 84 Condition with Ballon Amount 0 is not satisfied"
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 84,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 150000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The borrower can buy the assets privately for up to the loan amount drafted in application."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The borrower can not buy the assets privately for over the loan amount."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 150000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Used Asset": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "USED",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The used asset qualify for the relevant asset categories"
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The un-used asset qualifies for the relevant asset categories."
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 15,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0.2,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the applicable motor asset list.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0.2,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "==",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is Private which is Okay",
-        "Exception_rule": {
+      },
+      "Primary Pepper_Tier_C": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Motor_Vehicles, Light commercial vehicles, rigid trucks, trailers, buses, forklifts, material handling, yelow goods, earthmoving equipment, wheeled construction equipment, agricultural equipment",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset is listed as an eligible asset."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "There are no applicable asset categories for this asset. Consequently, checking the 'Excluded asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "taxi, uber, rideshare, racing cars, hire cars / limousines, prime movers",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Remark": "The asset is not listed as excluded on any applicable list. As a result, it will be given the benefit of the doubt for additional evaluation."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The asset qualifies in excluded asset categories and will not be considered for further assessment."
+              }
+            }
+          }
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
+          }
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
+          "Reference_field": "amount_financed",
           "Rule_Operator": "<=",
           "Rule_Value": 40000,
           "Field_Type": 3,
-          "Reference_field": "Loan_Amount",
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": false,
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Loan Amount of greater than 40,000 is not allowed with Asset supplier Private"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories"
           },
           "Flow_Exception_for_False": {
-            "Remark": "Loan Amount of less than 40,000 is all right with Asset supplier Private"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+          }
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 84,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 40000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The borrower can buy the assets privately for up to the loan amount drafted in application."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The borrower can not buy the assets privately for over the loan amount."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 40000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Used Asset": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "USED",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The used asset qualifies for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The un-used asset qualifies for the relevant asset categories."
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 15,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0.2,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the applicable motor asset list.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0.2,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
       },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "==",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 40000,
+      "Secondary Pepper_Tier_A": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to Primary_Assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset is listed as an eligible asset."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset does not qualify for any relevant applicable asset categories. Therefore, it will be considered with the benefit of doubt for further assessment."
+          }
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
           "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
+          }
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
           "Reference_field": "amount_financed",
-          "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
-          },
-          "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
-          }
-        }
-      }
-    },
-    "usage_type": {
-      "Reference_field": "usage_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "USED",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type of used is not allowed"
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 15,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Secondary Pepper_Tier_A": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is not in Allowed list"
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 24,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 24,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 150000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amout is in allowed limit"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments"
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "==",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is Private which is Okay",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 100000,
-          "Field_Type": 3,
-          "Reference_field": "Loan_Amount",
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": false,
-          "Flow_Exception_for_True": {
-            "Remark": "Loan Amount of greater than 100,000 is not allowed with Asset supplier Private"
-          },
-          "Flow_Exception_for_False": {
-            "Remark": "Loan Amount of less than 100,000 is all right with Asset supplier Private"
-          }
-        }
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "!=",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
           "Rule_Operator": "<=",
           "Rule_Value": 150000,
           "Field_Type": 3,
-          "Reference_field": "amount_financed",
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories"
           },
           "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
           }
-        }
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 15,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Secondary Pepper_Tier_B": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to primary assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is not in Allowed Asset List"
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 12,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 12,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 150000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amout is in allowed limit"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments"
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "==",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is Private which is Okay",
-        "Exception_rule": {
-          "Rule_Operator": "<=",
-          "Rule_Value": 100000,
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
           "Field_Type": 3,
-          "Reference_field": "Loan_Amount",
-          "Is_Nested": false,
-          "Flow_for_True": true,
-          "Flow_for_False": false,
           "Flow_Exception_for_True": {
-            "Remark": "Loan Amount of greater than 100,000 is not allowed with Asset supplier Private"
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
           },
           "Flow_Exception_for_False": {
-            "Remark": "Loan Amount of less than 100,000 is all right with Asset supplier Private"
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class."
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 100000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The borrower can buy the assets privately for up to the loan amount drafted in application."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The borrower can not buy the assets privately for over the loan amount."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 150000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 15,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their property holding against this asst."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the exception list of assets.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
       },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "!=",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
+      "Secondary Pepper_Tier_B": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Construction equipment (non wheeled & non tracked) attachments to Primary_Assets, engineering equipment, lathes, CNC machines, press brakes, concrete cutters, road marking equipment, mechanical equipment, hoists, generators, compressors, industrial printers",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset is listed as an eligible asset."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset does not qualify for any relevant excluded asset categories. Therefore, it will be considered with the benefit of doubt for further assessment."
+          }
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 12,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
+          }
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 12,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
+          "Reference_field": "amount_financed",
           "Rule_Operator": "<=",
           "Rule_Value": 150000,
           "Field_Type": 3,
-          "Reference_field": "amount_financed",
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories"
           },
           "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+          }
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class."
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "==",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 100000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The borrower can buy the assets privately for up to the loan amount drafted in application."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The borrower can not buy the assets privately for over the loan amount."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 150000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 15,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0.2,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the applicable motor asset list.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0.2,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 15,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
       },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Tertiary Pepper_Tier_A": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is not in Allowed Asset List"
-      }
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 36,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 75000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amout is in allowed limit"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": "==",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with 0 ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments"
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not Private"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Asset Supplier should not be private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "!=",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
+      "Tertiary Pepper_Tier_A": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset is listed as an eligible asset."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset does not qualify for any relevant applicable asset categories. Therefore, it will be considered with the benefit of doubt for further assessment."
+          }
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
+          }
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 12,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
+          "Reference_field": "amount_financed",
           "Rule_Operator": "<=",
           "Rule_Value": 75000,
           "Field_Type": 3,
-          "Reference_field": "amount_financed",
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories"
           },
           "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+          }
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">=",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class."
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "!=",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy assets from dealer."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower can not buy the assets privately"
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 75000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Used Asset": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "!=",
+          "Rule_Value": "USED",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The un-used asset qualify for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The used asset does not qualify for the relevant asset categories."
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 8,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meeet the deposit criteria for their property holding against this asst."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the exception list of assets.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
-      }
-    },
-    "usage_type": {
-      "Reference_field": "usage_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "USED",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type"
       },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type of used is not allowed"
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 8,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
-  },
-  "Tertiary Pepper_Tier_B": {
-    "asset_type": {
-      "Reference_field": "asset_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is in Allowed Asset List"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset is not in Allowed Asset List"
-      },
-      "Is_Nested": false,
-      "Flow_for_True": true,
-      "Flow_for_False": true,
-      "Remark": 1
-    },
-    "ABN_in_Months": {
-      "Reference_field": "ABN_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 24,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "ABN(In Months) is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "ABN(In Months) is Less then Expected ABN"
-      }
-    },
-    "GST_in_Months": {
-      "Reference_field": "GST_in_Months",
-      "Rule_Operator": ">",
-      "Rule_Value": 12,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "GST Months is greater than Allowed ABN"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "GST Months is Less then Expected"
-      }
-    },
-    "Loan_Amount": {
-      "Reference_field": "Loan_Amount",
-      "Rule_Operator": "<=",
-      "Rule_Value": 55000,
-      "Field_Type": 3,
-      "Is_Nested": false,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "Loan_Amount",
-        "Rule_Operator": ">",
-        "Rule_Value": 0,
-        "Field_Type": 3
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Loan Amout is in allowed limit"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Loan Amount Exceded Allowed Loan Limit"
-      }
-    },
-    "applicant_entity_type": {
-      "Reference_field": "applicant_entity_type",
-      "Rule_Operator": "in",
-      "Rule_Value": "Sole traders, Companies, Trusts, Partnerships",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Applicant Entity Type is in Sole traders, Companies, Trusts, Partnerships"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Applicant Entity Type is not in allowed Applicant Entity List"
-      }
-    },
-    "MAX_TERM": {
-      "Reference_field": "repayment_term_month",
-      "Rule_Operator": "<=",
-      "Rule_Value": 60,
-      "Field_Type": 3,
-      "logical_operator": "and",
-      "Logical_Rule": {
-        "Reference_field": "balloon_amount",
-        "Rule_Operator": "==",
-        "Rule_Value": 0,
-        "Field_Type": 3,
-        "Is_Nested": false,
-        "Flow_for_True": false,
-        "Flow_for_False": true
-      },
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Repayment Term with 0 ballon Amount is Qualified"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Repayment Term Condition is not satisfied with 60 Repayments"
-      }
-    },
-    "asset_supplier_type": {
-      "Reference_field": "asset_supplier_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "Private",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Supplier is not Private"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Asset Supplier should not be private Dealer"
-      }
-    },
-    "Max_loan_non_proprty_owners": {
-      "Reference_field": "guarantor_1_residential_status",
-      "Rule_Operator": "!=",
-      "Rule_Value": "OWNING",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is Owned"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "Gurantor residence status is not Owned",
-        "Exception_rule": {
+      "Tertiary Pepper_Tier_B": {
+        "Asset Type": {
+          "Reference_field": "asset_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Computer equipment, GPS equipment, Surveying equipment, phtocopiers, telephone systems (hardware only), point of sale equipment, solar & renewable energy assets, office equipment, LED lighting, vending machines, skip bins, shipping containers, porta-loo, agricultural feed bin, moveable silos, non fixed water and diesel tanks, food manufacturing equipment, specialised food trucks, coffee machines, medical and dental equipment, gym equipment",
+          "Field_Type": 4,
+          "Is_Evaluating":false,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset is listed as an eligible asset."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset does not qualify for any relevant applicable asset categories. Therefore, it will be considered with the benefit of doubt for further assessment."
+          }
+        },
+        "ABN Registration": {
+          "Reference_field": "ABN_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 24,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the age requirement of ABN for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the age requirement of ABN for the relevant asset categories."
+          }
+        },
+        "GST Registration": {
+          "Reference_field": "GST_in_Months",
+          "Rule_Operator": ">=",
+          "Rule_Value": 12,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower business meets the age requirement of GST for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower business does not meet the age requirement of GST for the relevant asset categories."
+          }
+        },
+        "Loan Amount": {
+          "Reference_field": "amount_financed",
           "Rule_Operator": "<=",
           "Rule_Value": 55000,
           "Field_Type": 3,
-          "Reference_field": "amount_financed",
+          "logical_operator": "and",
+          "Logical_Rule": {
+            "Reference_field": "amount_financed",
+            "Rule_Operator": ">",
+            "Rule_Value": 0,
+            "Field_Type": 3
+          },
           "Flow_Exception_for_True": {
-            "Remark": "Gurantor residence status is Owned and Loan amount for financing is under  much to lend"
+            "Condition_to_proceed": true,
+            "Remark": "The loan limit meets the criteria for the relevant asset categories"
           },
           "Flow_Exception_for_False": {
-            "Remark": "Gurantor residence status is Owned but Loan amount for financing is too much to lend"
+            "Condition_to_proceed": false,
+            "Remark": "The loan limit does not meet the criteria for loan range for the relevant asset categories"
+          }
+        },
+        "Applicant Entity Type": {
+          "Reference_field": "applicant_entity_type",
+          "Rule_Operator": "in",
+          "Rule_Value": "Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the eligible borrower's requirements under the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the eligible borrower's requirements under the relevant asset categories."
+          }
+        },
+        "Repayment Term": {
+          "Reference_field": "balloon_amount",
+          "Rule_Operator": ">=",
+          "Rule_Value": 0,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset meets the balloon amount requirement for its class.",
+            "Exception_rule": {
+              "Reference_field": "repayment_term_month",
+              "Rule_Operator": "<=",
+              "Rule_Value": 60,
+              "Field_Type": 3,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": " The loan repayment period satisfies the asset's maximum loan term requirement"
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The loan repayment term does not meet the maximum loan term requirement for the asset."
+              }
+            }
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset fails to meet the balloon amount requirement for its class."
+          }
+        },
+        "Asset Supplier Type": {
+          "Reference_field": "asset_supplier_type",
+          "Rule_Operator": "!=",
+          "Rule_Value": "Private",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower can buy the assets privately."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower can not buy the assets privately"
+          }
+        },
+        "Max Loan for Non Property Owners": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset.",
+            "Exception_rule": {
+              "Rule_Operator": "<=",
+              "Rule_Value": 55000,
+              "Field_Type": 3,
+              "Reference_field": "amount_financed",
+              "Flow_Exception_for_True": {
+                "Remark": "The requested loan limit meets the borrower's property criteria for the relevant asset categories."
+              },
+              "Flow_Exception_for_False": {
+                "Remark": "The requested loan limit does not meet the borrower's property criteria for the relevant asset categories."
+              }
+            }
+          }
+        },
+        "Used Asset": {
+          "Reference_field": "usage_type",
+          "Rule_Operator": "!=",
+          "Rule_Value": "USED",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The un-used asset qualify for the relevant asset categories."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The used asset does not qualify for the relevant asset categories."
+          }
+        },
+        "Max Age of Asset": {
+          "Reference_field": "Asset_age_at_end_of_term",
+          "Rule_Operator": "<=",
+          "Rule_Value": 8,
+          "Field_Type": 3,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The asset age meets the required age criteria."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The asset age does not meet the required age criteria."
+          }
+        },
+        "Deposit for non-property owner": {
+          "Reference_field": "guarantor_1_residential_status",
+          "Rule_Operator": "==",
+          "Rule_Value": "OWNING",
+          "Field_Type": 4,
+          "Flow_Exception_for_True": {
+            "Condition_to_proceed": true,
+            "Remark": "The borrower meets the property criteria for the relevant asset, so deposit is not required."
+          },
+          "Flow_Exception_for_False": {
+            "Condition_to_proceed": false,
+            "Remark": "The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.",
+            "Exception_rule": {
+              "Reference_field": "asset_type",
+              "Rule_Operator": "not in",
+              "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+              "Field_Type": 4,
+              "Flow_Exception_for_True": {
+                "Condition_to_proceed": true,
+                "Remark": "The asset qualifies in the primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "Deposit_Amount_percentage",
+                  "Rule_Operator": ">=",
+                  "Rule_Value": 0.2,
+                  "Field_Type": 2,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                  }
+                }
+              },
+              "Flow_Exception_for_False": {
+                "Condition_to_proceed": false,
+                "Remark": "The asset does not qualify in the applicable primary asset list.",
+                "Exception_rule": {
+                  "Reference_field": "asset_type",
+                  "Rule_Operator": "in",
+                  "Rule_Value": "MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS >4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS <3.5 TONNES, HEAVY TRUCKS >3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES",
+                  "Field_Type": 4,
+                  "Flow_Exception_for_True": {
+                    "Condition_to_proceed": true,
+                    "Remark": "The asset qualifies in the applicable motor asset list.",
+                    "Exception_rule": {
+                      "Reference_field": "Deposit_Amount_percentage",
+                      "Rule_Operator": ">=",
+                      "Rule_Value": 0.2,
+                      "Field_Type": 2,
+                      "Flow_Exception_for_True": {
+                        "Condition_to_proceed": true,
+                        "Remark": "The borrower meets the deposit criteria for their non-property holdings against this asset."
+                      },
+                      "Flow_Exception_for_False": {
+                        "Condition_to_proceed": false,
+                        "Remark": "The borrower does not meet the deposit criteria for their non-property holding against this asset."
+                      }
+                    }
+                  },
+                  "Flow_Exception_for_False": {
+                    "Condition_to_proceed": false,
+                    "Remark": "The asset does not qualify as it is not in the exclusion list."
+                  }
+                }
+              }
+            }
           }
         }
       }
-    },
-    "usage_type": {
-      "Reference_field": "usage_type",
-      "Rule_Operator": "!=",
-      "Rule_Value": "USED",
-      "Field_Type": 4,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": true,
-        "Remark": "usage_type of used is not allowed"
-      }
-    },
-    "Max_age_of_asset_at_end_of_term": {
-      "Reference_field": "Asset_age",
-      "Rule_Operator": "<=",
-      "Rule_Value": 8,
-      "Field_Type": 3,
-      "Flow_Exception_for_True": {
-        "Condition_to_proceed": true,
-        "Remark": "Asset Age is under Allowed Age of Asset"
-      },
-      "Flow_Exception_for_False": {
-        "Condition_to_proceed": false,
-        "Remark": "Max Age of Asset Limit exceeded"
-      }
-    }
   }
-}
