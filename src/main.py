@@ -56,8 +56,6 @@ for Data_rule in Data_of_Rule_test:
             TempDict[LenderName][temppte.RC_ID]["Remark"] = Rule_evaluate['Remark']
             if not EATD :
                 break
-            if type(temppte.Rule.Remark) == int:
-                remarks +=  Remarks[f'{temppte.Rule.Remark}']
             temppte = temppte.next_Rule
 
         if temppte == None:

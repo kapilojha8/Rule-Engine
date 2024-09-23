@@ -9,7 +9,7 @@ class Flow_exception:
         return f"Exception Rule : {self.Exception_rule} || Condition to proceed : {self.Condition_to_proceed} || Remark : {self.Remark}"
 
 class Rule:
-    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Field_Type, Is_Nested:bool, Nested_Rule,Flow_exception_True,Flow_exception_False, Is_Evaluating, logical_operator:str=None,Logical_Rule=None, Flow_for_True:bool=False, Flow_for_False:bool=False, Remark=""):
+    def __init__(self, ID:str, Rule_header:str,Rule_operator:str, Rule_value, Field_Type,Flow_exception_True,Flow_exception_False, Is_Evaluating, logical_operator:str=None,Logical_Rule=None):
         """
             Initializes a Rule object with the provided attributes.
 
@@ -18,33 +18,20 @@ class Rule:
                 Rule_header (str): The attribute or field that the rule is based on.
                 Rule_operator (str): The operator used in the rule (e.g., '>', '<', '==').
                 Rule_value (Any): The value that the Rule_header is compared against.
-                Is_Nested (bool): Flag indicating if the rule is nested within another rule.
-                Nested_Rule (Rule): Another Rule object that this rule is nested with.
                 logical_operator (str, optional): Logical operator ('and', 'or') used between rules.
                 Logical_Rule (Rule, optional): Additional logical rule for combined evaluation.
-                Flow_for_True (bool): Flag indicating whether to continue flow if the rule evaluates to True.
-                Flow_for_False (bool): Flag indicating whether to continue flow if the rule evaluates to False.
         """
         self.ID = ID
         self.Rule_header = Rule_header
         self.Rule_value = self.convert_value(Rule_value, Field_Type)
-        # self.Rule_value = Rule_value
         self.Rule_operator = Rule_operator
-        # self.Rule_order = Rule_order
-        # self.Rule_parent = Rule_parent
-        self.Is_Nested = Is_Nested
-        self.Nested_Rule = Nested_Rule
         self.logical_operator = logical_operator  # Can be 'and' or 'or'
         self.Logical_Rule = Logical_Rule
-        self.Flow_for_True = Flow_for_True
-        self.Flow_for_False = Flow_for_False
         self.Is_Evaluating = Is_Evaluating
-        # Flow_exception_True,Flow_exception_False = True,False
         self.Flow_Exception_for_True = Flow_exception_True
         self.Flow_Exception_for_False = Flow_exception_False
         self.Evaluated_result = None
-        self.Remark = Remark
-
+        
     def convert_value(self, value, Field_Type):
         if Field_Type == 0 or Field_Type == '0':  # bool
             return bool(value)
@@ -74,8 +61,6 @@ class Rule:
             return f"{self.Rule_header}"
         if self.logical_operator and self.Logical_Rule:
             return f"({self.Rule_header} {self.Rule_operator} {str(self.Rule_value)} {self.logical_operator} {str(self.Logical_Rule)})"
-        if not self.Is_Nested:
-            return f"{self.Rule_header} {self.Rule_operator} {str(self.Rule_value)}"
         if self.Rule_value!=None and self.Rule_operator!=None and self.Rule_value!=None:
             return f"{self.Rule_header} {self.Rule_operator} {str(self.Rule_value)}"
 
@@ -152,72 +137,15 @@ class Rule:
                 LLO = self.Flow_Exception_for_True.Exception_rule.evaluate(data)
                 nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
                 result = LLO['Return_result']
-                # print("Flow Exception for true \n ",self.Flow_Exception_for_True)
-                # print("This is Evaluation of this Rule ",LLO)
-                # print("This is Remark of this Rule ",self.Flow_Exception_for_True.Remark)
-                # print("Exception rule  for true :",self.Flow_Exception_for_True.Exception_rule)
-            # if self.Flow_Exception_for_True.Exception_rule:
-                # print("This is Flow Exception Rule is :",self.Flow_Exception_for_True.Condition_to_proceed)
         else:
             if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Remark:
                 nested_remark += self.Flow_Exception_for_False.Remark
             if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Exception_rule:
                 LLO = self.Flow_Exception_for_False.Exception_rule.evaluate(data)
                 nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
-                result = LLO['Return_result']
-                # print("Flow Exception for false \n ",self.Flow_Exception_for_False)
-                # print("This is Evaluation of this Rule ",LLO)
-            #     print("Exception rule for false :",self.Flow_Exception_for_False.Exception_rule)
-            # # if self.Flow_Exception_for_False.Exception_rule:
-            #     print("This is Flow Exception Rule is :",self.Flow_Exception_for_False.Condition_to_proceed)
-        
+                result = LLO['Return_result']        
         self.Evaluated_result = result
         return {"Return_result": result, "Remark": nested_remark }
-
-
-
-    def __and__(self, other):
-        """
-        Combine this rule with another rule using AND logic.
-
-        Args:
-            other (Rule): The other rule to combine with this rule.
-
-        Returns:
-            Rule: A new rule representing the combination of the two rules with AND logic.
-        """
-        combined_rule = Rule(
-            ID=max(self.ID, other.ID) + "1",
-            Rule_header=f"({self}) and ({other})",
-            Rule_value=None,
-            Rule_operator=None,
-            Is_Nested=False,
-            Nested_Rule=None,
-            logical_operator="and"
-        )
-        return combined_rule
-
-    def __or__(self, other):
-        """
-        Combine this rule with another rule using OR logic.
-
-        Args:
-            other (Rule): The other rule to combine with this rule.
-
-        Returns:
-            Rule: A new rule representing the combination of the two rules with OR logic.
-        """
-        combined_rule = Rule(
-            ID=max(self.ID, other.ID) + "1",
-            Rule_header=f"({self}) or ({other})",
-            Rule_value=None,
-            Rule_operator=None,
-            Is_Nested=False,
-            Nested_Rule=None,
-            logical_operator="or"
-        )
-        return combined_rule
-
 
 class Rule_Connection: ## Rules Linked List
     """
@@ -246,9 +174,6 @@ class Rule_Connection: ## Rules Linked List
             Returns:
                 bool: The decision to continue (True) or stop (False) based on the rule's evaluation.
         """
-        # if type(rule.Nested_Rule)==type(rule):
-        #     if rule.Nested_Rule.Evaluated_result == False:
-        #         return rule.Nested_Rule.Flow_for_False
         if rule.Evaluated_result:
             return rule.Flow_Exception_for_True.Condition_to_proceed
         else:
