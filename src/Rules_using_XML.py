@@ -1,41 +1,50 @@
 import xml.etree.ElementTree as ET
-from Rule_model import Rule, Rule_Connection
+from Rule_model import Rule, Rule_Connection, Flow_exception
 
 
-def parse_nested_rule(element):
-    # print("The Element is :",element.find('Reference_field').text)
-    # print("Flow for true ->> ",element.find('Flow_for_True').text)
+def parse_nested_rule(Rule_element):
     """Recursive function to parse nested rules in the XML."""
     # Extracting necessary attributes
-    reference_field = element.find('Reference_field').text
-    rule_operator = element.find('Rule_Operator').text.strip()
-    rule_value = element.find('Rule_Value').text
-    field_type = element.find('Field_Type').text[2:]
-    flow_for_true = element.find('Flow_for_True').text == "true"
-    flow_for_false = element.find('Flow_for_False').text == "true"
-    logical_operator = element.find('logical_operator').text if element.find('logical_operator') is not None else None
+    Flow_exception_True_Flow_rule, Flow_exception_True_Condition_to_proceed,Flow_exception_True_Remark,Flow_exception_False_Flow_rule, Flow_exception_False_Condition_to_proceed,Flow_exception_False_Remark = None, None, None, None, None, None
+    if Rule_element.find("Flow_Exception_for_True"):
+        Flow_Exception_for_True = Rule_element.find("Flow_Exception_for_True")
+        if Flow_Exception_for_True.find('Exception_rule'):
+            Flow_exception_True_Flow_rule = Flow_Exception_for_True.find('Exception_rule')
+        if Flow_Exception_for_True.attrib.get('Condition_to_proceed'): 
+            Flow_exception_True_Condition_to_proceed = Flow_Exception_for_True.attrib.get('Condition_to_proceed')
+        if Flow_Exception_for_True.attrib.get('Remark'): 
+            Flow_exception_True_Remark = Flow_Exception_for_True.attrib.get('Remark')
 
-    nested_rule_element = element.find('Nested_Rule')
-    nested_rule = parse_nested_rule(nested_rule_element) if nested_rule_element is not None else None
+    if Rule_element.find("Flow_Exception_for_False"):
+        Flow_Exception_for_False = Rule_element.find("Flow_Exception_for_False")
+        if Flow_Exception_for_False.find('Exception_rule'):
+            Flow_exception_False_Flow_rule = Flow_Exception_for_False.find('Exception_rule')
+        if Flow_Exception_for_False.attrib.get('Condition_to_proceed'): 
+            Flow_exception_False_Condition_to_proceed = Flow_Exception_for_False.attrib.get('Condition_to_proceed')
+        if Flow_Exception_for_False.attrib.get('Remark'): 
+            Flow_exception_False_Remark = Flow_Exception_for_False.attrib.get('Remark')
     
-    logical_rule_element = element.find('Logical_Rule')
-    logical_rule = parse_nested_rule(logical_rule_element) if logical_rule_element is not None else None
-
-    # Creating and returning Rule object
     return Rule(
-        ID=element.tag,
-        Rule_header=reference_field,
-        Rule_operator=rule_operator,
-        Rule_value=rule_value,
-        Field_Type=field_type,
-        Is_Nested=nested_rule is not None,
-        Nested_Rule=nested_rule,
-        Flow_for_True=flow_for_true,
-        Flow_for_False=flow_for_false,
-        logical_operator=logical_operator,
-        Logical_Rule=logical_rule
-    )
-
+                ID=Rule_element.tag,
+                Rule_header    =  Rule_element.attrib['Reference_field'],
+                Rule_operator  =  Rule_element.attrib['Rule_Operator'],
+                Rule_value     =  Rule_element.attrib['Rule_Value'],
+                Field_Type     =  Rule_element.attrib.get('Field_Type'),
+                Is_Evaluating  =  Rule_element.attrib.get('Is_Evaluating', True),
+                Flow_exception_True = Flow_exception(
+                   Exception_rule =  parse_nested_rule(Flow_exception_True_Flow_rule) if Flow_exception_True_Flow_rule else None,
+                   Condition_to_proceed =  Flow_exception_True_Condition_to_proceed if Flow_exception_True_Condition_to_proceed else False,
+                   Remark = Flow_exception_True_Remark if Flow_exception_True_Remark else ""
+                  ),
+                Flow_exception_False = Flow_exception(
+                   Exception_rule =  parse_nested_rule(Flow_exception_False_Flow_rule) if Flow_exception_False_Flow_rule else False,
+                   Condition_to_proceed = Flow_exception_False_Condition_to_proceed if Flow_exception_False_Condition_to_proceed else None,
+                   Remark = Flow_exception_False_Remark if Flow_exception_False_Remark else ""
+                  ),
+                
+                logical_operator = Rule_element.attrib.get('logical_operator', None),
+                Logical_Rule   =   parse_nested_rule(Rule_element.find('Logical_Rule')) if Rule_element.find('Logical_Rule') else None,
+        )
 
 class RulesUsingXML:
     def __init__(self, xml_file_name):
@@ -50,40 +59,16 @@ class RulesUsingXML:
         # Iterate over the lenders in the XML file
         Dict = {}
         for lender in self.root.find('Lenders'):
+            connections = None
             Dict[lender.tag] = {}
             lender_name = lender.tag
-            lender_attrib = lender.attrib
-            print("-->",lender_name)
-            for rule_element in (list(lender)):
-                print((rule_element))
+            for rule_element in reversed(list(lender)):
+                rule = parse_nested_rule(rule_element)
+                connections = Rule_Connection(ID=rule_element.tag, Rule=rule, next_Rule=connections)
                 # for ref,refval in Dict[lender.tag][rule_element.tag]:
                 #     print(ref,refval)
                 Dict[lender.tag][rule_element.tag] = {}
                 # Dict[lender.tag][rule_element.tag]['Reference_field'] = rule_element.find('Rule').get('Reference_field')
                 # Dict[lender.tag][rule_element.tag]['Rule_Operator'] = rule_element.find('Rule').get('Rule_Operator')
                 # Dict[lender.tag][rule_element.tag]['Field_Type'] = rule_element.find('Rule').get('Field_Type')
-            continue
-        
-            connections = None
-
-            # Create Rule objects and connect them
-            for rule_element in reversed(list(lender)):
-                rule = parse_nested_rule(rule_element)
-                connections = Rule_Connection(ID=rule_element.tag, Rule=rule, next_Rule=connections)
-
-            # Store the connected rules for the lender
             self.lender_rules[lender_name] = connections
-        print(Dict)
-# Example Usage:
-
-# xml_file = 'rules.xml'  # Path to your XML file
-# rules_from_xml = RulesUsingXML(xml_file)
-# rules_from_xml.create_rules_using_xml()
-
-# # Accessing the rules for a particular lender:
-# for lender_name, rule_connection in rules_from_xml.lender_rules.items():
-#     print(f"Lender: {lender_name}")
-#     temp = rule_connection
-#     while temp is not None:
-#         print(temp.Rule)
-#         temp = temp.next_Rule
