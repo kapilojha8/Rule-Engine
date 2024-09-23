@@ -1,0 +1,666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <!-- Root Element -->
+    <xs:element name="root">
+        <xs:complexType>
+            <xs:sequence>
+
+                <!-- Field_type Element -->
+                <xs:element name="Field_type">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="FT_0" type="xs:string" />
+                            <xs:element name="FT_1" type="xs:string" />
+                            <xs:element name="FT_2" type="xs:string" />
+                            <xs:element name="FT_3" type="xs:string" />
+                            <xs:element name="FT_4" type="xs:string" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <!-- Remarks Element -->
+                <xs:element name="Remarks">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="R1" type="xs:string" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <!-- Lenders Element -->
+                <xs:element name="Lenders">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <!-- Flexi_up_to_20K Element -->
+                            <xs:element name="Flexi_up_to_20K">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <!-- Asset_Type Element -->
+                                        <xs:element name="Asset_Type">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Exception_rule">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_True">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_False">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute
+                                                                            name="Reference_field"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Operator"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Field_Type"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Value"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- ABN_Registration Element -->
+                                        <xs:element name="ABN_Registration">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- GST_Registration Element -->
+                                        <xs:element name="GST_Registration">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Loan_Amount Element -->
+                                        <xs:element name="Loan_Amount">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Logical_Rule">
+                                                        <xs:complexType>
+                                                            <xs:attribute name="Reference_field"
+                                                                type="xs:string" use="required" />
+                                                            <xs:attribute name="Rule_Operator"
+                                                                type="xs:string" use="required" />
+                                                            <xs:attribute name="Rule_Value"
+                                                                type="xs:string" use="required" />
+                                                            <xs:attribute name="Field_Type"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="logical_operator"
+                                                    type="xs:string" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Applicant_Entity_Type Element -->
+                                        <xs:element name="Applicant_Entity_Type">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Repayment_Term Element -->
+                                        <xs:element name="Repayment_Term">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Exception_rule">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_True">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_False">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute
+                                                                            name="Reference_field"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Operator"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Value"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Field_Type"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Exception_rule">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_True">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_False">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute
+                                                                            name="Reference_field"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Operator"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Value"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Field_Type"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Asset_Supplier_Type Element -->
+                                        <xs:element name="Asset_Supplier_Type">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Max_Loan_for_Non_Property_Owners Element -->
+                                        <xs:element name="Max_Loan_for_Non_Property_Owners">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Exception_rule">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_True">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_False">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute
+                                                                            name="Reference_field"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Operator"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Value"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Field_Type"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Used_Asset Element -->
+                                        <xs:element name="Used_Asset">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                        <!-- Max_Age_of_Asset Element -->
+                                        <xs:element name="Max_Age_of_Asset">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="Flow_Exception_for_True">
+                                                        <xs:complexType>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="Flow_Exception_for_False">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="Exception_rule">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element
+                                                                                name="Logical_Rule">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Reference_field"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Rule_Operator"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Rule_Value"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Field_Type"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_True">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                            <xs:element
+                                                                                name="Flow_Exception_for_False">
+                                                                                <xs:complexType>
+                                                                                    <xs:attribute
+                                                                                        name="Condition_to_proceed"
+                                                                                        type="xs:boolean"
+                                                                                        use="required" />
+                                                                                    <xs:attribute
+                                                                                        name="Remark"
+                                                                                        type="xs:string"
+                                                                                        use="required" />
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute
+                                                                            name="Reference_field"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Operator"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Rule_Value"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="Field_Type"
+                                                                            type="xs:string"
+                                                                            use="required" />
+                                                                        <xs:attribute
+                                                                            name="logical_operator"
+                                                                            type="xs:string" />
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                            <xs:attribute
+                                                                name="Condition_to_proceed"
+                                                                type="xs:boolean" use="required" />
+                                                            <xs:attribute name="Remark"
+                                                                type="xs:string" use="required" />
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="Reference_field"
+                                                    type="xs:string" use="required" />
+                                                <xs:attribute name="Rule_Operator" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Rule_Value" type="xs:string"
+                                                    use="required" />
+                                                <xs:attribute name="Field_Type" type="xs:string"
+                                                    use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
