@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="Pepper_transform.xsl"?>
 <root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="pepper_loans.xsd">
     <Field_type>
@@ -29,8 +30,7 @@
                 </Flow_Exception_for_False>
             </Asset_Type>
 
-            <ABN_Registration Reference_field="ABN_in_Months" Rule_Operator="&gt;=" Rule_Value="24"
-                Field_Type="3">
+            <ABN_Registration Reference_field="ABN_in_Months" Rule_Operator="&gt;=" Rule_Value="24" Field_Type="3">
                 <Flow_Exception_for_True Condition_to_proceed="true"
                     Remark="The borrower meets the age requirement of ABN for the relevant asset categories." />
                 <Flow_Exception_for_False Condition_to_proceed="false"

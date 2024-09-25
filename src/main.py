@@ -22,7 +22,9 @@ if (sys.argv[1] == "rule-engine-JSON"):
     Rules_by_Lender.Create_rules_using_json()
     Remarks = Rules_by_Lender.Remarks
 elif (sys.argv[1] == "rule-engine-XML"):
-    Rules_by_Lender  = RulesUsingXML('../data/Lenders XML/Pepper Loans.xml')
+    Rules_by_Lender  = RulesUsingXML('../data/Lenders XML/Pepper Loans.xml', '../data/Lenders XML/pepper_loans.xsd')
+    if not Rules_by_Lender:
+        exit("Error while loading the Xml file")
     Rules_by_Lender.create_rules_using_xml()
 else:
     sys.exit("Incorrect arguments. Did you mean: rule-engine or if-statements?")

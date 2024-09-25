@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="output.xsd">
+    <Field_Type F="bool" G="date" H="float" I="int" J="str" />
+    <Remarks F="Benefit of Doubt" G="" />
+    <Lenders>
+        <Primary_Flexi_up_to_20K>
+            <Asset_Type Reference_field="asset_type" Rule_Operator="in" Field_Type="4"  Is_Evaluating="false" Rule_Value="Agricultural machinery and equipment, Materials handling/forklifts, Access equipment (boom/scissor lifts), Light trucks &lt;3.5 tonnes, Heavy trucks &gt;3.5 tonnes,  TRAILERS, BUSES AND COACHES,  Commercial Motor_Vehicles (utes, vans and 4WDs), Construction and earth moving equipment (non-mining)">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset is listed as an eligible asset." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="There are no applicable asset categories for this asset. Consequently, checking the 'Excluded asset list'.">
+                    <Exception_rule Reference_field="asset_type" Rule_Operator="not in" Rule_Value="Passenger cars, SUVs" Field_Type="4">
+                        <Flow_Exception_for_True Remark="The asset is not listed as excluded on any applicable list. As a result, it will be given the benefit of the doubt for additional evaluation." />
+                        <Flow_Exception_for_False Remark="The asset qualifies in excluded asset list and will not be considered for further assessment." />
+                    </Exception_rule>
+                </Flow_Exception_for_False>
+            </Asset_Type>
+            <ABN_Registration Reference_field="ABN_in_Months" Rule_Operator="&gt;=" Rule_Value="24" Field_Type="3">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower meets the age requirement of ABN for the relevant asset categories." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower does not meet the age requirement of ABN for the relevant asset categories." />
+            </ABN_Registration>
+            <GST_Registration Reference_field="GST_in_Months" Rule_Operator="&gt;=" Rule_Value="0" Field_Type="3">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower business meets the age requirement of GST for the relevant asset categories." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower business does not meet the age requirement of GST for the relevant asset categories." />
+            </GST_Registration>
+            <Loan_Amount Reference_field="amount_financed" Rule_Operator="&lt;=" Rule_Value="20000" Field_Type="3" logical_operator="and" >
+                <Logical_Rule Reference_field="amount_financed" Rule_Operator="&gt;" Rule_Value="0"    Field_Type="3" />
+                <Flow_Exception_for_True Condition_to_proceed="true"  Remark="The loan limit meets the criteria for the relevant asset categories" />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The loan limit does not meet the criteria for loan range for the relevant asset categories" />
+            </Loan_Amount>
+            <Applicant_Entity_Type Reference_field="applicant_entity_type" Rule_Operator="in" Rule_Value="Sole traders, Companies, COMPANY, Trusts, TRUST, Partnerships, SOLE_TRADER,  PARTNERSHIP" Field_Type="4">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower meets the eligible borrower's requirements under the relevant asset categories." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower does not meet the eligible borrower's requirements under the relevant asset categories." />
+            </Applicant_Entity_Type>
+            <Repayment_Term Reference_field="Asset_age" Rule_Operator="&gt;=" Rule_Value="3" Field_Type="3">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset meets the age ( greater than 3 ) requirement for its class.">
+                    <Exception_rule Reference_field="repayment_term_month" Rule_Operator="&lt;="  Rule_Value="60" Field_Type="3">
+                        <Flow_Exception_for_True Condition_to_proceed="true" Remark=" The loan repayment period satisfies the asset's maximum loan term requirement" />
+                        <Flow_Exception_for_False Condition_to_proceed="false" Remark="The loan repayment term does not meet the maximum loan term requirement for the asset." />
+                    </Exception_rule>
+                </Flow_Exception_for_True>
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The asset meets the age ( less than 3 ) requirement for its class.">
+                    <Exception_rule Reference_field="repayment_term_month" Rule_Operator="&lt;=" Rule_Value="84" Field_Type="3">
+                        <Flow_Exception_for_True Condition_to_proceed="true" Remark=" The loan repayment period satisfies the asset's maximum loan term requirement" />
+                        <Flow_Exception_for_False Condition_to_proceed="false" Remark="The loan repayment term does not meet the maximum loan term requirement for the asset." />
+                    </Exception_rule>
+                </Flow_Exception_for_False>
+            </Repayment_Term>
+            <Asset_Supplier_Type Reference_field="asset_supplier_type" Rule_Operator="==" Rule_Value="Private" Field_Type="4" Is_Evaluating="false">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower can buy the assets privately." />
+                <Flow_Exception_for_False Condition_to_proceed="true" Remark="The borrower can buy assets from dealer." />
+            </Asset_Supplier_Type>
+            <Max_Loan_for_Non_Property_Owners Reference_field="guarantor_1_residential_status" Rule_Operator="==" Rule_Value="OWNING" Field_Type="4">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower meets the property criteria for the relevant asset categories." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower does not meet the property criteria for the relevant asset.">
+                    <Exception_rule Rule_Operator="&lt;=" Rule_Value="20000" Field_Type="3" Reference_field="amount_financed">
+                        <Flow_Exception_for_True Remark="The requested loan limit meets the borrower's property criteria for the relevant asset categories." />
+                        <Flow_Exception_for_False Remark="The requested loan limit does not meet the borrower's property criteria for the relevant asset categories." />
+                    </Exception_rule>
+                </Flow_Exception_for_False>
+            </Max_Loan_for_Non_Property_Owners>
+            <Used_Asset Reference_field="usage_type" Rule_Operator="==" Rule_Value="USED" Field_Type="4" Is_Evaluating="false">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The used asset qualifies for the relevant asset categories." />
+                <Flow_Exception_for_False Condition_to_proceed="true" Remark="The un-used asset qualifies for the relevant asset categories." />
+            </Used_Asset>
+            <Max_Age_of_Asset Reference_field="Asset_age_at_end_of_term" Rule_Operator="&lt;=" Rule_Value="20" Field_Type="3">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset age meets the required age criteria." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The asset age does not meet the required age criteria Consequently, checking the 'Exception asset list'.">
+                    <Exception_rule Reference_field="Asset_age_at_end_of_term" Rule_Operator="&lt;=" Rule_Value="30" Field_Type="3" logical_operator="and">
+                        <Logical_Rule Reference_field="asset_type" Rule_Operator="==" Rule_Value="trailers" Field_Type="4" />
+                        <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset (an exception one) meets the age requirements." />
+                        <Flow_Exception_for_False Condition_to_proceed="false" Remark="The asset (an exception one) does not meet the age requirements." />
+                    </Exception_rule>
+                </Flow_Exception_for_False>
+            </Max_Age_of_Asset>
+            <Deposit_for_non-property_owner Reference_field="guarantor_1_residential_status" Rule_Operator="==" Rule_Value="OWNING" Field_Type="4">
+                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower meets the property criteria for the relevant asset, so deposit is not required." />
+                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower does not meet the property criteria for the relevant asset, Consequently, checking the 'Exception asset list'.">
+                    <Exception_rule Reference_field="asset_type" Rule_Operator="not in" Rule_Value="MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS &gt;4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS &lt;3.5 TONNES, HEAVY TRUCKS &gt;3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES"         Field_Type="4">
+                        <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset qualifies in the primary asset list.">
+                            <Exception_rule Reference_field="Deposit_Amount_percentage" Rule_Operator="&gt;=" Rule_Value="0" Field_Type="2">
+                                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The borrower meets the deposit criteria for their non-property holdings against this asset." />
+                                <Flow_Exception_for_False Condition_to_proceed="false" Remark="The borrower does not meet the deposit criteria for their non-property holding against this asset." />
+                            </Exception_rule>
+                        </Flow_Exception_for_True>
+                        <Flow_Exception_for_False Condition_to_proceed="false" Remark="The asset does not qualify in the applicable primary asset list.">
+                            <Exception_rule Reference_field="asset_type" Rule_Operator="in" Rule_Value="MOTOR VEHICLES, PASSENGER VEHICLES, LIGHT COMMERCIAL VEHICLES, RIGID TRUCKS, TRAILERS, BUSES, FORKLIFTS, MATERIAL HANDLING, YELLOW GOODS, EARTHMOVING EQUIPMENT, WHEELED CONSTRUCTION EQUIPMENT, AGRICULTURAL EQUIPMENT, HEAVY TRUCKS &gt;4.5T GVM, CARAVANS, COMMERCIAL MOTOR VEHICLES, UTES, VANS, 4WDS, LIGHT TRUCKS &lt;3.5 TONNES, HEAVY TRUCKS &gt;3.5 TONNES, TRAILERS, BUSES AND COACHES, PASSENGER CARS, SUVS, EVS, MOTORBIKES"                 Field_Type="4">
+                                <Flow_Exception_for_True Condition_to_proceed="true" Remark="The asset qualifies in the applicable motor asset list.">
+                                    <Exception_rule Reference_field="Deposit_Amount_percentage"    Rule_Operator="&gt;=" Rule_Value="0" Field_Type="2">
+                                        <Flow_Exception_for_True Condition_to_proceed="true"   Remark="The borrower meets the deposit criteria for their non-property holdings against this asset." />
+                                        <Flow_Exception_for_False Condition_to_proceed="false"   Remark="The borrower does not meet the deposit criteria for their non-property holding against this asset." />
+                                    </Exception_rule>
+                                </Flow_Exception_for_True>
+                                <Flow_Exception_for_False Condition_to_proceed="false"   Remark="The asset does not qualify as it is not in the exclusion list." />
+                            </Exception_rule>
+                        </Flow_Exception_for_False>
+                    </Exception_rule>
+                </Flow_Exception_for_False>
+            </Deposit_for_non-property_owner>
+        </Primary_Flexi_up_to_20K>
+    </Lenders>
+</root>

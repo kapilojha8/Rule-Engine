@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+from XMl_validator import XMl_validator
 from Rule_model import Rule, Rule_Connection, Flow_exception
 
 
@@ -47,8 +48,11 @@ def parse_nested_rule(Rule_element):
         )
 
 class RulesUsingXML:
-    def __init__(self, xml_file_name):
+    def __init__(self, xml_file_name, xsd_file_name):
         # Create a dictionary to hold the lenders and their associated rules
+        xml_validator =  XMl_validator(XML_File_path=xml_file_name, XSD_File_path=xsd_file_name)
+        if not xml_validator.validate_XML():
+            return False
         self.lender_rules = {}
         # Load the XML file
         tree = ET.parse(xml_file_name)
