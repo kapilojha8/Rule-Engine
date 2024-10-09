@@ -24,7 +24,6 @@ class PreprocessingOfData:
             if ClientDataDict:
                 self.create_abn_gst_dates()
             else:
-                print("Tha pe ")
                 if len(self.Client_data.columns) and  all(item in self.Client_data.columns for item in ['Asset_age','GST_in_Months','ABN_in_Months']):
                     ValueError("The Columns were not in Dataframe")
                 self.create_Asset_age_at_end_of_term()

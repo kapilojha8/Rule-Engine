@@ -6,11 +6,11 @@
       <xs:sequence>
         <xs:element name="Field_Type">
           <xs:complexType>
-            <xs:attribute name="F" type="xs:string" use="required" />
-            <xs:attribute name="G" type="xs:string" use="required" />
-            <xs:attribute name="H" type="xs:string" use="required" />
-            <xs:attribute name="I" type="xs:string" use="required" />
-            <xs:attribute name="J" type="xs:string" use="required" />
+            <xs:attribute name="FT1" type="xs:string" use="required" />
+            <xs:attribute name="FT2" type="xs:string" use="required" />
+            <xs:attribute name="FT3" type="xs:string" use="required" />
+            <xs:attribute name="FT4" type="xs:string" use="required" />
+            <xs:attribute name="FT5" type="xs:string" use="required" />
           </xs:complexType>
         </xs:element>
         <xs:element name="Remarks">
