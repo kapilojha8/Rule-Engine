@@ -5,7 +5,7 @@ from Rules_using_XML import RulesUsingXML
 import pandas as pd
 from datetime import datetime
 from preprocessing_of_data import PreprocessingOfData
-
+from Rule_XML_Parser import Rules_XML_Parser
 
 Preprocessed_data = PreprocessingOfData(csv_file_path="../data/Data from Client.csv", ClientDataDict=False)
 Preprocessed_data.converting_df_to_dict()
@@ -22,10 +22,15 @@ if (sys.argv[1] == "rule-engine-JSON"):
     Rules_by_Lender.Create_rules_using_json()
     Remarks = Rules_by_Lender.Remarks
 elif (sys.argv[1] == "rule-engine-XML"):
-    Rules_by_Lender  = RulesUsingXML('../data/Lenders XML/output.xml', '../data/Lenders XML/output.xsd')
+    Rules_by_Lender  = False 
+    # RulesUsingXML('../data/Lenders XML/output.xml', '../data/Lenders XML/output.xsd')
+    Rules_by_Lender = Rules_XML_Parser('../data/Lenders XML/output.xml', '../data/Lenders XML/output.xsd')
+
     if not Rules_by_Lender:
         exit("Error while loading the Xml file")
-    Rules_by_Lender.create_rules_using_xml()
+    # Rules_by_Lender.create_rules_using_xml()
+    Rules_by_Lender.create_rules_using_xml(Data_of_Rule_test)
+    exit('Testing phase running')
 else:
     sys.exit("Incorrect arguments. Did you mean: rule-engine or if-statements?")
 
