@@ -1,11 +1,33 @@
 from datetime import datetime
 class Flow_exception:
+    """
+        A class to represent an exception flow in a rule-based system.
+
+        Attributes:
+        - Exception_rule (str): The rule or condition that triggered the exception.
+        - Remark (str): Additional information or comments about the exception.
+        - Condition_to_proceed (bool): Indicates if the process can proceed despite the exception. Defaults to False.
+    """
     def __init__(self,Exception_rule, Remark, Condition_to_proceed=False) -> None:
+        """
+        Initializes a Flow_exception instance.
+
+        Parameters:
+        - Exception_rule (str): The rule or condition that caused the exception.
+        - Remark (str): A remark or comment providing additional context about the exception.
+        - Condition_to_proceed (bool): A flag indicating if the process can continue. Defaults to False.
+        """
         self.Exception_rule = Exception_rule
         self.Condition_to_proceed = Condition_to_proceed
         self.Remark = Remark
 
     def __str__(self) -> str:
+        """
+            Returns a string representation of the Flow_exception instance.
+
+            Returns:
+            - str: A formatted string containing the exception details.
+        """
         return f"Exception Rule : {self.Exception_rule} || Condition to proceed : {self.Condition_to_proceed} || Remark : {self.Remark}"
 
 class Rule:
@@ -33,6 +55,15 @@ class Rule:
         self.Evaluated_result = None
         
     def convert_value(self, value, Field_Type):
+        """
+            Converts the Field value from client into the specific type provided by the Rule.
+            Parameters:
+            - value (str): The value which needs to be convered.
+            - Field_Type (str/int): The variable which decide the type of value.
+
+            Returns:
+            - The value into the converted Field type if Field_Type exits in the Rule Otherwise throw an exception.
+        """
         if Field_Type == 0 or Field_Type == '0':  # bool
             return bool(value)
         elif Field_Type == 1 or Field_Type == '1':  # date
@@ -68,11 +99,14 @@ class Rule:
         """
             Evaluates the rule against provided data.
 
-            Args:
+            Parameters:
                 data (dict): The data dictionary containing values to be evaluated against the rule.
 
             Returns:
-                bool: The result of the rule evaluation (True or False).
+                return_result (dict): Having 2 values as  {
+                                        Return_result (bool):  The result of the rule evaluation (True or False)., 
+                                        Remark (str): The Remark explaining the evaluation result 
+                                        }
         """
 
         nested_remark = ""
@@ -85,7 +119,7 @@ class Rule:
         if isinstance(actual_value, datetime) or isinstance(self.Rule_value, datetime):
             self.Rule_value = datetime.strptime(self.Rule_value, "%d/%m/%Y").date() if isinstance(self.Rule_value, str) else self.Rule_value
             actual_value = actual_value.date() if isinstance(actual_value, datetime) else actual_value
-        
+        # Attempt to convert string values to integers if applicable
         try:
             if isinstance(self.Rule_value, str) and self.Rule_value.isdigit():
                 self.Rule_value = int(self.Rule_value)
@@ -93,7 +127,7 @@ class Rule:
                 actual_value = int(actual_value)
         except ValueError:
             raise ValueError(f"Cannot convert {self.Rule_value} or {actual_value} to int.")
-        
+        # Evaluate the rule using the specified operator
         # Add additional operator support here
         if self.Rule_operator == "==":
             if isinstance(actual_value, str) and isinstance(self.Rule_value, str):
@@ -123,7 +157,7 @@ class Rule:
             result = actual_value.strip().lower() not in self.Rule_value
         else:
             raise ValueError(f"Unsupported operator: {self.Rule_operator}")
-        
+        # Evaluate logical operators if present (AND/OR conditions)
         if self.logical_operator:
             if self.logical_operator == "and":
                 result = result and self.Logical_Rule.evaluate(data)['Return_result']
@@ -137,6 +171,7 @@ class Rule:
                 LLO = self.Flow_Exception_for_True.Exception_rule.evaluate(data)
                 nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
                 result = LLO['Return_result']
+        # Handle flow exceptions for FALSE evaluation
         else:
             if self.Flow_Exception_for_False and self.Flow_Exception_for_False.Remark:
                 nested_remark += self.Flow_Exception_for_False.Remark
@@ -144,6 +179,7 @@ class Rule:
                 LLO = self.Flow_Exception_for_False.Exception_rule.evaluate(data)
                 nested_remark = nested_remark+" || "+LLO['Remark'] if nested_remark != "" else LLO['Remark']
                 result = LLO['Return_result']        
+        # Store the evaluation result and return the result and remarks
         self.Evaluated_result = result
         return {"Return_result": result, "Remark": nested_remark }
 
